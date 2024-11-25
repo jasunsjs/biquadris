@@ -1,17 +1,15 @@
-#ifndef GRAPHICSOBSERVER_H
-#define GRAPHICSOBSERVER_H
+#ifndef TEXTOBSERVER_H
+#define TEXTOBSERVER_H
 
 #include "observer.h"
 #include "window.h"
+#include <iostream>
 
-class GraphicsObserver : public Observer {
-    XWindow window;
-    const int pixelSize;
-
+class TextObserver : public Observer {
+    std::ostream out;
     void update(){
         
     }
-
 
 };
 

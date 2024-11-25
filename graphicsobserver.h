@@ -2,9 +2,10 @@
 #define GRAPHICSOBSERVER_H
 
 #include "observer.h"
+#include "window.h"
 
 class GraphicsObserver : public Observer {
-    Window window;
+    XWindow window;
     const int pixelSize;
 
     void update(){
