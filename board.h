@@ -6,7 +6,7 @@ class Board {
     int width, height;
     Decorator* picture;
   public:
-    char getState(int x, int y);
+    char getState(int x, int y) const override;
     void removeLayer();
     void checkBoard();
 };
