@@ -5,14 +5,13 @@
 #include "observer.h"
 
 class Subject {
-    private:
-        std::vector<Observer> observers; 
-    public:
-        void attach( Observer* o );
-        void detach( Observer* o );
-        void update();
-        virtual ~Subject() = default;
-
+    std::vector<Observer> observers; 
+  public:
+    void attach( Observer* o );
+    void detach( Observer* o );
+    void updateObservers();
+    virtual char getState(int x, int y) const = 0;
+    virtual ~Subject() = default;
 };
 
 #endif
