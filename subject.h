@@ -7,8 +7,8 @@
 class Subject {
     std::vector<Observer> observers; 
   public:
-    void attach( Observer* o );
-    void detach( Observer* o );
+    void attach(Observer* o);
+    void detach(Observer* o);
     void updateObservers();
     virtual char getState(int x, int y) const = 0;
     virtual ~Subject() = default;
