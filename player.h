@@ -1,5 +1,6 @@
 #ifndef PLAYER_H
 #define PLAYER_H
+#include <string>
 #include "effect.h"
 #include "board.h"
 
@@ -10,6 +11,6 @@ class Player {
     Board* board;
   public:
     void applyEffect();
-};  
+};
 
 #endif
