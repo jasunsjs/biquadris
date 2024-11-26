@@ -10,7 +10,7 @@ class Controller {
     bool noRandom1, noRandom2;
     Player* p1, p2;
   public:
-    Controller();
+    Controller(Player* p1, Player* p2);
     void levelUp();
     void levelDown();
     void restart();

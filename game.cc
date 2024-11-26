@@ -32,7 +32,6 @@ int main(int argc, char* argv[]) {
         }
     }
     // Set up players and controller
-    Controller ctrl;
     Player p1;
     Player p2;
     std::string name;
@@ -58,6 +57,7 @@ int main(int argc, char* argv[]) {
         board1.attach(new GraphicsObserver(&board1));
         board2.attach(new GraphicsObserver(&board2));
     }
+    Controller ctrl{&p1, &p2};
     // Main game loop
     // TODO
 }
