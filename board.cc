@@ -22,4 +22,9 @@ void Board::getCols() {
     return cols;
 }
 
-Board::~Board() { delete picture; }
+Board::~Board() {
+    delete picture;
+    for (Observer* o : observers) {
+        delete o;
+    }
+}
