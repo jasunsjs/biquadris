@@ -10,6 +10,7 @@ class Player {
     int level, score;
     Board* board;
   public:
+    Player(const std::string& name);
     void applyEffect();
 };
 
