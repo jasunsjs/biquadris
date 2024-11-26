@@ -3,11 +3,12 @@
 #include <fstream>
 #include <unordered_map>
 #include <string>
+#include <iostream>
 
 class Controller {
     std::unordered_map<std::string, std::string> commandMap;
     bool noRandom1, noRandom2;
-    std::ifstream inputFile1, inputFile2;
+    Player* p1, p2;
   public:
     Controller();
     void levelUp();
