@@ -3,9 +3,10 @@
 #include "decorator.h"
 
 class Board {
-    int width, height;
+    int rows, cols;
     Decorator* picture;
   public:
+    Board(int rows = 15, int cols = 11);
     char getState(int x, int y) const override;
     void removeLayer();
     void checkBoard();
