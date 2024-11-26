@@ -14,4 +14,9 @@ void Board::checkBoard() {
     // TODO
 }
 
-Board::~Board() { delete picture; }
+Board::~Board() {
+    delete picture;
+    for (Observer* o : observers) {
+        delete obs;
+    }
+}
