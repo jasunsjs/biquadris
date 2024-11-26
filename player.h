@@ -4,10 +4,9 @@
 #include "board.h"
 
 class Player {
-    string playerName;
+    std::string playerName;
     Effect currEffect;
-    int level;
-    int score;
+    int level, score;
     Board* board;
   public:
     void applyEffect();
