@@ -2,7 +2,7 @@
 #define BOARD_H
 #include "decorator.h"
 
-class Board {
+class Board : public Subject {
     int rows, cols;
     Decorator* picture;
   public:
