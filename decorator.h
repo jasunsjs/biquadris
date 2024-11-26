@@ -8,7 +8,7 @@
 class Decorator: public Board {
   protected:
     Board *component;
-    std::vector<std::pair<int, int>> coords;
+    std::vector<std::pair<int, int>> coords; // Vector of 4 pairs representing each block cell's position
     char symbol;
     int generatedLevel;
   public:
