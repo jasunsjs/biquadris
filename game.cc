@@ -20,7 +20,9 @@ int main(int argc, char* argv[]) {
         if (arg == "-text") {
             textOnly = true;
         } else if (arg == "-seed") {
-            seed = argv[++i];
+            // Convert string to int
+            std::istringstream iss{argv[++i]};
+            iss >> seed;
         } else if (arg == "-scriptfile1") {
             scriptFile1 = argv[++i];
         } else if (arg == "-scriptfile2") {
