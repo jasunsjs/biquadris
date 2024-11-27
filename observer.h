@@ -6,7 +6,7 @@ class Observer {
   protected:
     Board* subject;
     int width;
-    int height;
+    int height; 
   public:
     Observer(Board* subject, int width, int height)
     : subject(subject), width(width), height(height) {}
