@@ -2,20 +2,73 @@
 
 using namespace std;
 
+
 void LBlock::rotateClockwise() {
+    vector<pair<int, int>> newCoords = coords;
+    pair<int, int> newBottomLeft = bottomLeft;
 
-    if (state == RotationState::Default) {
-        for ()
+    transpose(newCoords, newBottomLeft);
+    
+    // Set new bottom left anchor and reverse cols
+    if (state == RotationState::Default || state == RotationState::Rotated270) {
+        newBottomLeft.first -= 1;
+        newBottomLeft.second += 2;
+
+        int diff = newCoords[1].first - newCoords[0].first;
+        newCoords[2].first += diff;
+        newCoords[3].first += diff;
+        swap(newCoords[0], newCoords[1]);    
+    } else {
+        newBottomLeft.first -= 2;
+        newBottomLeft.second += 1;
+
+        int diff = newCoords[3].first - newCoords[1].first;
+        newCoords[0].first += diff;
+        swap(newCoords[1], newCoords[3]);
     }
-    state = static_cast<RotationState>((static_cast<int>(state) + 1) % 4);
 
-    return;
+    reposition(newCoords, newBottomLeft);
+
+    if (isValid(newCoords)) {
+        coords = newCoords;
+    }
+
+    // Change state
+    state = static_cast<RotationState>((static_cast<int>(state) + 1) % 4);
 }
 
 void LBlock::rotateCounterClockwise() {
-    state = static_cast<RotationState>((static_cast<int>(state) + 3) % 4);
+    vector<pair<int, int>> newCoords = coords;
+    pair<int, int> newBottomLeft = bottomLeft;
 
-    return;
+    transpose(newCoords, newBottomLeft);
+
+    // Set new bottom left anchor and reverse rows
+    if (state == RotationState::Default || state == RotationState::Rotated270) {
+        newBottomLeft.first -= 1;
+        newBottomLeft.second += 2;
+
+        int diff = newCoords[3].second - newCoords[1].second;
+        newCoords[0].second += diff;
+        swap(newCoords[1], newCoords[3]);
+    } else {
+        newBottomLeft.first -= 2;
+        newBottomLeft.second += 1;
+
+        int diff = newCoords[1].second - newCoords[0].second;
+        newCoords[2].second += diff;
+        newCoords[3].second += diff;
+        swap(newCoords[0], newCoords[1]);
+    }
+
+    reposition(newCoords, newBottomLeft);
+
+    if (isValid(newCoords)) {
+        coords = newCoords;
+    }
+
+    // Change state
+    state = static_cast<RotationState>((static_cast<int>(state) + 3) % 4);
 }
 
 char LBlock::charAt(int x, int y) const {
@@ -30,5 +83,3 @@ char LBlock::charAt(int x, int y) const {
     // Else call next decorator's charAt()
     return component->getState(x, y);
 }
-
-
