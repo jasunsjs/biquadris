@@ -5,7 +5,7 @@
 
 class Blank: public Decorator {
   public:
-    char charAt(int x, int y) override;
+    char charAt(int x, int y) const override;
 };
 
 #endif
