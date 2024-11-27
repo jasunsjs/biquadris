@@ -1,4 +1,5 @@
 #include "subject.h"
+#include "observer.h"
 
 void Subject::attach(Observer* o) {
     observers.push_back(o);

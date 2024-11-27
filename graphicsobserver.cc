@@ -1,7 +1,7 @@
 #include "graphicsobserver.h"
 
 GraphicsObserver::GraphicsObserver(Board* s, int w, int h)
-: Observer(s, w, h), window(100, 100) {
+: Observer(s, w, h), window(1000, 1000) {
     s->attach(this);
 }
 
