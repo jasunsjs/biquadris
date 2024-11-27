@@ -14,13 +14,12 @@ void Board::checkBoard() {
     // TODO
 }
 
-int Board::getRows() {
+<<<<<<< HEAD
+int Board::getRows() const {
     return rows;
 }
 
-int Board::getCols() {
-    return cols;
-}
+int Board::getCols() const {
 
 Board::~Board() {
     delete picture;
