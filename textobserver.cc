@@ -1,9 +1,9 @@
 #include "textobserver.h"
 
+TextObserver::TextObserver(Board* s, int w, int h, std::ostream& o) 
+: Observer(s, w, h), out(o) {}
+
 void TextObserver::update(){
-    //get width and height of the board
-    int width = subject->getCols();
-    int height = subject->getRows();
 
     out << "------------" << std::endl;
 

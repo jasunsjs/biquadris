@@ -6,8 +6,12 @@
 #include <iostream>
 
 class TextObserver : public Observer {
-    std::ostream out;
-    void update();
+    std::ostream& out;
+
+    public:
+        TextObserver(Board* s, int w, int h, std::ostream& o);
+        void update() override;
+        ~TextObserver() override = default;
 
 };
 

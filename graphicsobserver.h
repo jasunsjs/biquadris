@@ -6,13 +6,12 @@
 
 class GraphicsObserver : public Observer {
     XWindow window;
-    const int pixelSize;
+    const int pixelSize = 1;
 
-    void update(){
-        
-    }
-
-
+    public:
+        GraphicsObserver(Board* s, int w, int h, XWindow window);
+        void update() override;
+        ~GraphicsObserver() override = default;
 };
 
 #endif
