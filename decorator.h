@@ -19,9 +19,14 @@ class Decorator: public Board {
     char symbol;
     int generatedLevel;
     RotationState state;
+    std::pair<int, int> bottomLeft; // Anchor point for rotations
   public:
-    Decorator(Board *component, std::vector<std::pair<int, int>> coords, char symbol, 
-      int generatedLevel, RotationState state = RotationState::Default);
+    Decorator(Board *component, 
+              std::vector<std::pair<int, int>> coords, 
+              char symbol, 
+              int generatedLevel, 
+              RotationState state = RotationState::Default, 
+              std::pair<int, int> bottomLeft = {0, 3});
     virtual ~Decorator();
 
     // Universal movement across all blocks
@@ -30,9 +35,12 @@ class Decorator: public Board {
     void moveDown();
     bool drop();
 
-    // Getter
-    std::vector<std::pair<int, int>> getCoords() const;
-    Board* getComponent() const;
+    // Helper methods for movement and rotations
+    bool isValid(const std::vector<std::pair<int, int>> &coordinates) const;
+    void transpose(std::vector<std::pair<int, int>> &coordinates, 
+                   std::pair<int, int> &anchor) const; // Swap x and y values
+    void reposition(std::vector<std::pair<int, int>> &coordinates,
+                    std::pair<int, int> &anchor) const; // Translate block back to designated anchor point
 
     // Block specific, pure virtual
     virtual void rotateClockwise() = 0;
