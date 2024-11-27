@@ -17,6 +17,7 @@ int main(int argc, char* argv[]) {
     bool textOnly = false;
     int seed = 0;
     int startLevel = 0;
+
     // Parse command line args
     for (int i = 1; i < argc; ++i) {
         std::string arg = argv[i];
@@ -36,6 +37,7 @@ int main(int argc, char* argv[]) {
     }
     // Set seed
     srand(seed);
+
     // Set up players and controller
     Player p1;
     Player p2;
@@ -54,18 +56,15 @@ int main(int argc, char* argv[]) {
     p2.setBoard(&board2);
 
     // Set up observers
-    std::vector<Observer*> observers;
-    
-    Observer* to1 = new TextObserver(&board1, 11, 15, std::cout);
-    Observer* to2 = new TextObserver(&board2, 11, 15, std::cout);
-    observers.push_back(to1);
-    observers.push_back(to2);
-
+    TextObserver to1{&board1, 11, 15, std::cout};
+    TextObserver to2{&board2, 11, 15, std::cout};
+    board1.attach(&to1);
+    board2.attach(&to2);
     if (!textOnly) {
-        Observer* go1 = new GraphicsObserver(&board1, 11, 15);
-        Observer* go2 = new GraphicsObserver(&board2, 11, 15);
-        observers.push_back(go1);
-        observers.push_back(go2);
+        GraphicsObserver go1{&board1, 11, 15};
+        GraphicsObserver go2{&board2, 11, 15};
+        board1.attach(&go1);
+        board2.attach(&go2);
     } 
 
     Controller ctrl{&p1, &p2};
