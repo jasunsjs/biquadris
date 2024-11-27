@@ -2,7 +2,8 @@
 #define SUBJECT_H
 
 #include <vector>
-#include "observer.h"
+
+class Observer;
 
 class Subject {
     std::vector<Observer*> observers; 

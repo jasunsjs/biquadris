@@ -6,7 +6,7 @@
 
 class GraphicsObserver : public Observer {
     XWindow window;
-    const int pixelSize = 5;
+    const int pixelSize = 20;
     std::vector<std::vector<char>> previousState; //cache for effiency, might not use
 
     public:
