@@ -5,17 +5,17 @@
 #include "board.h"
 
 class Player {
-    std::string playerName;
+    std::string playerName, inputFilename;
     Effect currEffect;
     int level, score;
     Board* board;
-    ifstream inputFile;
   public:
-    Player(const std::string& name = "Player");
+    Player(const std::string& name = "Player", Board* b, const std::string& filename);
     void applyEffect();
-    void setInputFile(const std::string& filename);
-    void setName(const std::string& name);
-    void setBoard(Board* b);
+    void setLevel(int lvl);
+    std::string getName();
+    int getLevel();
+    int getScore();
 };
 
 #endif
