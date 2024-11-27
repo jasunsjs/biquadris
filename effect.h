@@ -2,7 +2,7 @@
 #define EFFECT_H
 
 class Effect {
-public:
+  public:
     virtual void apply() = 0;
     virtual ~Effect() = default;
 };
