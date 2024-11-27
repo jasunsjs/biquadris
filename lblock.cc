@@ -14,16 +14,14 @@ void LBlock::rotateClockwise() {
         newBottomLeft.first -= 1;
         newBottomLeft.second += 2;
 
-        int diff = newCoords[1].first - newCoords[0].first;
-        newCoords[2].first += diff;
-        newCoords[3].first += diff;
+        newCoords[2].first = newCoords[0].first;
+        newCoords[3].first = newCoords[0].first;
         swap(newCoords[0], newCoords[1]);    
     } else {
         newBottomLeft.first -= 2;
         newBottomLeft.second += 1;
 
-        int diff = newCoords[3].first - newCoords[1].first;
-        newCoords[0].first += diff;
+        newCoords[0].first = newCoords[3].first;
         swap(newCoords[1], newCoords[3]);
     }
 
@@ -48,16 +46,14 @@ void LBlock::rotateCounterClockwise() {
         newBottomLeft.first -= 1;
         newBottomLeft.second += 2;
 
-        int diff = newCoords[3].second - newCoords[1].second;
-        newCoords[0].second += diff;
+        newCoords[0].second = newCoords[3].second;
         swap(newCoords[1], newCoords[3]);
     } else {
         newBottomLeft.first -= 2;
         newBottomLeft.second += 1;
 
-        int diff = newCoords[1].second - newCoords[0].second;
-        newCoords[2].second += diff;
-        newCoords[3].second += diff;
+        newCoords[2].second = newCoords[0].second;
+        newCoords[3].second = newCoords[0].second;
         swap(newCoords[0], newCoords[1]);
     }
 
