@@ -10,8 +10,8 @@ class Board {
     char getState(int x, int y) const override;
     void removeLayer();
     void checkBoard();
-    void getRows() const;
-    void getCols() const;
+    int getRows() const;
+    int getCols() const;
 
 };
 

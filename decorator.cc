@@ -12,17 +12,7 @@ Decorator::~Decorator() {
 
 // ** Universal Block Movement **
 void Decorator::moveLeft() {
-
-    // Determine left most cell
-    int leftMost = component.getCols() - 1;
-    for (pair<int, int> p : coords) {
-        if (p.first < leftMost) {
-            leftMost = p.first;
-        }
-    }
-
-    // Check condition for moving left
-    if (leftMost != 0 && ) {
+    if (canMoveLeft(*this)) {
         for (pair<int, int> p : coords) {
             p.first--;
         }
@@ -30,18 +20,89 @@ void Decorator::moveLeft() {
 }
 
 void Decorator::MoveRight() {
-    if (coords.first != component.getCols() - 1) {
-        coords.first++;
+    if (canMoveRight(*this)) {
+        for (pair<int, int> p : coords) {
+            p.first++;
+        }
     }
 }
 
 void Decorator::moveDown() {
-    if () {
-        coords.second--;
+    if (canMoveDown(*this)) {
+        for (pair<int, int> p : coords) {
+            p.second++;
+        }
     }
 }
 
 bool Decorator::drop() {
+    while (canMoveDown(*this)) {
+        this->moveDown();
+    }
+    return true;
+}
 
+std::vector<std::pair<int, int>> Decorator::getCoords() const {
+    return coords;
+}
+
+Board* Decorator::getComponent() const {
+    return component;
+}
+
+
+// ** Helper functions **
+bool canMoveLeft(const Decorator &d) {
+
+    // Check if block is at edge of board
+    for (pair<int, int> p : d.getCoords()) {
+        if (p.first == 0) {
+            return false;
+        }
+    }
+
+    // Check if block has room to move
+    for (pair<int, int> p : d.getCoords()) {
+        if (d.charAt(p.first - 1, p.second) != ' ') {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool canMoveRight(const Decorator &d) {
+
+    // Check if block is at edge of board
+    for (pair<int, int> p : d.getCoords()) {
+        if (p.first == d.getComponent()->getCols() - 1) {
+            return false;
+        }
+    }
+
+    // Check if block has room to move
+    for (pair<int, int> p : d.getCoords()) {
+        if (d.charAt(p.first + 1, p.second) != ' ') {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool canMoveDown(const Decorator &d) {
+
+    // Check if block is at edge of board
+    for (pair<int, int> p : d.getCoords()) {
+        if (p.second == d.getComponent()->getRows() - 1) {
+            return false;
+        }
+    }
+
+    // Check if block has room to move
+    for (pair<int, int> p : d.getCoords()) {
+        if (d.charAt(p.first, p.second + 1) != ' ') {
+            return false;
+        }
+    }
+    return true;
 }
 
