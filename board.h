@@ -1,8 +1,9 @@
 #ifndef BOARD_H
 #define BOARD_H
 #include "decorator.h"
+#include "subject.h"
 
-class Board {
+class Board : public Subject {
     int rows, cols;
     Decorator* picture;
   public:
