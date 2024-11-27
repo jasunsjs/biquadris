@@ -12,7 +12,6 @@ class Board {
     void checkBoard();
     int getRows() const;
     int getCols() const;
-
 };
 
 #endif
