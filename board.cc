@@ -1,9 +1,29 @@
 #include "board.h"
 
-Board::Board(int rows, int cols, Decorator* picture) : rows{rows}, cols{cols}, picture{picture} {}
+Board::Board() : rows(15), cols(11) {}
+
+// Board::Board(int rows, int cols, Decorator* picture) : rows{rows}, cols{cols}, picture{picture} {}
 
 char Board::getState(int x, int y) const {
-    return picture->charAt(x, y);
+    char board[15][11] =  {
+        {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
+        {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
+        {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
+        {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
+        {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
+        {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
+        {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
+        {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
+        {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
+        {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
+        {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
+        {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
+        {'T', 'T', 'T', '.', '.', '.', '.', '.', '.', '.'}, // Simulate a T-block
+        {'.', 'T', '.', '.', '.', '.', '.', '.', '.', '.'}, // Bottom row
+        {'I', 'I', 'I', 'I', '.', '.', '.', '.', '.', '.'}, // Simulate an I-block
+    };
+
+    return board[x][y];
 }
 
 void Board::removeLayer() {
@@ -20,11 +40,4 @@ int Board::getRows() const {
 
 int Board::getCols() const {
     return cols;
-}
-
-Board::~Board() {
-    delete picture;
-    for (Observer* o : observers) {
-        delete o;
-    }
 }

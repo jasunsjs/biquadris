@@ -7,6 +7,9 @@ TextObserver::TextObserver(Board* s, int w, int h, std::ostream& o)
 }
 
 void TextObserver::update(){
+    out << "Level: " << subject->getLevel() << std::endl;
+    out << "Score: " << subject->getScore() << std::endl;
+
 
     out << "------------" << std::endl;
 
