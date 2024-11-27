@@ -3,8 +3,8 @@
 using namespace std;
 
 // ** Decorator Constructor and Destructor **
-Decorator::Decorator(Board *component, vector<pair<int, int>> coords, char symbol, int generatedLevel):
-    component{component}, coords{coords}, symbol{symbol}, generatedLevel{generatedLevel} {}
+Decorator::Decorator(Board *component, vector<pair<int, int>> coords, char symbol, int generatedLevel, RotationState state):
+    component{component}, coords{coords}, symbol{symbol}, generatedLevel{generatedLevel}, state{state} {}
 
 Decorator::~Decorator() {
     delete component;
