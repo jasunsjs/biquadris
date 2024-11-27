@@ -13,6 +13,9 @@ class Board : public Subject {
     void checkBoard();
     int getRows() const;
     int getCols() const;
+    void setBlind(int rowStart, int rowEnd, int colStart, int colEnd);
+    void setBlock(char block);
+    bool dropBlock();
 };
 
 #endif

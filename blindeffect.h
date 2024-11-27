@@ -3,7 +3,9 @@
 #include "effect.h"
 
 class BlindEffect : public Effect {
+    int rowStart, rowEnd, colStart, colEnd;
   public:
+    BlindEffect();
     void apply(Board& board) override;
 };
 
