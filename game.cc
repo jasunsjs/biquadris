@@ -5,6 +5,7 @@
 #include "decorator.h"
 #include <string>
 #include <iostream>
+#include <cstdlib>
 
 int main(int argc, char* argv[]) {
     std::string scriptFile1 = "sequence1.txt";
@@ -31,6 +32,8 @@ int main(int argc, char* argv[]) {
             startLevel = argv[++i];
         }
     }
+    // Set seed
+    srand(seed);
     // Set up players and controller
     Player p1;
     Player p2;

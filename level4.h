@@ -1,14 +1,18 @@
 #ifndef LEVEL4_H
 #define LEVEL4_H
 #include "level.h"
-#include <cstdlib>
+#include <vector>
+#include <utility>
 
 class Level4 : public Level {
-    std::unordered_map<char, double> blockProbabilities;
-    int numBlocks;
+    std::vector<std::pair<char, int>> blockWeights;
+    int totalWeight, numBlocks;
   public:
     Level4();
     char nextBlock() override;
+    void rowCleared();
+    void blockPlaced();
+    bool shouldDropStar();
 };
 
 #endif
