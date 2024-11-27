@@ -10,7 +10,7 @@ class GraphicsObserver : public Observer {
     std::vector<std::vector<char>> previousState; //cache for effiency, might not use
 
     public:
-        GraphicsObserver(Board* s, int w, int h, XWindow window);
+        GraphicsObserver(Board* s, int w, int h);
         int mapBlockToColor(char state);
         void update() override;
         ~GraphicsObserver() override = default;

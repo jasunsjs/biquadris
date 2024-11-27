@@ -1,8 +1,8 @@
 #include "graphicsobserver.h"
 
-GraphicsObserver::GraphicsObserver(Board* s, int w, int h, XWindow window)
-: Observer(s, w, h), window(window) {
-    s.attac
+GraphicsObserver::GraphicsObserver(Board* s, int w, int h)
+: Observer(s, w, h), window(100, 100) {
+    s->attach(this);
 }
 
 int GraphicsObserver::mapBlockToColor(char state){

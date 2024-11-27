@@ -1,8 +1,10 @@
 #include "player.h"
 #include "board.h"
 #include "controller.h"
-#include "observer.h"
 #include "decorator.h"
+#include "observer.h"
+#include "textobserver.h"
+#include "graphicsobserver.h"
 #include <string>
 #include <iostream>
 #include <cstdlib>
@@ -50,16 +52,22 @@ int main(int argc, char* argv[]) {
     Board board2{11, 15, new Blank()};
     p1.setBoard(&board1);
     p2.setBoard(&board2);
+
     // Set up observers
-    if (textOnly) {
-        board1.attach(new TextObserver(&board1));
-        board2.attach(new TextObserver(&board2));
-    } else {
-        board1.attach(new TextObserver(&board1));
-        board2.attach(new TextObserver(&board2));
-        board1.attach(new GraphicsObserver(&board1));
-        board2.attach(new GraphicsObserver(&board2));
-    }
+    std::vector<Observer*> observers;
+    
+    Observer* to1 = new TextObserver(&board1, 11, 15, std::cout);
+    Observer* to2 = new TextObserver(&board2, 11, 15, std::cout);
+    observers.push_back(to1);
+    observers.push_back(to2);
+
+    if (!textOnly) {
+        Observer* go1 = new GraphicsObserver(&board1, 11, 15);
+        Observer* go2 = new GraphicsObserver(&board2, 11, 15);
+        observers.push_back(go1);
+        observers.push_back(go2);
+    } 
+
     Controller ctrl{&p1, &p2};
     // Main game loop
     // TODO

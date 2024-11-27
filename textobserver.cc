@@ -1,7 +1,10 @@
 #include "textobserver.h"
+#include "board.h"
 
 TextObserver::TextObserver(Board* s, int w, int h, std::ostream& o) 
-: Observer(s, w, h), out(o) {}
+: Observer(s, w, h), out(o) {
+    s->attach(this);
+}
 
 void TextObserver::update(){
 
