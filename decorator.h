@@ -7,7 +7,7 @@
 
 enum class RotationState {
     Default,      // Default orientation
-    Rotated90,
+    Rotated90,    // Assume clockwise be default
     Rotated180,
     Rotated270
 };
