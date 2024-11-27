@@ -7,9 +7,7 @@
 
 class TextObserver : public Observer {
     std::ostream out;
-    void update(){
-        
-    }
+    void update();
 
 };
 

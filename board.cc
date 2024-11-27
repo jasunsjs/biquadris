@@ -14,11 +14,11 @@ void Board::checkBoard() {
     // TODO
 }
 
-void Board::getRows() {
+int Board::getRows() {
     return rows;
 }
 
-void Board::getCols() {
+int Board::getCols() {
     return cols;
 }
 
