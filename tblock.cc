@@ -1,9 +1,9 @@
-#include "lblock.h"
+#include "tblock.h"
 
 using namespace std;
 
 
-void LBlock::rotateClockwise() {
+void TBlock::rotateClockwise() {
     vector<pair<int, int>> newCoords = coords;
     pair<int, int> newBottomLeft = bottomLeft;
 
@@ -14,15 +14,12 @@ void LBlock::rotateClockwise() {
         newBottomLeft.first -= 1;
         newBottomLeft.second += 2;
 
-        newCoords[2].first = newCoords[0].first;
-        newCoords[3].first = newCoords[0].first;
-        swap(newCoords[0], newCoords[1]);    
+        newCoords[0].first = newCoords[3].first;
+        newCoords[2].first = newCoords[3].first;
+        swap(newCoords[1], newCoords[3]);
     } else {
         newBottomLeft.first -= 2;
         newBottomLeft.second += 1;
-
-        newCoords[0].first = newCoords[3].first;
-        swap(newCoords[1], newCoords[3]);
     }
 
     reposition(newCoords, newBottomLeft);
@@ -35,13 +32,13 @@ void LBlock::rotateClockwise() {
     state = static_cast<RotationState>((static_cast<int>(state) + 1) % 4);
 }
 
-void LBlock::rotateCounterClockwise() {
+void TBlock::rotateCounterClockwise() {
     for (int i = 0; i < 3; ++i) {
         rotateClockwise();
     }
 }
 
-char LBlock::charAt(int x, int y) const {
+char TBlock::charAt(int x, int y) const {
 
     // Check if within block
     for (pair<int, int> p : coords) {

@@ -7,7 +7,7 @@ class TBlock: public Decorator {
   public:
     void rotateClockwise() override;
     void rotateCounterClockwise() override;
-    char charAt(int x, int y) override;
+    char charAt(int x, int y) const override;
 };
 
 #endif
