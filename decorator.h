@@ -21,10 +21,14 @@ class Decorator: public Board {
     void moveDown();
     bool drop();
 
+    // Getter
+    std::vector<std::pair<int, int>> getCoords() const;
+    Board* getComponent() const;
+
     // Block specific, pure virtual
     virtual void rotateClockwise() = 0;
     virtual void rotateCounterClockwise() = 0;
-    virtual char charAt(int x, int y) = 0;
+    virtual char charAt(int x, int y) const = 0;
 };
 
 #endif
