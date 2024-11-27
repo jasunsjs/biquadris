@@ -1,6 +1,6 @@
 #include "controller.h"
 
-Controller(Player* p1, Player* p2) : p1{p1}, p2{p2}, noRandom1{false}, noRandom2{false} {
+Controller::Controller(Player* p1, Player* p2) : p1{p1}, p2{p2}, noRandom1{false}, noRandom2{false} {
     // Create command map with shortcuts
     commandMap = {
         {"lef", "left"},
@@ -82,14 +82,14 @@ Controller(Player* p1, Player* p2) : p1{p1}, p2{p2}, noRandom1{false}, noRandom2
     };
 }
 
-void levelUp() {
+void Controller::levelUp() {
     // TODO
 }
 
-void levelDown() {
+void Controller::levelDown() {
     // TODO
 }
 
-void restart() {
+void Controller::restart() {
     // TODO
 }
