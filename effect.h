@@ -3,8 +3,8 @@
 
 class Effect {
   public:
-    virtual void apply() = 0;
     virtual ~Effect() = default;
+    virtual void apply(Board& board) = 0;
 };
 
 #endif
