@@ -39,21 +39,16 @@ int main(int argc, char* argv[]) {
     srand(seed);
 
     // Set up players and controller
-    Player p1;
-    Player p2;
-    std::string name;
-    std::cout << "Enter Player 1 name: ";
-    std::getline(std::cin, name)
-    p1.setName(name);
-    std::cout << "Enter Player 2 name: ";
-    std::getline(std::cin, name)
-    p2.setName(name);
-    p1.setInputFile(scriptFile1);
-    p2.setInputFile(scriptFile2);
     Board board1{11, 15, new Blank()};
     Board board2{11, 15, new Blank()};
-    p1.setBoard(&board1);
-    p2.setBoard(&board2);
+    std::string name;
+    std::cout << "Enter Player 1 name: ";
+    std::getline(std::cin, name);
+    Player p1{name, &board1, scriptFile1};
+    p1.setName(name);
+    std::cout << "Enter Player 2 name: ";
+    std::getline(std::cin, name);
+    Player p2{name, &board2, scriptFile2};
 
     // Set up observers
     TextObserver to1{&board1, 11, 15, std::cout};
