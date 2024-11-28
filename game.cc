@@ -60,14 +60,14 @@ int main(int argc, char* argv[]) {
 
     // Set up observers
     TextObserver* to = new TextObserver{&board1, &board2, 11, 15, std::cout};
-    GraphicsObserver* go;
+    GraphicsObserver* go = nullptr;
     if (!textOnly) {
         go = new GraphicsObserver{&board1, &board2, 11, 15};
     }
 
     Controller ctrl{&p1, &p2};
     
-    // // Main game loop
+    // Main game loop
     while (true) {
         // Startup sequence
         ctrl.generateNextBlock(&p1);
@@ -87,7 +87,9 @@ int main(int argc, char* argv[]) {
         // TODO
     }
 
-    // Delete constructors
+    // Delete observers
     delete to;
-    delete go;
+    if (go) {
+        delete go;
+    }
 }
