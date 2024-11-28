@@ -1,4 +1,5 @@
 #include "heavyeffect.h"
+#include "board.h"
 
 HeavyEffect::HeavyEffect() : numRows{2} {}
 

@@ -1,6 +1,7 @@
 #ifndef EFFECT_H
 #define EFFECT_H
-#include "board.h"
+
+class Board; // Forward declaration
 
 class Effect {
   public:

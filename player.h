@@ -12,7 +12,7 @@ class Player {
     Board* board;
     Level* level;
   public:
-    Player(const std::string& name = "Player", Board* b, const std::string& filename, int startLevel);
+    Player(const std::string& name, Board* b, const std::string& filename, int startLevel);
     void applyEffect();
     void setLevel(int levelNum);
     std::string getName();
