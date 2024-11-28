@@ -1,4 +1,5 @@
 #include "blindeffect.h"
+#include "board.h"
 
 BlindEffect::BlindEffect() : rowStart{3}, rowEnd{12}, colStart{3}, colEnd{9} {}
 
