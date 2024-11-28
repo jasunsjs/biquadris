@@ -57,7 +57,6 @@ void Board::moveBlock(int rows, int cols) {
 }
 
 void Board::rotateBlock(bool clockwise) {
-    // TODO
     if (clockwise) {
         picture->rotateClockwise();
     } else {
@@ -66,7 +65,6 @@ void Board::rotateBlock(bool clockwise) {
 }
 
 bool Board::dropBlock() {
-    // TODO
     return picture->drop();
 }
 
