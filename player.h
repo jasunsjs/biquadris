@@ -3,6 +3,7 @@
 #include <string>
 #include "effect.h"
 #include "board.h"
+#include "level.h"
 
 class Player {
     std::string playerName, inputFilename;
