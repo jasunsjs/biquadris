@@ -9,13 +9,14 @@ class Controller {
     Player* p1, p2, currPlayer;
   public:
     Controller(Player* p1, Player* p2);
-    void takeCommand();
+    bool takeCommand();
     bool interpretCommand(std::string& cmd);
-    void processCommand(const std::string& cmd);
+    bool processCommand(const std::string& cmd);
     void levelUp();
     void levelDown();
-    void restart();
     void switchPlayer();
+    void generateNextBlock(Player* p);
+    void generateCurrBlock(Player* p);
 };
 
 #endif

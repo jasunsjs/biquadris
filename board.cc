@@ -1,5 +1,12 @@
 #include "board.h"
 #include "decorator.h"
+#include "oblock.h"
+#include "sblock.h"
+#include "zblock.h"
+#include "tblock.h"
+#include "iblock.h"
+#include "lblock.h"
+#include "jblock.h"
 #include "player.h"
 
 Board::Board() : rows(15), cols(11) {}
@@ -49,7 +56,21 @@ void Board::setBlind(int rowStart, int rowEnd, int colStart, int colEnd) {
 }
 
 void Board::setBlock(char block) {
-    // TODO
+    if (block == 'O') {
+        picture = new OBlock(this, player->getLevel()->getLevelNum());
+    } else if (block == 'T') {
+        picture = new TBlock(this, player->getLevel()->getLevelNum());
+    } else if (block == 'I') {
+        picture = new IBlock(this, player->getLevel()->getLevelNum());
+    } else if (block == 'J') {
+        picture = new JBlock(this, player->getLevel()->getLevelNum());
+    } else if (block == 'L') {
+        picture = new LBlock(this, player->getLevel()->getLevelNum());
+    } else if (block == 'S') {
+        picture = new SBlock(this, player->getLevel()->getLevelNum());
+    } else if (block == 'Z') {
+        picture = new ZBlock(this, player->getLevel()->getLevelNum());
+    }
 }
 
 void Board::moveBlock(int rows, int cols) {
@@ -72,6 +93,10 @@ void Board::rotateBlock(bool clockwise) {
 
 bool Board::dropBlock() {
     return picture->drop();
+}
+
+void Board::setNextBlock(char block) {
+    nextBlock = block;
 }
 
 //int Board::getScore() const { return player->getScore(); }

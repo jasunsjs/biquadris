@@ -5,10 +5,10 @@
 
 class LBlock: public Decorator {
   public:
-    LBlock(Board *component, 
+    LBlock(Board *component,
+           int generatedLevel,
            std::vector<std::pair<int, int>> coords = {{2, 2}, {2, 3}, {1, 3}, {0, 3}}, 
-           char symbol = 'L', 
-           int generatedLevel);
+           char symbol = 'L');
     void rotateClockwise() override;
     void rotateCounterClockwise() override;
     char charAt(int x, int y) const override;

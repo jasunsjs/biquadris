@@ -3,8 +3,8 @@
 using namespace std;
 
 
-IBlock::IBlock(Board *component, vector<pair<int, int>> coords, char symbol, int generatedLevel):
-    Decorator{component, coords, symbol, generatedLevel} {}
+IBlock::IBlock(Board *component, int generatedLevel, vector<pair<int, int>> coords, char symbol):
+    Decorator{component, generatedLevel, coords, symbol} {}
 
 void IBlock::rotateClockwise() {
     vector<pair<int, int>> newCoords = coords;

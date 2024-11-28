@@ -24,6 +24,7 @@ class Board : public Subject {
     bool dropBlock();
     int getScore() const;
     int getLevel() const;
+    void setNextBlock(char block);
     char getNextBlock() const;
 };
 
