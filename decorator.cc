@@ -4,11 +4,11 @@ using namespace std;
 
 
 // ** Decorator Constructor and Destructor **
-Decorator::Decorator(Board *component, vector<pair<int, int>> coords, char symbol, int generatedLevel):
+Decorator::Decorator(Board *component, int generatedLevel, vector<pair<int, int>> coords, char symbol):
+    generatedLevel{generatedLevel},
     component{component}, 
     coords{coords}, 
-    symbol{symbol}, 
-    generatedLevel{generatedLevel} {}
+    symbol{symbol} {}
 
 Decorator::~Decorator() {
     delete component;

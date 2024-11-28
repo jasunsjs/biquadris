@@ -2,8 +2,8 @@
 
 using namespace std;
 
-OBlock::OBlock(Board *component, vector<pair<int, int>> coords, char symbol, int generatedLevel):
-    Decorator{component, coords, symbol, generatedLevel} {}
+OBlock::OBlock(Board *component, int generatedLevel, vector<pair<int, int>> coords, char symbol):
+    Decorator{component, generatedLevel, coords, symbol} {}
 
 void OBlock::rotateClockwise() {
     return;

@@ -3,8 +3,8 @@
 using namespace std;
 
 
-ZBlock::ZBlock(Board *component, vector<pair<int, int>> coords, char symbol, int generatedLevel):
-    Decorator{component, coords, symbol, generatedLevel} {}
+ZBlock::ZBlock(Board *component, int generatedLevel, vector<pair<int, int>> coords, char symbol):
+    Decorator{component, generatedLevel, coords, symbol} {}
 
 void ZBlock::rotateClockwise() {
     vector<pair<int, int>> newCoords = coords;

@@ -21,7 +21,7 @@ class Decorator: public Board {
     RotationState state = RotationState::Default;
     std::pair<int, int> bottomLeft = {0, 3}; // Anchor point for rotations, default set
   public:
-    Decorator(Board *component, std::vector<std::pair<int, int>> coords, char symbol, int generatedLevel);
+    Decorator(Board *component, int generatedLevel, std::vector<std::pair<int, int>> coords, char symbol);
     virtual ~Decorator();
 
     // Universal movement across all blocks
