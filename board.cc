@@ -63,3 +63,7 @@ bool Board::dropBlock() {
     // TODO
     return picture->drop();
 }
+
+Player* Board::getPlayer() {
+    return player;
+}

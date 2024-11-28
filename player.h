@@ -15,9 +15,9 @@ class Player {
     void applyEffect();
     void setLevel(int levelNum);
     std::string getName();
-    Level* getLevel();
+    Level* getLevel() const;
     int getScore();
-    Board* getBoard();
+    Board* getBoard() const;
 };
 
 #endif

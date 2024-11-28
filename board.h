@@ -8,8 +8,7 @@ class Decorator;
 class Board : public Subject {
     int rows, cols;
     Decorator* picture;
-    // Player* owner;
-
+    Player* player;
   public:
     Board();
     char getState(int x, int y) const override;
@@ -22,12 +21,9 @@ class Board : public Subject {
     void moveBlock(int rows, int cols);
     void rotateBlock(bool clockwise);
     bool dropBlock();
-
-    int getScore() const { return 0; }
-    int getLevel() const { return 1; }
-  
     //char getNextBlock() const { return owner->getNextBlock(); }
     char getNextBlock() const { return 'J'; }
+    Player* getPlayer();
 };
 
 #endif
