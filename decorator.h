@@ -12,7 +12,7 @@ enum class RotationState {
     Rotated270
 };
 
-class Decorator: public Board {
+class Decorator : public Board {
   protected:
     Board *component;
     std::vector<std::pair<int, int>> coords; // Vector of 4 pairs representing each block cell's position
@@ -42,6 +42,7 @@ class Decorator: public Board {
     virtual void rotateCounterClockwise() {}
     // Pure virtual, must implement in children
     virtual char charAt(int x, int y) const = 0;
+    virtual 
 };
 
 #endif

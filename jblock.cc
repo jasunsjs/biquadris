@@ -1,4 +1,6 @@
 #include "jblock.h"
+#include "blank.h"
+#include <iostream>
 
 using namespace std;
 
@@ -52,7 +54,5 @@ char JBlock::charAt(int x, int y) const {
             return symbol;
         }
     }
-
-    // Else call next decorator's charAt()
-    return component->getState(x, y);
+    return component->getState(x, y); 
 }

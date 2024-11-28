@@ -11,7 +11,7 @@ void TextObserver::update(){
     out << "Player 1: " << s1->getPlayerName() << "\t\t" << "Player 2: " << s2->getPlayerName() << std::endl;
     out << "Level: " << s1->getLevel() << "\t\t" << "Level: " << s2->getLevel() << std::endl;
     out << "Score: " << s1->getScore() << "\t\t" << "Score: " << s2->getScore() << std::endl;
-    
+
     for(int i = 0; i < (width + 2); i++){
         out << "-";
     }
@@ -20,16 +20,16 @@ void TextObserver::update(){
         out << "-";
     }
     out << std::endl;
-
+    
     //updates state of each coord 
-    for(int r = 0; r < height; r++){
+    for(int r = 0; r < height + 3; r++){
         out << '|';
         for(int c = 0; c < width; c++){
-            out << s1->getState(r, c);
+            out << s1->getState(c, r);
         }
         out << '|' << "\t\t" << '|';
         for (int c = 0; c < width; c++) {
-            out << s2->getState(r, c);
+            out << s2->getState(c, r);
         }
         out << '|' << std::endl;
     } 

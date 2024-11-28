@@ -10,31 +10,20 @@
 #include "jblock.h"
 #include "player.h"
 #include "blank.h"
+#include <iostream>
 
-Board::Board() : rows{15}, cols{11}, picture{nullptr} {}
+Board::Board() : rows{15}, cols{11}, picture{nullptr}, player{nullptr} {
+    // std::cout << "Default constructing board" << std::endl;
+}
 
-// Board::Board(int rows, int cols, Decorator* picture) : rows{rows}, cols{cols}, picture{picture} {}
+Board::Board(int rows, int cols, Decorator* picture) : rows{rows}, cols{cols}, picture{picture} {}
 
 char Board::getState(int x, int y) const {
-    char board[15][11] = {
-        {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
-        {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
-        {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
-        {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
-        {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
-        {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
-        {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
-        {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
-        {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
-        {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
-        {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
-        {'.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'},
-        {'T', 'T', 'T', '.', '.', '.', '.', '.', '.', '.', '.'}, // Simulate a T-block
-        {'.', 'T', '.', '.', '.', '.', '.', '.', '.', '.', '.'}, // Bottom row of T-block
-        {'I', 'I', 'I', 'I', '.', '.', '.', '.', '.', '.', '.'}  // Simulate an I-block
-    };
-
-    return board[x][y];
+    if (!picture) {
+        return ' ';
+    } else {
+        return picture->charAt(x, y);
+    }
 }
 
 void Board::removeLayer() {
@@ -59,19 +48,19 @@ void Board::setBlind(int rowStart, int rowEnd, int colStart, int colEnd) {
 
 void Board::setBlock(char block) {
     if (block == 'O') {
-        picture = new OBlock(this, player->getLevel()->getLevelNum());
+        picture = new OBlock(picture, player->getLevel()->getLevelNum());
     } else if (block == 'T') {
-        picture = new TBlock(this, player->getLevel()->getLevelNum());
+        picture = new TBlock(picture, player->getLevel()->getLevelNum());
     } else if (block == 'I') {
-        picture = new IBlock(this, player->getLevel()->getLevelNum());
+        picture = new IBlock(picture, player->getLevel()->getLevelNum());
     } else if (block == 'J') {
-        picture = new JBlock(this, player->getLevel()->getLevelNum());
+        picture = new JBlock(picture, player->getLevel()->getLevelNum());
     } else if (block == 'L') {
-        picture = new LBlock(this, player->getLevel()->getLevelNum());
+        picture = new LBlock(picture, player->getLevel()->getLevelNum());
     } else if (block == 'S') {
-        picture = new SBlock(this, player->getLevel()->getLevelNum());
+        picture = new SBlock(picture, player->getLevel()->getLevelNum());
     } else if (block == 'Z') {
-        picture = new ZBlock(this, player->getLevel()->getLevelNum());
+        picture = new ZBlock(picture, player->getLevel()->getLevelNum());
     }
 }
 
@@ -101,14 +90,14 @@ void Board::setNextBlock(char block) {
     nextBlock = block;
 }
 
-//int Board::getScore() const { return player->getScore(); }
-int Board::getScore() const { return 0; }
+int Board::getScore() const { return player->getScore(); }
+// int Board::getScore() const { return 0; }
 
-// int Board::getLevel const { return player->getLevel()->getLevelNum()}
-int Board::getLevel() const {  return 1; }
+int Board::getLevel() const { return player->getLevel()->getLevelNum(); }
+// int Board::getLevel() const {  return 1; }
 
-//char getNextBlock() const { return player->getNextBlock(); }
-char Board::getNextBlock() const { return 'I'; }
+char Board::getNextBlock() const { return nextBlock; }
+// char Board::getNextBlock() const { return 'I'; }
 
 std::string Board::getPlayerName() const { return player->getName(); }
 

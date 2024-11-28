@@ -7,8 +7,8 @@
 
 class Player {
     std::string playerName, inputFilename;
-    Effect* currEffect;
-    int score;
+    Effect* currEffect = nullptr;
+    int score = 0;
     Board* board;
     Level* level;
   public:

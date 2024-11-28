@@ -11,6 +11,9 @@
 #include <cstdlib>
 #include <sstream>
 
+const int BOARD_ROWS = 15;
+const int BOARD_COLS = 11;
+
 int main(int argc, char* argv[]) {
     std::string scriptFile1 = "sequence1.txt";
     std::string scriptFile2 = "sequence2.txt";
@@ -43,8 +46,9 @@ int main(int argc, char* argv[]) {
     srand(seed);
 
     // Set up players and controller
-    Board board1;
-    Board board2;
+    Blank* blank = new Blank();
+    Board board1{BOARD_ROWS, BOARD_COLS, blank};
+    Board board2{BOARD_ROWS, BOARD_COLS, blank};
     std::string name;
     std::cout << "Enter Player 1 name: ";
     std::getline(std::cin, name);
@@ -63,7 +67,7 @@ int main(int argc, char* argv[]) {
 
     Controller ctrl{&p1, &p2};
     
-    // Main game loop
+    // // Main game loop
     while (true) {
         // Startup sequence
         ctrl.generateNextBlock(&p1);

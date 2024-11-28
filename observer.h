@@ -7,7 +7,7 @@
 
 class Observer {
   protected:
-    Board* s1, *s2;
+    Board *s1, *s2;
     int width;
     int height; 
     const std::unordered_map<char, std::vector<std::string>> blockShapes = {

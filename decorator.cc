@@ -2,11 +2,10 @@
 
 using namespace std;
 
-
 // ** Decorator Constructor and Destructor **
 Decorator::Decorator(Board *component, int generatedLevel, vector<pair<int, int>> coords, char symbol):
-    generatedLevel{generatedLevel},
     component{component}, 
+    generatedLevel{generatedLevel},
     coords{coords}, 
     symbol{symbol} {}
 
@@ -57,7 +56,8 @@ bool Decorator::drop() {
     pair<int, int> newBottomLeft = bottomLeft;
 
     // Continuously move down until invalid position
-    while (isValid(newCoords)) {
+    while (isValid(
+        newCoords)) {
         for (int i = 0; i < newCoords.size(); ++i) {
             newCoords[i].second++;
         }

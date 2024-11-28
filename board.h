@@ -7,12 +7,14 @@ class Decorator; // Forward declaration
 class Player; // Forward declaration
 
 class Board : public Subject {
-    int rows, cols;
+    int rows = 15;
+    int cols = 11;
     Decorator* picture;
     Player* player = nullptr;
     char nextBlock;
   public:
     Board();
+    Board(int row, int col, Decorator *picture);
     char getState(int x, int y) const override;
     void removeLayer();
     void checkBoard();

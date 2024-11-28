@@ -194,7 +194,9 @@ bool Controller::processCommand(const std::string& cmd) {
 }
 
 void Controller::render() {
-    currPlayer->getBoard()->updateObservers();
+    // std::cout << "STANLEY" << std::endl;
+    currPlayer->getBoard()->updateObservers(); // error
+    // std::cout << "RYAN" << std::endl; // not currently printing
 }
 
 void Controller::levelUp() {

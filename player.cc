@@ -7,10 +7,9 @@
 
 Player::Player(const std::string& name, Board* b, const std::string& filename, int startLevel)
     : playerName{name},
-      score{0},
-      currEffect{nullptr},
       inputFilename{filename},
       board{b} {
+    level = new Level0{inputFilename};
     setLevel(startLevel);
 }
 
