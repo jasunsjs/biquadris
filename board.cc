@@ -53,7 +53,13 @@ void Board::setBlock(char block) {
 }
 
 void Board::moveBlock(int rows, int cols) {
-    // TODO
+    if (rows == -1) {
+        picture->moveLeft();
+    } else if (rows == 1) {
+        picture->moveRight();
+    } else if (cols == -1) {
+        picture->moveDown();
+    }
 }
 
 void Board::rotateBlock(bool clockwise) {
