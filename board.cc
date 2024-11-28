@@ -99,10 +99,11 @@ void Board::setNextBlock(char block) {
     nextBlock = block;
 }
 
-char Board::getNextBlock() const {
-    return nextBlock;
-}
+//int Board::getScore() const { return player->getScore(); }
+int Board::getScore() const { return 0; }
 
-Player* Board::getPlayer() {
-    return player;
-}
+// int Board::getLevel const { return player->getLevel()->getLevelNum()}
+int Board::getLevel() const {  return 1; }
+
+//char getNextBlock() const { return owner->getNextBlock(); }
+char Board::getNextBlock() const { return; }

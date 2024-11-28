@@ -7,7 +7,8 @@
 class GraphicsObserver : public Observer {
     XWindow window;
     const int pixelSize = 20;
-    std::vector<std::vector<char>> previousState; //cache for effiency, might not use
+    std::vector<std::vector<char>> board1Cache;
+    std::vector<std::vector<char>> board2Cache;
 
     public:
         GraphicsObserver(Board* b1, Board* b2, int w, int h);
