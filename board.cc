@@ -107,3 +107,5 @@ int Board::getLevel() const {  return 1; }
 
 //char getNextBlock() const { return owner->getNextBlock(); }
 char Board::getNextBlock() const { return; }
+
+std::string Board::getPlayerName() const { return player->getName()}

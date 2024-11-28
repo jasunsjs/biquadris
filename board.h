@@ -26,6 +26,7 @@ class Board : public Subject {
     int getLevel() const;
     void setNextBlock(char block);
     char getNextBlock() const;
+    std::string getPlayerName() const;
 };
 
 #endif
