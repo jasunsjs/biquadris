@@ -62,6 +62,10 @@ bool Board::dropBlock() {
     // TODO
 }
 
+char Board::getNextBlock() const {
+    return nextBlock;
+}
+
 Player* Board::getPlayer() {
     return player;
 }

@@ -9,6 +9,7 @@ class Board : public Subject {
     int rows, cols;
     Decorator* picture;
     Player* player;
+    char nextBlock;
   public:
     Board();
     char getState(int x, int y) const override;
@@ -21,8 +22,7 @@ class Board : public Subject {
     void moveBlock(int rows, int cols);
     void rotateBlock(bool clockwise);
     bool dropBlock();
-    //char getNextBlock() const { return owner->getNextBlock(); }
-    char getNextBlock() const { return 'J'; }
+    char getNextBlock() const;
     Player* getPlayer();
 };
 
