@@ -59,6 +59,9 @@ int main(int argc, char* argv[]) {
     } 
 
     Controller ctrl{&p1, &p2};
+    
     // Main game loop
-    // TODO
+    while (true) {
+        ctrl.takeCommand();
+    }
 }

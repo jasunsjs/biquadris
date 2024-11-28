@@ -4,14 +4,11 @@ using namespace std;
 
 
 // ** Decorator Constructor and Destructor **
-Decorator::Decorator(Board *component, vector<pair<int, int>> coords, char symbol, 
-    int generatedLevel, RotationState state, pair<int, int> bottomLeft):
-        component{component}, 
-        coords{coords}, 
-        symbol{symbol}, 
-        generatedLevel{generatedLevel}, 
-        state{state}, 
-        bottomLeft{bottomLeft} {}
+Decorator::Decorator(Board *component, vector<pair<int, int>> coords, char symbol, int generatedLevel):
+    component{component}, 
+    coords{coords}, 
+    symbol{symbol}, 
+    generatedLevel{generatedLevel} {}
 
 Decorator::~Decorator() {
     delete component;
@@ -31,7 +28,7 @@ void Decorator::moveLeft() {
     }
 }
 
-void Decorator::MoveRight() {
+void Decorator::moveRight() {
     vector<pair<int, int>> newCoords = coords;
     for (int i = 0; i < newCoords.size(); ++i) {
         newCoords[i].first++;

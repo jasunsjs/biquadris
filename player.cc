@@ -3,13 +3,17 @@
 Player::Player(const std::string& name, Board* b, const std::string& filename, int startLevel)
     : playerName{name},
       score{0},
+      currEffect{nullptr},
       inputFilename{filename},
       board{b} {
     setLevel(startLevel);
 }
 
 void Player::applyEffect() {
-    // TODO
+    if (!currEffect) {
+        return;
+    }
+    currEffect->apply(board);
 }
 
 void Player::setLevel(int levelNum) {

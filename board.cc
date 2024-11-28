@@ -1,4 +1,6 @@
 #include "board.h"
+#include "decorator.h"
+#include "player.h"
 
 Board::Board() : rows(15), cols(11) {}
 
@@ -51,13 +53,32 @@ void Board::setBlock(char block) {
 }
 
 void Board::moveBlock(int rows, int cols) {
-    // TODO
+    if (rows == -1) {
+        picture->moveLeft();
+    } else if (rows == 1) {
+        picture->moveRight();
+    } else if (cols == -1) {
+        picture->moveDown();
+    }
 }
 
 void Board::rotateBlock(bool clockwise) {
-    // TODO
+    if (clockwise) {
+        picture->rotateClockwise();
+    } else {
+        picture->rotateCounterClockwise();
+    }
 }
 
 bool Board::dropBlock() {
-    // TODO
+    return picture->drop();
 }
+
+//int Board::getScore() const { return player->getScore(); }
+int Board::getScore() const { return 0; }
+
+// int Board::getLevel const { return player->getLevel()->getLevelNum()}
+int Board::getLevel() const {  return 1; }
+
+//char getNextBlock() const { return owner->getNextBlock(); }
+char Board::getNextBlock() const { return; }

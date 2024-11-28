@@ -18,20 +18,15 @@ class Decorator: public Board {
     std::vector<std::pair<int, int>> coords; // Vector of 4 pairs representing each block cell's position
     char symbol;
     int generatedLevel;
-    RotationState state;
-    std::pair<int, int> bottomLeft; // Anchor point for rotations
+    RotationState state = RotationState::Default;
+    std::pair<int, int> bottomLeft = {0, 3}; // Anchor point for rotations, default set
   public:
-    Decorator(Board *component, 
-              std::vector<std::pair<int, int>> coords, 
-              char symbol, 
-              int generatedLevel, 
-              RotationState state = RotationState::Default, 
-              std::pair<int, int> bottomLeft = {0, 3});
+    Decorator(Board *component, std::vector<std::pair<int, int>> coords, char symbol, int generatedLevel);
     virtual ~Decorator();
 
     // Universal movement across all blocks
     void moveLeft();
-    void MoveRight();
+    void moveRight();
     void moveDown();
     bool drop();
 

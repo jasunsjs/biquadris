@@ -3,6 +3,9 @@
 using namespace std;
 
 
+JBlock::JBlock(Board *component, vector<pair<int, int>> coords, char symbol, int generatedLevel):
+    Decorator{component, coords, symbol, generatedLevel} {}
+
 void JBlock::rotateClockwise() {
     vector<pair<int, int>> newCoords = coords;
     pair<int, int> newBottomLeft = bottomLeft;

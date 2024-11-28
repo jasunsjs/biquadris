@@ -34,15 +34,15 @@ void GraphicsObserver::update() {
 
     int board1OffsetX = 4 * pixelSize;
     int board2OffsetX = 20 * pixelSize;
-    int uiHeight = 90;
+    int uiHeight = 100;
 
     window.drawString(board1OffsetX + 10, 20, "Player 1");
     window.drawString(board1OffsetX + 10, 40, "Level: " + std::to_string(s1->getLevel()));
     window.drawString(board1OffsetX + 10, 60, "Score: " + std::to_string(s1->getScore()));
 
-    window.drawString(board1OffsetX+ board2OffsetX + 10, 20, "Player 2");
-    window.drawString(board1OffsetX+ board2OffsetX + 10, 40, "Level: " + std::to_string(s2->getLevel()));
-    window.drawString(board1OffsetX+ board2OffsetX + 10, 60, "Score: " + std::to_string(s2->getScore()));
+    window.drawString(board2OffsetX + 10, 20, "Player 2");
+    window.drawString(board2OffsetX + 10, 40, "Level: " + std::to_string(s2->getLevel()));
+    window.drawString(board2OffsetX + 10, 60, "Score: " + std::to_string(s2->getScore()));
 
     for (int r = 0; r < height; r++) {
         for (int c = 0; c < width; c++) {

@@ -1,17 +1,16 @@
 #ifndef BOARD_H
 #define BOARD_H
 #include "subject.h"
-// #include "player.h"
+#include "player.h"
 
 class Decorator; 
 
 class Board : public Subject {
     int rows, cols;
     Decorator* picture;
-    // Player* owner;
-
+    Player* player;
+    char nextBlock;
   public:
-    char next = 'L';
     Board();
     char getState(int x, int y) const override;
     void removeLayer();
@@ -23,12 +22,9 @@ class Board : public Subject {
     void moveBlock(int rows, int cols);
     void rotateBlock(bool clockwise);
     bool dropBlock();
-
-    int getScore() const { return 0; }
-    int getLevel() const { return 1; }
-  
-    //char getNextBlock() const { return owner->getNextBlock(); }
-    char getNextBlock() const { return next; }
+    int getScore() const;
+    int getLevel() const;
+    char getNextBlock() const;
 };
 
 #endif

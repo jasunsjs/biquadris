@@ -6,7 +6,7 @@
 
 class Player {
     std::string playerName, inputFilename;
-    Effect currEffect;
+    Effect* currEffect;
     int score;
     Board* board;
     Level* level;
@@ -15,9 +15,9 @@ class Player {
     void applyEffect();
     void setLevel(int levelNum);
     std::string getName();
-    Level* getLevel();
+    Level* getLevel() const;
     int getScore();
-    Board* getBoard();
+    Board* getBoard() const;
 };
 
 #endif
