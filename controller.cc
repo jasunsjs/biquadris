@@ -174,7 +174,7 @@ bool Controller::processCommand(const std::string& cmd) {
         currPlayer->getBoard()->setBlock('T');
     }
     // Render displays
-    currPlayer->getBoard()->notifyObservers();
+    currPlayer->getBoard()->updateObservers();
     return true;
 }
 

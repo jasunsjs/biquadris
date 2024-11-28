@@ -63,7 +63,13 @@ int main(int argc, char* argv[]) {
     // Main game loop
     while (true) {
         // Startup sequence
+        ctrl.generateNextBlock(&p1);
+        ctrl.generateNextBlock(&p2);
 
+        // Current game loop
         while (ctrl.takeCommand()) {}
+
+        // Restart sequence
+        // TODO
     }
 }
