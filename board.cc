@@ -41,3 +41,23 @@ int Board::getRows() const {
 int Board::getCols() const {
     return cols;
 }
+
+void Board::setBlind(int rowStart, int rowEnd, int colStart, int colEnd) {
+    // TODO
+}
+
+void Board::setBlock(char block) {
+    // TODO
+}
+
+void Board::moveBlock(int rows, int cols) {
+    // TODO
+}
+
+void Board::rotateBlock(bool clockwise) {
+    // TODO
+}
+
+bool Board::dropBlock() {
+    // TODO
+}

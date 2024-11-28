@@ -19,6 +19,8 @@ class Board : public Subject {
     int getCols() const;
     void setBlind(int rowStart, int rowEnd, int colStart, int colEnd);
     void setBlock(char block);
+    void moveBlock(int rows, int cols);
+    void rotateBlock(bool clockwise);
     bool dropBlock();
 
     int getScore() const { return 0; }

@@ -17,7 +17,7 @@ class Player {
     std::string getName();
     Level* getLevel();
     int getScore();
-    void setBlock(char block);
+    Board* getBoard();
 };
 
 #endif

@@ -49,7 +49,6 @@ int Player::getScore() {
     return score;
 }
 
-void setBlock(char block) {
-    // TODO
+Board* Player::getBoard() {
+    return board;
 }
-

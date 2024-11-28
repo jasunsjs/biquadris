@@ -111,87 +111,67 @@ bool Controller::interpretCommand(std::string& cmd) {
 
 void Controller::processCommand(const std::string& cmd) {
     // Carry out command
-    switch (cmd) {
-        case "left":
-            currPlayer->moveBlock(-1, 0);
+    if (cmd == "left") {
+        currPlayer->getBoard()->moveBlock(-1, 0);
+    } else if (cmd == "right") {
+        currPlayer->getBoard()->moveBlock(1, 0);
+    } else if (cmd == "down") {
+        currPlayer->getBoard()->moveBlock(0, 1);
+    } else if (cmd == "clockwise") {
+        currPlayer->getBoard()->rotateBlock(true);
+    } else if (cmd == "counterclockwise") {
+        currPlayer->getBoard()->rotateBlock(false);
+    } else if (cmd == "drop") {
+        currPlayer->getBoard()->dropBlock();
+        switchPlayer();
+    } else if (cmd == "levelup") {
+        levelUp();
+    } else if (cmd == "leveldown") {
+        levelDown();
+    } else if (cmd == "restart") {
+        restart();
+    } else if (cmd == "norandom") {
+        if (currPlayer->getLevel()->getLevelNum() != 3 && currPlayer->getLevel()->getLevelNum() != 4) {
+            std::cout << "This command only works on levels 3 and 4" << std::endl;
             break;
-        case "right":
-            currPlayer->moveBlock(1, 0);
+        }
+        string sequenceFilename;
+        std::cin >> sequenceFilename;
+        currPlayer->getLevel()->setRandom(false);
+        currPlayer->getLevel()->setSequenceFile(sequenceFilename);
+    } else if (cmd == "random") {
+        if (currPlayer->getLevel()->getLevelNum() != 3 && currPlayer->getLevel()->getLevelNum() != 4) {
+            std::cout << "This command only works on levels 3 and 4" << std::endl;
             break;
-        case "down":
-            currPlayer->moveBlock(0, 1);
-            break;
-        case "clockwise":
-            currPlayer->rotateBlock(true);
-            break;
-        case "counterclockwise":
-            currPlayer->rotateBlock(true);
-            break;
-        case "drop":
-            currPlayer->dropBlock();
-            switchPlayer();
-            break;
-        case "levelup":
-            levelUp();
-            break;
-        case "leveldown":
-            levelDown();
-            break;
-        case "restart":
-            restart();
-            break;
-        case "norandom":
-            if (currPlayer->getLevel()->getLevelNum() != 3 && currPlayer->getLevel()->getLevelNum() != 4) {
-                std::cout << "This command only works on levels 3 and 4" << std::endl;
-                break;
-            }
-            string filename;
-            std::cin >> filename;
-            currPlayer->getLevel()->setRandom(false);
-            currPlayer->getLevel()->setSequenceFile(filename);
-            break;
-        case "random":
-            if (currPlayer->getLevel()->getLevelNum() != 3 && currPlayer->getLevel()->getLevelNum() != 4) {
-                std::cout << "This command only works on levels 3 and 4" << std::endl;
-                break;
-            }
-            currPlayer->getLevel()->setRandom(true);
-            break;
-        case "sequence":
-            string filename;
-            std::cin >> filename;
-            ifstream input{filename};
-            string line, str;
-            while (getLine(input, line)) {
-                istringstream iss{line};
-                while (iss >> str) {
-                    if (interpretCommand(str)) {
-                        processCommand(str);
-                    }
+        }
+        currPlayer->getLevel()->setRandom(true);
+    } else if (cmd == "sequence") {
+        string sequenceFilename;
+        std::cin >> sequenceFilename;
+        ifstream input{sequenceFilename};
+        string line, str;
+        while (getline(input, line)) {
+            istringstream iss{line};
+            while (iss >> str) {
+                if (interpretCommand(str)) {
+                    processCommand(str);
                 }
             }
-            break;
-        case "I":
-            currPlayer->setBlock('I');
-            break;
-        case "J":
-            currPlayer->setBlock('J');
-            break;
-        case "L":
-            currPlayer->setBlock('L');
-            break;
-        case "O":
-            currPlayer->setBlock('O');
-            break;
-        case "S":
-            currPlayer->setBlock('S');
-            break;
-        case "Z":
-            currPlayer->setBlock('Z');
-            break;
-        case "T":
-            currPlayer->setBlock('T');
-            break;
+        }
+    } else if (cmd == "I") {
+        currPlayer->getBoard()->setBlock('I');
+    } else if (cmd == "J") {
+        currPlayer->getBoard()->setBlock('J');
+    } else if (cmd == "L") {
+        currPlayer->getBoard()->setBlock('L');
+    } else if (cmd == "O") {
+        currPlayer->getBoard()->setBlock('O');
+    } else if (cmd == "S") {
+        currPlayer->getBoard()->setBlock('S');
+    } else if (cmd == "Z") {
+        currPlayer->getBoard()->setBlock('Z');
+    } else if (cmd == "T") {
+        currPlayer->getBoard()->setBlock('T');
     }
 }
 
