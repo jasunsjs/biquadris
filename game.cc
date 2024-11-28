@@ -62,6 +62,8 @@ int main(int argc, char* argv[]) {
     
     // Main game loop
     while (true) {
-        ctrl.takeCommand();
+        // Startup sequence
+
+        while (ctrl.takeCommand()) {}
     }
 }

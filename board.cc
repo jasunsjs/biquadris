@@ -70,6 +70,10 @@ bool Board::dropBlock() {
     return picture->drop();
 }
 
+void Board::setNextBlock(char block) {
+    nextBlock = block;
+}
+
 char Board::getNextBlock() const {
     return nextBlock;
 }
