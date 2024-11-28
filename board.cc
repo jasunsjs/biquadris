@@ -70,6 +70,10 @@ bool Board::dropBlock() {
     return picture->drop();
 }
 
+char Board::getNextBlock() const {
+    return nextBlock;
+}
+
 Player* Board::getPlayer() {
     return player;
 }
