@@ -34,12 +34,12 @@ void GraphicsObserver::update() {
     int uiHeight = 100;
 
     window.drawString(10, 20, "Player 1");
-    window.drawString(10, 40, "Level: " + std::to_string(s1->getLevel()));
-    window.drawString(10, 60, "Score: " + std::to_string(s1->getScore()));
+    window.drawString(10, 40, "Level: " + std::to_string(s1->getPlayer()->getLevel()->getLevelNum()));
+    window.drawString(10, 60, "Score: " + std::to_string(s1->getPlayer()->getScore()));
 
     window.drawString(board2OffsetX + 10, 20, "Player 2");
-    window.drawString(board2OffsetX + 10, 40, "Level: " + std::to_string(s2->getLevel()));
-    window.drawString(board2OffsetX + 10, 60, "Score: " + std::to_string(s2->getScore()));
+    window.drawString(board2OffsetX + 10, 40, "Level: " + std::to_string(s2->getPlayer()->getLevel()->getLevelNum()));
+    window.drawString(board2OffsetX + 10, 60, "Score: " + std::to_string(s2->getPlayer()->getScore()));
 
     for (int r = 0; r < height; r++) {
         for (int c = 0; c < width; c++) {

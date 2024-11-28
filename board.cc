@@ -61,3 +61,7 @@ void Board::rotateBlock(bool clockwise) {
 bool Board::dropBlock() {
     // TODO
 }
+
+Player* Board::getPlayer() {
+    return player;
+}

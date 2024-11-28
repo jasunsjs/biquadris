@@ -8,8 +8,8 @@ TextObserver::TextObserver(Board* b1, Board* b2, int w, int h, std::ostream& o)
 }
 
 void TextObserver::update(){
-    out << "Level: " << s1->getLevel() << "\t\t" << "Level: " << s2->getLevel() << std::endl;
-    out << "Score: " << s1->getScore() << "\t\t" << "Score: " << s2->getScore() << std::endl;
+    out << "Level: " << s1->getPlayer()->getLevel()->getLevelNum() << "\t\t" << "Level: " << s2->getPlayer()->getLevel()->getLevelNum() << std::endl;
+    out << "Score: " << s1->getPlayer()->getScore() << "\t\t" << "Score: " << s2->getPlayer()->getScore() << std::endl;
 
     out << "-------------\t\t-------------" << std::endl;
 
