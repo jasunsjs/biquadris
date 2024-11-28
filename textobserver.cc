@@ -11,7 +11,15 @@ void TextObserver::update(){
     out << "Level: " << s1->getLevel() << "\t\t" << "Level: " << s2->getLevel() << std::endl;
     out << "Score: " << s1->getScore() << "\t\t" << "Score: " << s2->getScore() << std::endl;
 
-    out << "-------------\t\t-------------" << std::endl;
+    //-------
+    for(int i = 0; i < (width + 2); i++){
+        out << "-";
+    }
+    out << "\t\t";
+    for(int i = 0; i < (width + 2); i++){
+        out << "-";
+    }
+    out << std::endl;
 
     //updates state of each coord 
     for(int r = 0; r < height; r++){
@@ -26,7 +34,15 @@ void TextObserver::update(){
         out << '|' << std::endl;
     } 
 
-    out << "-------------\t\t-------------" << std::endl;
+    //-------
+    for(int i = 0; i < (width + 2); i++){
+        out << "-";
+    }
+    out << "\t\t";
+    for(int i = 0; i < (width + 2); i++){
+        out << "-";
+    }
+    out << std::endl;
 
     // Next Block
     out << "Next Block: " << "\t\t" << "Next Block:" << std::endl;
