@@ -18,6 +18,7 @@ class Decorator : public Board {
     std::vector<std::pair<int, int>> coords; // Vector of 4 pairs representing each block cell's position
     char symbol;
     int generatedLevel;
+    bool dropped = false;
     RotationState state = RotationState::Default;
     std::pair<int, int> bottomLeft = {0, 3}; // Anchor point for rotations, default set
   public:
@@ -42,7 +43,7 @@ class Decorator : public Board {
     virtual void rotateCounterClockwise() {}
     // Pure virtual, must implement in children
     virtual char charAt(int x, int y) const = 0;
-    virtual 
+    bool isDroppedAt(int x, int y) const;
 };
 
 #endif

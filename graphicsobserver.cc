@@ -2,7 +2,7 @@
 
 GraphicsObserver::GraphicsObserver(Board* b1, Board* b2, int w, int h)
 : Observer(b1, b2, w, h), window(800, 500), board1Cache(h, std::vector<char>(w, ' ')), 
- board2Cache(h, std::vector<char>(w, ' ')) {
+board2Cache(h, std::vector<char>(w, ' ')) {
     s1->attach(this);
     s2->attach(this);
 }
@@ -46,24 +46,24 @@ void GraphicsObserver::update() {
 
     for (int r = 0; r < height; r++) {
         for (int c = 0; c < width; c++) {
-            char state1 = s1->getState(c, r);
+            char state1 = s1->getState(r, c);
 
-            if (state1 != board1Cache[c][r]) { 
+            if (state1 != board1Cache[r][c]) { 
                 int color1 = mapBlockToColor(state1);
-                int x1 = board1OffsetX + r * pixelSize;
-                int y1 = uiHeight + c * pixelSize;
+                int x1 = board1OffsetX + c * pixelSize;
+                int y1 = uiHeight + r * pixelSize;
                 window.fillRectangle(x1, y1, pixelSize, pixelSize, color1);
-                board1Cache[c][r] = state1;
+                board1Cache[r][c] = state1;
             }
 
-            char state2 = s2->getState(c, r);
+            char state2 = s2->getState(r, c);
 
-            if (state2 != board2Cache[c][r]) { 
+            if (state2 != board2Cache[r][c]) { 
                 int color2 = mapBlockToColor(state2);
-                int x2 = board1OffsetX+ board2OffsetX + r * pixelSize;
-                int y2 = uiHeight + c * pixelSize;
+                int x2 = board1OffsetX+ board2OffsetX + c * pixelSize;
+                int y2 = uiHeight + r * pixelSize;
                 window.fillRectangle(x2, y2, pixelSize, pixelSize, color2);
-                board2Cache[c][r] = state2;
+                board2Cache[r][c] = state2;
             }
         }
     }
