@@ -59,10 +59,11 @@ int main(int argc, char* argv[]) {
     board2.setPlayer(&p2);
 
     // Set up observers
-    TextObserver to{&board1, &board2, 11, 15, std::cout};
+    TextObserver* to{&board1, &board2, 11, 15, std::cout};
+    GraphicsObserver* go;
     if (!textOnly) {
-        GraphicsObserver go{&board1, &board2, 11, 15};
-    } 
+        go = new GraphicsObserver{&board1, &board2, 11, 15};
+    }
 
     Controller ctrl{&p1, &p2};
     
@@ -85,4 +86,8 @@ int main(int argc, char* argv[]) {
         // Restart sequence
         // TODO
     }
+
+    // Delete constructors
+    delete to;
+    delete go;
 }
