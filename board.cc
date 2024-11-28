@@ -57,7 +57,19 @@ void Board::setBlind(int rowStart, int rowEnd, int colStart, int colEnd) {
 
 void Board::setBlock(char block) {
     if (block == 'O') {
-        picture = new OBlock(picture, player->getLevel()->getLevelNum());
+        picture = new OBlock(this, player->getLevel()->getLevelNum());
+    } else if (block == 'T') {
+        picture = new TBlock(this, player->getLevel()->getLevelNum());
+    } else if (block == 'I') {
+        picture = new IBlock(this, player->getLevel()->getLevelNum());
+    } else if (block == 'J') {
+        picture = new JBlock(this, player->getLevel()->getLevelNum());
+    } else if (block == 'L') {
+        picture = new LBlock(this, player->getLevel()->getLevelNum());
+    } else if (block == 'S') {
+        picture = new SBlock(this, player->getLevel()->getLevelNum());
+    } else if (block == 'Z') {
+        picture = new ZBlock(this, player->getLevel()->getLevelNum());
     }
 }
 
