@@ -1,6 +1,7 @@
 #ifndef BOARD_H
 #define BOARD_H
 #include "subject.h"
+#include "player.h"
 
 class Decorator; 
 
