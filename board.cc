@@ -18,6 +18,10 @@ Board::Board() : rows{15}, cols{11}, picture{nullptr}, player{nullptr} {
 
 Board::Board(int rows, int cols, Decorator* picture) : rows{rows}, cols{cols}, picture{picture} {}
 
+Board::~Board() {
+    delete picture;
+}
+
 char Board::getState(int x, int y) const {
     if (!picture) {
         return ' ';

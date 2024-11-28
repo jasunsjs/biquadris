@@ -10,7 +10,9 @@ Decorator::Decorator(Board *component, int generatedLevel, vector<pair<int, int>
     symbol{symbol} {}
 
 Decorator::~Decorator() {
-    delete component;
+    if (component) {
+        delete component;
+    }
 }
 
 

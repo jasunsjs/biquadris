@@ -42,7 +42,6 @@ class Decorator : public Board {
     virtual void rotateCounterClockwise() {}
     // Pure virtual, must implement in children
     virtual char charAt(int x, int y) const = 0;
-    virtual 
 };
 
 #endif
