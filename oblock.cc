@@ -2,6 +2,9 @@
 
 using namespace std;
 
+OBlock::OBlock(Board *component, vector<pair<int, int>> coords, char symbol, int generatedLevel):
+    Decorator{component, coords, symbol, generatedLevel} {}
+
 void OBlock::rotateClockwise() {
     return;
 }

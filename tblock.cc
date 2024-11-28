@@ -3,6 +3,9 @@
 using namespace std;
 
 
+TBlock::TBlock(Board *component, vector<pair<int, int>> coords, char symbol, int generatedLevel):
+    Decorator{component, coords, symbol, generatedLevel} {}
+
 void TBlock::rotateClockwise() {
     vector<pair<int, int>> newCoords = coords;
     pair<int, int> newBottomLeft = bottomLeft;

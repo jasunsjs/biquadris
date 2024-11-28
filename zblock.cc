@@ -3,6 +3,9 @@
 using namespace std;
 
 
+ZBlock::ZBlock(Board *component, vector<pair<int, int>> coords, char symbol, int generatedLevel):
+    Decorator{component, coords, symbol, generatedLevel} {}
+
 void ZBlock::rotateClockwise() {
     vector<pair<int, int>> newCoords = coords;
     pair<int, int> newBottomLeft = bottomLeft;
