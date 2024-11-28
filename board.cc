@@ -1,5 +1,6 @@
 #include "board.h"
 #include "decorator.h"
+#include "player.h"
 
 Board::Board() : rows(15), cols(11) {}
 
@@ -57,6 +58,11 @@ void Board::moveBlock(int rows, int cols) {
 
 void Board::rotateBlock(bool clockwise) {
     // TODO
+    if (clockwise) {
+        picture->rotateClockwise();
+    } else {
+        picture->rotateCounterClockwise();
+    }
 }
 
 bool Board::dropBlock() {
