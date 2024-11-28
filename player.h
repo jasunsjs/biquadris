@@ -17,7 +17,7 @@ class Player {
     void setLevel(int levelNum);
     std::string getName();
     Level* getLevel() const;
-    int getScore();
+    int getScore() const;
     Board* getBoard() const;
 };
 

@@ -1,4 +1,6 @@
 #include "controller.h"
+#include "level3.h"
+#include "level4.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -87,13 +89,15 @@ Controller::Controller(Player* p1, Player* p2) : p1{p1}, p2{p2}, currPlayer{p1} 
 
 bool Controller::takeCommand() {
     // Get command from input, interpret, then process command
-    string cmd;
-    while (true) {
-        std::cout << "Player " << currPlayer->getName() << ", please enter command:" << std::endl;
-        std::cin >> cmd;
+    std::string cmd;
+    std::cout << "Player " << currPlayer->getName() << ", please enter command:" << std::endl;
+    while (std::cin >> cmd) {
         if (interpretCommand(cmd)) {
             break;
         }
+    }
+    if (std::cin.eof()) {
+        return false;
     }
     return processCommand(cmd);
 }
@@ -133,25 +137,36 @@ bool Controller::processCommand(const std::string& cmd) {
     } else if (cmd == "norandom") {
         if (currPlayer->getLevel()->getLevelNum() != 3 && currPlayer->getLevel()->getLevelNum() != 4) {
             std::cout << "This command only works on levels 3 and 4" << std::endl;
-            break;
+        } else {
+            std::string sequenceFilename;
+            std::cin >> sequenceFilename;
+            // Casting to appropriate level
+            if (auto* level3 = dynamic_cast<Level3*>(currPlayer->getLevel())) {
+                level3->setRandom(false);
+                level3->setSequenceFile(sequenceFilename);
+            } else if (auto* level4 = dynamic_cast<Level4*>(currPlayer->getLevel())) {
+                level4->setRandom(false);
+                level4->setSequenceFile(sequenceFilename);
+            }
         }
-        string sequenceFilename;
-        std::cin >> sequenceFilename;
-        currPlayer->getLevel()->setRandom(false);
-        currPlayer->getLevel()->setSequenceFile(sequenceFilename);
     } else if (cmd == "random") {
         if (currPlayer->getLevel()->getLevelNum() != 3 && currPlayer->getLevel()->getLevelNum() != 4) {
             std::cout << "This command only works on levels 3 and 4" << std::endl;
-            break;
+        } else {
+            // Casting to appropriate level
+            if (auto* level3 = dynamic_cast<Level3*>(currPlayer->getLevel())) {
+                level3->setRandom(true);
+            } else if (auto* level4 = dynamic_cast<Level4*>(currPlayer->getLevel())) {
+                level4->setRandom(true);
+            }
         }
-        currPlayer->getLevel()->setRandom(true);
     } else if (cmd == "sequence") {
-        string sequenceFilename;
+        std::string sequenceFilename;
         std::cin >> sequenceFilename;
-        ifstream input{sequenceFilename};
-        string line, str;
+        std::ifstream input{sequenceFilename};
+        std::string line, str;
         while (getline(input, line)) {
-            istringstream iss{line};
+            std::istringstream iss{line};
             while (iss >> str) {
                 if (interpretCommand(str)) {
                     processCommand(str);
@@ -174,25 +189,29 @@ bool Controller::processCommand(const std::string& cmd) {
         currPlayer->getBoard()->setBlock('T');
     }
     // Render displays
-    currPlayer->getBoard()->updateObservers();
+    render();
     return true;
 }
 
+void Controller::render() {
+    currPlayer->getBoard()->updateObservers();
+}
+
 void Controller::levelUp() {
-    if (currPlayer->getLevel->getLevelNum() == 4) {
+    if (currPlayer->getLevel()->getLevelNum() == 4) {
         std::cout << "Cannot increase level, already at highest level" << std::endl;
     } else {
-        int newLevel = currPlayer->getLevel->getLevelNum() + 1;
+        int newLevel = currPlayer->getLevel()->getLevelNum() + 1;
         std::cout << "Increasing player " << currPlayer->getName() << " level to " << newLevel << std::endl;
         currPlayer->setLevel(newLevel);
     }
 }
 
 void Controller::levelDown() {
-    if (currPlayer->getLevel->getLevelNum() == 0) {
+    if (currPlayer->getLevel()->getLevelNum() == 0) {
         std::cout << "Cannot decrease level, already at lowest level" << std::endl;
     } else {
-        int newLevel = currPlayer->getLevel->getLevelNum() - 1;
+        int newLevel = currPlayer->getLevel()->getLevelNum() - 1;
         std::cout << "Decreasing player " << currPlayer->getName() << " level to " << newLevel << std::endl;
         currPlayer->setLevel(newLevel);
     }
@@ -211,7 +230,7 @@ void Controller::generateNextBlock(Player* p) {
     p->getBoard()->setNextBlock(block);
 }
 
-void generateCurrBlock(Player* p) {
+void Controller::generateCurrBlock(Player* p) {
     p->getBoard()->setBlock(p->getBoard()->getNextBlock());
     generateNextBlock(p);
 }

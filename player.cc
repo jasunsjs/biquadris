@@ -1,4 +1,9 @@
 #include "player.h"
+#include "level0.h"
+#include "level1.h"
+#include "level2.h"
+#include "level3.h"
+#include "level4.h"
 
 Player::Player(const std::string& name, Board* b, const std::string& filename, int startLevel)
     : playerName{name},
@@ -13,7 +18,7 @@ void Player::applyEffect() {
     if (!currEffect) {
         return;
     }
-    currEffect->apply(board);
+    currEffect->apply(*board);
 }
 
 void Player::setLevel(int levelNum) {
@@ -24,19 +29,19 @@ void Player::setLevel(int levelNum) {
             break;
         case 1:
             delete level;
-            level = new Level1{inputFilename};
+            level = new Level1();
             break;
         case 2:
             delete level;
-            level = new Level2{inputFilename};
+            level = new Level2();
             break;
         case 3:
             delete level;
-            level = new Level3{inputFilename};
+            level = new Level3();
             break;
         case 4:
             delete level;
-            level = new Level4{inputFilename};
+            level = new Level4();
             break;
     }
 }
@@ -45,14 +50,14 @@ std::string Player::getName() {
     return playerName;
 }
 
-Level* Player::getLevel() {
+Level* Player::getLevel() const {
     return level;
 }
 
-int Player::getScore() {
+int Player::getScore() const {
     return score;
 }
 
-Board* Player::getBoard() {
+Board* Player::getBoard() const {
     return board;
 }

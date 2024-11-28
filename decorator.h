@@ -37,9 +37,10 @@ class Decorator: public Board {
     void reposition(std::vector<std::pair<int, int>> &coordinates,
                     std::pair<int, int> &anchor) const; // Translate block back to designated anchor point
 
-    // Block specific, pure virtual
-    virtual void rotateClockwise() = 0;
-    virtual void rotateCounterClockwise() = 0;
+    // Block specific, virtual
+    virtual void rotateClockwise() {}
+    virtual void rotateCounterClockwise() {}
+    // Pure virtual, must implement in children
     virtual char charAt(int x, int y) const = 0;
 };
 

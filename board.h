@@ -1,14 +1,15 @@
 #ifndef BOARD_H
 #define BOARD_H
 #include "subject.h"
-#include "player.h"
+#include <string>
 
-class Decorator; 
+class Decorator; // Forward declaration
+class Player; // Forward declaration
 
 class Board : public Subject {
     int rows, cols;
     Decorator* picture;
-    Player* player;
+    Player* player = nullptr;
     char nextBlock;
   public:
     Board();
@@ -27,6 +28,7 @@ class Board : public Subject {
     void setNextBlock(char block);
     char getNextBlock() const;
     std::string getPlayerName() const;
+    void setPlayer(Player* p);
 };
 
 #endif

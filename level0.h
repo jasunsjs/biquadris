@@ -4,9 +4,9 @@
 #include <fstream>
 
 class Level0 : public Level {
-    ifstream input;
+    std::ifstream input;
   public:
-    Level0(string filename);
+    Level0(std::string filename);
     ~Level0();
     char nextBlock() override;
 };

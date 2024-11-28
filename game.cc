@@ -5,9 +5,11 @@
 #include "observer.h"
 #include "textobserver.h"
 #include "graphicsobserver.h"
+#include "blank.h"
 #include <string>
 #include <iostream>
 #include <cstdlib>
+#include <sstream>
 
 int main(int argc, char* argv[]) {
     std::string scriptFile1 = "sequence1.txt";
@@ -32,30 +34,31 @@ int main(int argc, char* argv[]) {
         } else if (arg == "-scriptfile2") {
             scriptFile2 = argv[++i];
         } else if (arg == "-startlevel") {
-            startLevel = argv[++i];
+            // Convert string to int
+            std::istringstream iss{argv[++i]};
+            iss >> startLevel;
         }
     }
     // Set seed
     srand(seed);
 
     // Set up players and controller
-    Board board1{11, 15, new Blank()};
-    Board board2{11, 15, new Blank()};
+    Board board1;
+    Board board2;
     std::string name;
     std::cout << "Enter Player 1 name: ";
     std::getline(std::cin, name);
     Player p1{name, &board1, scriptFile1, startLevel};
-    p1.setName(name);
     std::cout << "Enter Player 2 name: ";
     std::getline(std::cin, name);
     Player p2{name, &board2, scriptFile2, startLevel};
+    board1.setPlayer(&p1);
+    board2.setPlayer(&p2);
 
     // Set up observers
-    TextObserver to1{&board1, 11, 15, std::cout};
-    TextObserver to2{&board2, 11, 15, std::cout};
+    TextObserver to{&board1, &board2, 11, 15, std::cout};
     if (!textOnly) {
-        GraphicsObserver go1{&board1, 11, 15};
-        GraphicsObserver go2{&board2, 11, 15};
+        GraphicsObserver go{&board1, &board2, 11, 15};
     } 
 
     Controller ctrl{&p1, &p2};
@@ -67,10 +70,15 @@ int main(int argc, char* argv[]) {
         ctrl.generateCurrBlock(&p1);
         ctrl.generateNextBlock(&p2);
         ctrl.generateCurrBlock(&p2);
+        ctrl.render();
 
         // Current game loop
         while (ctrl.takeCommand()) {}
-
+        
+        if (std::cin.eof()) {
+            break;
+        }
+        // Set high scores
         // Restart sequence
         // TODO
     }

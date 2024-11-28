@@ -4,12 +4,13 @@
 #include <vector>
 #include <utility>
 #include <string>
+#include <fstream>
 
 class Level4 : public Level {
     std::vector<std::pair<char, int>> blockWeights;
     int totalWeight, numBlocks;
     bool random;
-    ifstream input;
+    std::ifstream input;
   public:
     Level4();
     char nextBlock() override;
@@ -17,7 +18,7 @@ class Level4 : public Level {
     void blockPlaced();
     bool shouldDropStar();
     void setRandom(bool randBool);
-    void setSequenceFile(std::string filename)
+    void setSequenceFile(std::string filename);
 };
 
 #endif

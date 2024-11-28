@@ -1,6 +1,6 @@
 #include "level0.h"
 
-Level0::Level0(string filename) : Level{0} {
+Level0::Level0(std::string filename) : Level{0} {
     if (input.is_open()) {
         input.close();
     }

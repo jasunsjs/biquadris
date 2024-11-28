@@ -1,5 +1,6 @@
 #include "board.h"
 #include "decorator.h"
+#include "player.h"
 #include "oblock.h"
 #include "sblock.h"
 #include "zblock.h"
@@ -8,8 +9,9 @@
 #include "lblock.h"
 #include "jblock.h"
 #include "player.h"
+#include "blank.h"
 
-Board::Board() : rows(15), cols(11) {}
+Board::Board() : rows{15}, cols{11}, picture{nullptr} {}
 
 // Board::Board(int rows, int cols, Decorator* picture) : rows{rows}, cols{cols}, picture{picture} {}
 
@@ -105,7 +107,11 @@ int Board::getScore() const { return 0; }
 // int Board::getLevel const { return player->getLevel()->getLevelNum()}
 int Board::getLevel() const {  return 1; }
 
-//char getNextBlock() const { return owner->getNextBlock(); }
-char Board::getNextBlock() const { return; }
+//char getNextBlock() const { return player->getNextBlock(); }
+char Board::getNextBlock() const { return 'I'; }
 
-std::string Board::getPlayerName() const { return player->getName()}
+std::string Board::getPlayerName() const { return player->getName(); }
+
+void Board::setPlayer(Player* p) {
+    player = p;
+}

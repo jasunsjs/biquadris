@@ -5,10 +5,10 @@
 
 class Blank: public Decorator {
   public:
-    Blank(Board *component, 
+    Blank(Board *component = nullptr, 
            std::vector<std::pair<int, int>> coords = {}, 
            char symbol = ' ', 
-           int generatedLevel);
+           int generatedLevel = 0);
     char charAt(int x, int y) const override;
 };
 
