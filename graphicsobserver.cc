@@ -22,6 +22,8 @@ int GraphicsObserver::mapBlockToColor(char state){
             color = XWindow::Magenta;
         } else if (state == 'J') {
             color = XWindow::Orange;
+        } else if (state == 'S') {  
+            color = XWindow::Cyan;
         } else if (state == ' ') {
             color = XWindow::Black;
         } else {
@@ -82,11 +84,13 @@ void GraphicsObserver::update() {
         for (size_t i = 0; i < shape.size(); i++) {
             for (size_t j = 0; j < shape[i].size(); j++) {
                 char cell = shape[i][j];
+                int x = board1OffsetX + 10 + j * pixelSize;
+                int y = nextBlockOffsetY + 20 + i * pixelSize;
                 if (cell != ' ') {
-                    int x = board1OffsetX + 10 + j * pixelSize;
-                    int y = nextBlockOffsetY + 20 + i * pixelSize;
                     int blockColor = mapBlockToColor(cell);
                     window.fillRectangle(x, y, pixelSize, pixelSize, blockColor);
+                } else {
+                    window.fillRectangle(x, y, pixelSize, pixelSize, XWindow::White);
                 }
             }
         }
@@ -101,11 +105,13 @@ void GraphicsObserver::update() {
         for (size_t i = 0; i < shape.size(); i++) {
             for (size_t j = 0; j < shape[i].size(); j++) {
                 char cell = shape[i][j];
+                int x = board2OffsetX + 10 + j * pixelSize;
+                int y = nextBlockOffsetY + 20 + i * pixelSize;
                 if (cell != ' ') {
-                    int x = board2OffsetX + 10 + j * pixelSize;
-                    int y = nextBlockOffsetY + 20 + i * pixelSize;
                     int blockColor = mapBlockToColor(cell);
                     window.fillRectangle(x, y, pixelSize, pixelSize, blockColor);
+                } else {
+                    window.fillRectangle(x, y, pixelSize, pixelSize, XWindow::White);
                 }
             }
         }

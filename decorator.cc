@@ -46,26 +46,24 @@ void Decorator::moveRight() {
 
 void Decorator::moveDown() {
     vector<pair<int, int>> newCoords = coords;
-    cout << "CCCCC" << endl;
     for (int i = 0; i < newCoords.size(); ++i) {
         newCoords[i].second++;
-        cout << "AAAAA" << endl;
     }
 
     if (isValid(newCoords)) {
-        cout << "BBBBB" << endl;
         coords = newCoords;
         bottomLeft.second++;
     }
+    cout << bottomLeft.first << ", " << bottomLeft.second << endl;
 }
 
 bool Decorator::drop() {
     vector<pair<int, int>> newCoords = coords;
     pair<int, int> newBottomLeft = bottomLeft;
 
+
     // Continuously move down until invalid position
-    while (isValid(
-        newCoords)) {
+    while (isValid(newCoords)) {
         for (int i = 0; i < newCoords.size(); ++i) {
             newCoords[i].second++;
         }
@@ -74,7 +72,7 @@ bool Decorator::drop() {
 
     // Go back by 1 unit
     for (int i = 0; i < coords.size(); ++i) {
-        coords[i].second = newCoords[i].second - 1;
+        newCoords[i].second--;
     }
     newBottomLeft.second--;
 
