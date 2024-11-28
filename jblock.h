@@ -11,7 +11,6 @@ class JBlock: public Decorator {
            char symbol = 'J');
     void rotateClockwise() override;
     void rotateCounterClockwise() override;
-    char charAt(int x, int y) const override; 
 };
 
 #endif

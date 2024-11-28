@@ -11,7 +11,6 @@ class OBlock: public Decorator {
            char symbol = 'O');
     void rotateClockwise() override;
     void rotateCounterClockwise() override;
-    char charAt(int x, int y) const override;
 };
 
 #endif

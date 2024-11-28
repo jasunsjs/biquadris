@@ -45,14 +45,3 @@ void JBlock::rotateCounterClockwise() {
         rotateClockwise();
     }
 }
-
-char JBlock::charAt(int x, int y) const {
-
-    // Check if within block
-    for (pair<int, int> p : coords) {
-        if (p.first == x && p.second == y) {
-            return symbol;
-        }
-    }
-    return component->getState(x, y); 
-}

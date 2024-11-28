@@ -127,6 +127,7 @@ bool Controller::processCommand(const std::string& cmd) {
         currPlayer->getBoard()->rotateBlock(false);
     } else if (cmd == "drop") {
         currPlayer->getBoard()->dropBlock();
+        generateCurrBlock(currPlayer);
         switchPlayer();
     } else if (cmd == "levelup") {
         levelUp();

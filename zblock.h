@@ -11,7 +11,6 @@ class ZBlock: public Decorator {
            char symbol = 'Z');
     void rotateClockwise() override;
     void rotateCounterClockwise() override;
-    char charAt(int x, int y) const override;
 };
 
 #endif

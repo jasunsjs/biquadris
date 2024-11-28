@@ -11,7 +11,6 @@ class TBlock: public Decorator {
            char symbol = 'T');
     void rotateClockwise() override;
     void rotateCounterClockwise() override;
-    char charAt(int x, int y) const override;
 };
 
 #endif

@@ -80,7 +80,7 @@ void Board::moveBlock(int rows, int cols) {
         picture->moveLeft();
     } else if (rows == 1) {
         picture->moveRight();
-    } else if (cols == -1) {
+    } else if (cols == 1) {
         picture->moveDown();
     }
 }

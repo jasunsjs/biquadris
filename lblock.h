@@ -11,7 +11,6 @@ class LBlock: public Decorator {
            char symbol = 'L');
     void rotateClockwise() override;
     void rotateCounterClockwise() override;
-    char charAt(int x, int y) const override;
 };
 
 #endif

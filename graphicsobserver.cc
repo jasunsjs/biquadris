@@ -1,8 +1,8 @@
 #include "graphicsobserver.h"
 
 GraphicsObserver::GraphicsObserver(Board* b1, Board* b2, int w, int h)
-: Observer(b1, b2, w, h), window(800, 500), board1Cache(h, std::vector<char>(w, '-')), 
- board2Cache(h, std::vector<char>(w, '-')) {
+: Observer(b1, b2, w, h), window(1000, 650), board1Cache(h+3, std::vector<char>(w, '-')), 
+ board2Cache(h+3, std::vector<char>(w, '-')) {
     s1->attach(this);
     s2->attach(this);
 }
@@ -47,7 +47,7 @@ void GraphicsObserver::update() {
     window.drawString(board2OffsetX + 10, 60, "Score: " + std::to_string(s2->getScore()));
 
     // Draw Boards
-    for (int y = 0; y < height; y++) {
+    for (int y = 0; y < height + 3; y++) {
         for (int x = 0; x < width; x++) {
             // Board 1
             char state1 = s1->getState(x, y);
@@ -71,7 +71,7 @@ void GraphicsObserver::update() {
         }
     }
 
-    int nextBlockOffsetY = uiHeight + height * pixelSize + 20;
+    int nextBlockOffsetY = uiHeight + (height+3) * pixelSize + 20;
 
     // Draw Next Block for Player 1
     window.drawString(board1OffsetX + 10, nextBlockOffsetY, "Next Block:");

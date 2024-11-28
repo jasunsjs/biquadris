@@ -42,7 +42,7 @@ class Decorator : public Board {
     virtual void rotateClockwise() {}
     virtual void rotateCounterClockwise() {}
     // Pure virtual, must implement in children
-    virtual char charAt(int x, int y) const = 0;
+    virtual char charAt(int x, int y) const;
     Decorator* blockAt(int x, int y);
 };
 

@@ -46,11 +46,14 @@ void Decorator::moveRight() {
 
 void Decorator::moveDown() {
     vector<pair<int, int>> newCoords = coords;
+    cout << "CCCCC" << endl;
     for (int i = 0; i < newCoords.size(); ++i) {
         newCoords[i].second++;
+        cout << "AAAAA" << endl;
     }
 
     if (isValid(newCoords)) {
+        cout << "BBBBB" << endl;
         coords = newCoords;
         bottomLeft.second++;
     }
@@ -88,12 +91,23 @@ bool Decorator::isValid(const vector<pair<int, int>> &coordinates) {
     for (pair<int, int> p : coordinates) {
         
         // Check if out of bounds and if position is already occupied
-        if (p.first < 0 || p.first >= component->getCols() || p.second < 0 || p.second >= component->getRows() ||
+        if (p.first < 0 || p.first >= component->getCols() || p.second < 0 || p.second >= component->getRows() + 3 ||
             (blockAt(p.first, p.second) && blockAt(p.first, p.second)->dropped)) {
             return false;
         }
     }
     return true;
+}
+
+char Decorator::charAt(int x, int y) const {
+
+    // Check if within block
+    for (pair<int, int> p : coords) {
+        if (p.first == x && p.second == y) {
+            return symbol;
+        }
+    }
+    return component->getState(x, y); 
 }
 
 Decorator* Decorator::blockAt(int x, int y) {
