@@ -1,4 +1,5 @@
 #include "decorator.h"
+#include <iostream>
 
 using namespace std;
 
@@ -32,10 +33,12 @@ void Decorator::moveLeft() {
 void Decorator::moveRight() {
     vector<pair<int, int>> newCoords = coords;
     for (int i = 0; i < newCoords.size(); ++i) {
+        // std::cout << "qwerty" << std::endl;
         newCoords[i].first++;
     }
 
     if (isValid(newCoords)) {
+        
         coords = newCoords;
         bottomLeft.first++;
     }
@@ -75,23 +78,31 @@ bool Decorator::drop() {
     // Assign
     coords = newCoords;
     bottomLeft = newBottomLeft;
+    dropped = true;
     return true;
 }
 
 
 // ** Helper methods for movement and rotations **
-bool Decorator::isValid(const vector<pair<int, int>> &coordinates) const {
+bool Decorator::isValid(const vector<pair<int, int>> &coordinates) {
     for (pair<int, int> p : coordinates) {
         
         // Check if out of bounds and if position is already occupied
         if (p.first < 0 || p.first >= component->getCols() || p.second < 0 || p.second >= component->getRows() ||
-            charAt(p.first, p.second) != ' ' || (charAt(p.first, p.second) == symbol && )) {
-
-            charAt(p.first, p.second) == symbol && 
+            (blockAt(p.first, p.second) && blockAt(p.first, p.second)->dropped)) {
             return false;
         }
     }
     return true;
+}
+
+Decorator* Decorator::blockAt(int x, int y) {
+    for (pair<int, int> p : coords) {
+        if (p.first == x && p.second == y) {
+            return this;
+        }
+    }
+    return component->getBlock(x, y);
 }
 
 void Decorator::transpose(vector<pair<int, int>> &coordinates, pair<int, int> &anchor) const {

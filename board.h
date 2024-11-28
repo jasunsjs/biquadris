@@ -17,6 +17,7 @@ class Board : public Subject {
     ~Board();
     Board(int row, int col, Decorator *picture);
     char getState(int x, int y) const override;
+    Decorator* getBlock(int x, int y);
     void removeLayer();
     void checkBoard();
     int getRows() const;

@@ -32,7 +32,7 @@ class Decorator : public Board {
     bool drop();
 
     // Helper methods for movement and rotations
-    bool isValid(const std::vector<std::pair<int, int>> &coordinates) const;
+    bool isValid(const std::vector<std::pair<int, int>> &coordinates);
     void transpose(std::vector<std::pair<int, int>> &coordinates, 
                    std::pair<int, int> &anchor) const; // Swap x and y values
     void reposition(std::vector<std::pair<int, int>> &coordinates,
@@ -43,6 +43,7 @@ class Decorator : public Board {
     virtual void rotateCounterClockwise() {}
     // Pure virtual, must implement in children
     virtual char charAt(int x, int y) const = 0;
+    Decorator* blockAt(int x, int y);
 };
 
 #endif
