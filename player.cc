@@ -13,6 +13,13 @@ Player::Player(const std::string& name, Board* b, const std::string& filename, i
     setLevel(startLevel);
 }
 
+Player::~Player() {
+    delete level;
+    if (currEffect) {
+        delete currEffect;
+    }
+}
+
 void Player::applyEffect() {
     if (!currEffect) {
         return;

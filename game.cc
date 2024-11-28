@@ -46,9 +46,8 @@ int main(int argc, char* argv[]) {
     srand(seed);
 
     // Set up players and controller
-    Blank* blank = new Blank();
-    Board board1{BOARD_ROWS, BOARD_COLS, blank};
-    Board board2{BOARD_ROWS, BOARD_COLS, blank};
+    Board board1{BOARD_ROWS, BOARD_COLS, new Blank()};
+    Board board2{BOARD_ROWS, BOARD_COLS, new Blank()};
     std::string name;
     std::cout << "Enter Player 1 name: ";
     std::getline(std::cin, name);

@@ -10,7 +10,9 @@ Decorator::Decorator(Board *component, int generatedLevel, vector<pair<int, int>
     symbol{symbol} {}
 
 Decorator::~Decorator() {
-    delete component;
+    if (component) {
+        delete component;
+    }
 }
 
 
@@ -74,14 +76,6 @@ bool Decorator::drop() {
     coords = newCoords;
     bottomLeft = newBottomLeft;
     return true;
-}
-
-bool Decorator::isDroppedAt(int x, int y) const {
-    for (pair<int, int> p : coords) {
-        if (p.first == x && p.second == y) {
-            return symbol;
-        }
-    }
 }
 
 
