@@ -5,8 +5,9 @@ class Level {
     int levelNum;
   public:
     Level(int num) : levelNum{num} {}
-    virtual char nextBlock() = 0;
     virtual ~Level() = default;
+    virtual char nextBlock() = 0;
+    int getLevelNum() { return levelNum; }
 };
 
 #endif

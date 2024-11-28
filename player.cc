@@ -1,28 +1,55 @@
 #include "player.h"
 
-Player::Player(const std::string& name, Board* b, const std::string& filename)
+Player::Player(const std::string& name, Board* b, const std::string& filename, int startLevel)
     : playerName{name},
-      level{0},
-      score{0}
-      inputFilename{filename} {}
+      score{0},
+      inputFilename{filename},
+      board{b} {
+    setLevel(startLevel);
+}
 
 void Player::applyEffect() {
     // TODO
 }
 
-void Player::setLevel(int lvl) {
-    level = lvl;
+void Player::setLevel(int levelNum) {
+    switch (levelNum) {
+        case 0:
+            delete level;
+            level = new Level0{inputFilename};
+            break;
+        case 1:
+            delete level;
+            level = new Level1{inputFilename};
+            break;
+        case 2:
+            delete level;
+            level = new Level2{inputFilename};
+            break;
+        case 3:
+            delete level;
+            level = new Level3{inputFilename};
+            break;
+        case 4:
+            delete level;
+            level = new Level4{inputFilename};
+            break;
+    }
 }
 
 std::string Player::getName() {
     return playerName;
 }
 
-int Player::getLevel() {
+Level* Player::getLevel() {
     return level;
 }
 
 int Player::getScore() {
     return score;
+}
+
+void setBlock(char block) {
+    // TODO
 }
 

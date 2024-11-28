@@ -1,6 +1,9 @@
 #include "controller.h"
+#include <iostream>
+#include <fstream>
+#include <sstream>
 
-Controller::Controller(Player* p1, Player* p2) : p1{p1}, p2{p2}, noRandom1{false}, noRandom2{false} {
+Controller::Controller(Player* p1, Player* p2) : p1{p1}, p2{p2}, currPlayer{p1} {
     // Create command map with shortcuts
     commandMap = {
         {"lef", "left"},
@@ -82,14 +85,144 @@ Controller::Controller(Player* p1, Player* p2) : p1{p1}, p2{p2}, noRandom1{false
     };
 }
 
+void Controller::takeCommand() {
+    // Get command from input, interpret, then process command
+    string cmd;
+    while (true) {
+        std::cout << "Player " << currPlayer->getName() << ", please enter command:" << std::endl;
+        std::cin >> cmd;
+        if (interpretCommand(cmd)) {
+            break;
+        }
+    }
+    processCommand(cmd);
+}
+
+bool Controller::interpretCommand(std::string& cmd) {
+    // Find corresponding command in map
+    auto found = commandMap.find(cmd);
+    if (found != commandMap.end()) {
+        cmd = found->second;
+        return true;
+    }
+    std::cout << "Invalid command" << std::endl;
+    return false;
+}
+
+void Controller::processCommand(const std::string& cmd) {
+    // Carry out command
+    switch (cmd) {
+        case "left":
+            currPlayer->moveBlock(-1, 0);
+            break;
+        case "right":
+            currPlayer->moveBlock(1, 0);
+            break;
+        case "down":
+            currPlayer->moveBlock(0, 1);
+            break;
+        case "clockwise":
+            currPlayer->rotateBlock(true);
+            break;
+        case "counterclockwise":
+            currPlayer->rotateBlock(true);
+            break;
+        case "drop":
+            currPlayer->dropBlock();
+            switchPlayer();
+            break;
+        case "levelup":
+            levelUp();
+            break;
+        case "leveldown":
+            levelDown();
+            break;
+        case "restart":
+            restart();
+            break;
+        case "norandom":
+            if (currPlayer->getLevel()->getLevelNum() != 3 && currPlayer->getLevel()->getLevelNum() != 4) {
+                std::cout << "This command only works on levels 3 and 4" << std::endl;
+                break;
+            }
+            string filename;
+            std::cin >> filename;
+            currPlayer->getLevel()->setRandom(false);
+            currPlayer->getLevel()->setSequenceFile(filename);
+            break;
+        case "random":
+            if (currPlayer->getLevel()->getLevelNum() != 3 && currPlayer->getLevel()->getLevelNum() != 4) {
+                std::cout << "This command only works on levels 3 and 4" << std::endl;
+                break;
+            }
+            currPlayer->getLevel()->setRandom(true);
+            break;
+        case "sequence":
+            string filename;
+            std::cin >> filename;
+            ifstream input{filename};
+            string line, str;
+            while (getLine(input, line)) {
+                istringstream iss{line};
+                while (iss >> str) {
+                    if (interpretCommand(str)) {
+                        processCommand(str);
+                    }
+                }
+            }
+            break;
+        case "I":
+            currPlayer->setBlock('I');
+            break;
+        case "J":
+            currPlayer->setBlock('J');
+            break;
+        case "L":
+            currPlayer->setBlock('L');
+            break;
+        case "O":
+            currPlayer->setBlock('O');
+            break;
+        case "S":
+            currPlayer->setBlock('S');
+            break;
+        case "Z":
+            currPlayer->setBlock('Z');
+            break;
+        case "T":
+            currPlayer->setBlock('T');
+            break;
+    }
+}
+
 void Controller::levelUp() {
-    // TODO
+    if (currPlayer->getLevel->getLevelNum() == 4) {
+        std::cout << "Cannot increase level, already at highest level" << std::endl;
+    } else {
+        int newLevel = currPlayer->getLevel->getLevelNum() + 1;
+        std::cout << "Increasing player " << currPlayer->getName() << " level to " << newLevel << std::endl;
+        currPlayer->setLevel(newLevel);
+    }
 }
 
 void Controller::levelDown() {
-    // TODO
+    if (currPlayer->getLevel->getLevelNum() == 0) {
+        std::cout << "Cannot decrease level, already at lowest level" << std::endl;
+    } else {
+        int newLevel = currPlayer->getLevel->getLevelNum() - 1;
+        std::cout << "Decreasing player " << currPlayer->getName() << " level to " << newLevel << std::endl;
+        currPlayer->setLevel(newLevel);
+    }
 }
 
 void Controller::restart() {
     // TODO
+}
+
+void Controller::switchPlayer() {
+    if (currPlayer == p1) {
+        currPlayer = p2;
+    } else {
+        currPlayer = p1;
+    }
 }

@@ -44,22 +44,18 @@ int main(int argc, char* argv[]) {
     std::string name;
     std::cout << "Enter Player 1 name: ";
     std::getline(std::cin, name);
-    Player p1{name, &board1, scriptFile1};
+    Player p1{name, &board1, scriptFile1, startLevel};
     p1.setName(name);
     std::cout << "Enter Player 2 name: ";
     std::getline(std::cin, name);
-    Player p2{name, &board2, scriptFile2};
+    Player p2{name, &board2, scriptFile2, startLevel};
 
     // Set up observers
     TextObserver to1{&board1, 11, 15, std::cout};
     TextObserver to2{&board2, 11, 15, std::cout};
-    board1.attach(&to1);
-    board2.attach(&to2);
     if (!textOnly) {
         GraphicsObserver go1{&board1, 11, 15};
         GraphicsObserver go2{&board2, 11, 15};
-        board1.attach(&go1);
-        board2.attach(&go2);
     } 
 
     Controller ctrl{&p1, &p2};

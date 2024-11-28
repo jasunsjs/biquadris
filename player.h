@@ -7,15 +7,17 @@
 class Player {
     std::string playerName, inputFilename;
     Effect currEffect;
-    int level, score;
+    int score;
     Board* board;
+    Level* level;
   public:
-    Player(const std::string& name = "Player", Board* b, const std::string& filename);
+    Player(const std::string& name = "Player", Board* b, const std::string& filename, int startLevel);
     void applyEffect();
-    void setLevel(int lvl);
+    void setLevel(int levelNum);
     std::string getName();
-    int getLevel();
+    Level* getLevel();
     int getScore();
+    void setBlock(char block);
 };
 
 #endif
