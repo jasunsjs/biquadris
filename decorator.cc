@@ -28,7 +28,7 @@ void Decorator::moveLeft() {
     }
 }
 
-void Decorator::MoveRight() {
+void Decorator::moveRight() {
     vector<pair<int, int>> newCoords = coords;
     for (int i = 0; i < newCoords.size(); ++i) {
         newCoords[i].first++;

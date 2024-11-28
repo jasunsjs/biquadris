@@ -26,7 +26,7 @@ class Decorator: public Board {
 
     // Universal movement across all blocks
     void moveLeft();
-    void MoveRight();
+    void moveRight();
     void moveDown();
     bool drop();
 
