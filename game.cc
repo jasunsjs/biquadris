@@ -59,7 +59,7 @@ int main(int argc, char* argv[]) {
     board2.setPlayer(&p2);
 
     // Set up observers
-    TextObserver* to{&board1, &board2, 11, 15, std::cout};
+    TextObserver* to = new TextObserver{&board1, &board2, 11, 15, std::cout};
     GraphicsObserver* go;
     if (!textOnly) {
         go = new GraphicsObserver{&board1, &board2, 11, 15};
