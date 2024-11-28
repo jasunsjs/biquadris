@@ -11,6 +11,7 @@ class Board : public Subject {
     // Player* owner;
 
   public:
+    char next = 'L';
     Board();
     char getState(int x, int y) const override;
     void removeLayer();
@@ -27,7 +28,7 @@ class Board : public Subject {
     int getLevel() const { return 1; }
   
     //char getNextBlock() const { return owner->getNextBlock(); }
-    char getNextBlock() const { return 'J'; }
+    char getNextBlock() const { return next; }
 };
 
 #endif
