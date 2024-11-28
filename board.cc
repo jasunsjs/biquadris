@@ -1,4 +1,5 @@
 #include "board.h"
+#include "decorator.h"
 
 Board::Board() : rows(15), cols(11) {}
 
@@ -60,4 +61,5 @@ void Board::rotateBlock(bool clockwise) {
 
 bool Board::dropBlock() {
     // TODO
+    return picture->drop();
 }
