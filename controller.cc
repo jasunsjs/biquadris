@@ -85,7 +85,7 @@ Controller::Controller(Player* p1, Player* p2) : p1{p1}, p2{p2}, currPlayer{p1} 
     };
 }
 
-void Controller::takeCommand() {
+bool Controller::takeCommand() {
     // Get command from input, interpret, then process command
     string cmd;
     while (true) {
@@ -95,7 +95,7 @@ void Controller::takeCommand() {
             break;
         }
     }
-    processCommand(cmd);
+    return processCommand(cmd);
 }
 
 bool Controller::interpretCommand(std::string& cmd) {
@@ -109,7 +109,7 @@ bool Controller::interpretCommand(std::string& cmd) {
     return false;
 }
 
-void Controller::processCommand(const std::string& cmd) {
+bool Controller::processCommand(const std::string& cmd) {
     // Carry out command
     if (cmd == "left") {
         currPlayer->getBoard()->moveBlock(-1, 0);
@@ -129,7 +129,7 @@ void Controller::processCommand(const std::string& cmd) {
     } else if (cmd == "leveldown") {
         levelDown();
     } else if (cmd == "restart") {
-        restart();
+        return false;
     } else if (cmd == "norandom") {
         if (currPlayer->getLevel()->getLevelNum() != 3 && currPlayer->getLevel()->getLevelNum() != 4) {
             std::cout << "This command only works on levels 3 and 4" << std::endl;
@@ -173,6 +173,9 @@ void Controller::processCommand(const std::string& cmd) {
     } else if (cmd == "T") {
         currPlayer->getBoard()->setBlock('T');
     }
+    // Render displays
+    currPlayer->getBoard()->notifyObservers();
+    return true;
 }
 
 void Controller::levelUp() {
@@ -195,14 +198,15 @@ void Controller::levelDown() {
     }
 }
 
-void Controller::restart() {
-    // TODO
-}
-
 void Controller::switchPlayer() {
     if (currPlayer == p1) {
         currPlayer = p2;
     } else {
         currPlayer = p1;
     }
+}
+
+void Controller::generateNextBlock(Player* p) {
+    char block = p->getLevel()->nextBlock();
+    p->getBoard()->setNextBlock(block);
 }

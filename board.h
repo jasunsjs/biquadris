@@ -22,6 +22,7 @@ class Board : public Subject {
     void moveBlock(int rows, int cols);
     void rotateBlock(bool clockwise);
     bool dropBlock();
+    void setNextBlock(char block);
     char getNextBlock() const;
     Player* getPlayer();
 };
