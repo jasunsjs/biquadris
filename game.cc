@@ -64,7 +64,9 @@ int main(int argc, char* argv[]) {
     while (true) {
         // Startup sequence
         ctrl.generateNextBlock(&p1);
+        ctrl.generateCurrBlock(&p1);
         ctrl.generateNextBlock(&p2);
+        ctrl.generateCurrBlock(&p2);
 
         // Current game loop
         while (ctrl.takeCommand()) {}

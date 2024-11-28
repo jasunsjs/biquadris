@@ -14,9 +14,9 @@ class Controller {
     bool processCommand(const std::string& cmd);
     void levelUp();
     void levelDown();
-    void restart();
     void switchPlayer();
     void generateNextBlock(Player* p);
+    void generateCurrBlock(Player* p);
 };
 
 #endif

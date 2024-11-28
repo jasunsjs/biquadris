@@ -210,3 +210,8 @@ void Controller::generateNextBlock(Player* p) {
     char block = p->getLevel()->nextBlock();
     p->getBoard()->setNextBlock(block);
 }
+
+void generateCurrBlock(Player* p) {
+    p->getBoard()->setBlock(p->getBoard()->getNextBlock());
+    generateNextBlock(p);
+}
