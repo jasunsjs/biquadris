@@ -11,11 +11,10 @@
 #include "forceblock.h"
 #include "player.h"
 #include "blank.h"
-// #include <unordered_set>
 #include <iostream>
 
-Board::Board() : rows{15}, cols{11}, picture{nullptr}, player{nullptr} {
-}
+// Default constructor
+Board::Board() : picture{nullptr}, player{nullptr} {}
 
 Board::Board(int rows, int cols, Decorator* picture) : rows{rows}, cols{cols}, picture{picture} {}
 
@@ -43,8 +42,6 @@ void Board::removeLayer(int row) {
         }
     }
 
-    // std::unordered_set<Decorator*> movedBlocks;
-
     // Move above rows down by 1
     for (int r = row - 1; r >= 0; r--) {
         for (int c = 0; c < cols; c++) {
@@ -52,11 +49,6 @@ void Board::removeLayer(int row) {
             if (curBlock) {
                 curBlock->unconditionalMoveDown(r); 
             }
-            
-            // if (curBlock && !movedBlocks.count(curBlock)) {
-            //     curBlock->unconditionalMoveDown(r); 
-            //     movedBlocks.insert(curBlock);
-            // }
         }
     }
 }

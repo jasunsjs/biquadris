@@ -1,10 +1,9 @@
 #include "decorator.h"
 #include <iostream>
 
-using namespace std;
 
 // ** Decorator Constructor and Destructor **
-Decorator::Decorator(Decorator *component, int generatedLevel, vector<pair<int, int>> coords, char symbol):
+Decorator::Decorator(Decorator *component, int generatedLevel, std::vector<std::pair<int, int>> coords, char symbol):
     component{component}, 
     generatedLevel{generatedLevel},
     coords{coords}, 
@@ -18,7 +17,7 @@ Decorator::~Decorator() {
 
 // ** Universal Block Movement **
 void Decorator::moveLeft() {
-    vector<pair<int, int>> newCoords = coords;
+    std::vector<std::pair<int, int>> newCoords = coords;
     for (int i = 0; i < newCoords.size(); ++i) {
         newCoords[i].first--;
     }
@@ -30,7 +29,7 @@ void Decorator::moveLeft() {
 }
 
 void Decorator::moveRight() {
-    vector<pair<int, int>> newCoords = coords;
+    std::vector<std::pair<int, int>> newCoords = coords;
     for (int i = 0; i < newCoords.size(); ++i) {
         newCoords[i].first++;
     }
@@ -43,7 +42,7 @@ void Decorator::moveRight() {
 }
 
 void Decorator::moveDown() {
-    vector<pair<int, int>> newCoords = coords;
+    std::vector<std::pair<int, int>> newCoords = coords;
     for (int i = 0; i < newCoords.size(); ++i) {
         newCoords[i].second++;
     }
@@ -62,8 +61,8 @@ void Decorator::unconditionalMoveDown(int row) {
 }
 
 void Decorator::drop() {
-    vector<pair<int, int>> newCoords = coords;
-    pair<int, int> newBottomLeft = bottomLeft;
+    std::vector<std::pair<int, int>> newCoords = coords;
+    std::pair<int, int> newBottomLeft = bottomLeft;
 
     // Continuously move down until invalid position
     while (isValid(newCoords)) {
@@ -94,8 +93,8 @@ void Decorator::removeTile(int x, int y) {
 }
 
 // ** Helper methods for movement and rotations **
-bool Decorator::isValid(const vector<pair<int, int>> &coordinates) {
-    for (pair<int, int> p : coordinates) {
+bool Decorator::isValid(const std::vector<std::pair<int, int>> &coordinates) {
+    for (std::pair<int, int> p : coordinates) {
         // Check if out of bounds and if position is already occupied
         if (p.first < 0 || p.first >= component->getCols() || p.second < 0 || p.second >= component->getRows() + 3 ||
             (blockAt(p.first, p.second) && blockAt(p.first, p.second)->dropped)) {
@@ -110,7 +109,7 @@ Decorator* Decorator::getComponent() const { return component; }
 bool Decorator::isEmpty() { return coords.size() == 0; }
 
 bool Decorator::canMoveDown() {
-    vector<pair<int, int>> newCoords = coords;
+    std::vector<std::pair<int, int>> newCoords = coords;
     for (int i = 0; i < newCoords.size(); ++i) {
         newCoords[i].second++;
     }
@@ -132,7 +131,7 @@ bool Decorator::hasOverlap() const {
 
 char Decorator::charAt(int x, int y) const {
     // Check if within block
-    for (pair<int, int> p : coords) {
+    for (std::pair<int, int> p : coords) {
         if (p.first == x && p.second == y) {
             return symbol;
         }
@@ -141,7 +140,7 @@ char Decorator::charAt(int x, int y) const {
 }
 
 Decorator* Decorator::blockAt(int x, int y) {
-    for (pair<int, int> p : coords) {
+    for (std::pair<int, int> p : coords) {
         if (p.first == x && p.second == y) {
             return this;
         }
@@ -152,14 +151,14 @@ Decorator* Decorator::blockAt(int x, int y) {
     return component->blockAt(x, y);
 }
 
-void Decorator::transpose(vector<pair<int, int>> &coordinates, pair<int, int> &anchor) const {
+void Decorator::transpose(std::vector<std::pair<int, int>> &coordinates, std::pair<int, int> &anchor) const {
     for (int i = 0; i < coordinates.size(); ++i) {
-        swap(coordinates[i].first, coordinates[i].second);
+        std::swap(coordinates[i].first, coordinates[i].second);
     }
-    swap(anchor.first, anchor.second);
+    std::swap(anchor.first, anchor.second);
 }
 
-void Decorator::reposition(vector<pair<int, int>> &coordinates, pair<int, int> &anchor) const {
+void Decorator::reposition(std::vector<std::pair<int, int>> &coordinates, std::pair<int, int> &anchor) const {
     // Calculate x and y translation factors
     int xDiff = bottomLeft.first - anchor.first;
     int yDiff = bottomLeft.second - anchor.second;
