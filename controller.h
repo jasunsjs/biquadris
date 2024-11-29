@@ -7,6 +7,7 @@
 class Controller {
     std::unordered_map<std::string, std::string> commandMap;
     Player *p1, *p2, *currPlayer;
+    std::string winner = "NONE";
   public:
     Controller(Player* p1, Player* p2);
     bool takeCommand();
@@ -19,6 +20,7 @@ class Controller {
     void switchPlayer();
     void generateNextBlock(Player* p);
     bool generateCurrBlock(Player* p);
+    std::string getWinner();
 };
 
 #endif

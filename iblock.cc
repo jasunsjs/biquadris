@@ -2,7 +2,6 @@
 
 using namespace std;
 
-
 IBlock::IBlock(Decorator *component, int generatedLevel, vector<pair<int, int>> coords, char symbol):
     Decorator{component, generatedLevel, coords, symbol} {}
 

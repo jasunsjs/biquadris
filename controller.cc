@@ -164,6 +164,8 @@ bool Controller::processCommand(const std::string& cmd, int multiplier) {
                     // Cannot generate without overlap
                     if (!currPlayer->getBoard()->setBlock('*')) {
                         render();
+                        switchPlayer();
+                        winner = currPlayer->getName();
                         return false;
                     }
                     currPlayer->getBoard()->dropBlock();                               
@@ -178,6 +180,8 @@ bool Controller::processCommand(const std::string& cmd, int multiplier) {
             // Check for generated block overlap
             if (!generateCurrBlock(currPlayer)) {
                 render();
+                switchPlayer();
+                winner = currPlayer->getName();
                 return false;
             }
             switchPlayer();
@@ -338,4 +342,8 @@ bool Controller::generateCurrBlock(Player* p) {
     }
     generateNextBlock(p);
     return true;
+}
+
+std::string Controller::getWinner() {
+    return winner;
 }

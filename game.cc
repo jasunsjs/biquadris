@@ -104,6 +104,7 @@ int main(int argc, char* argv[]) {
         int p1Score = p1->getScore();
         int p2Score = p2->getScore();
         std::cout << "Game Over!" << std::endl;
+        std::cout << "Player " << ctrl->getWinner() << " wins!" << std::endl;
         std::cout << "Player " << p1->getName() << " score: " << p1Score << std::endl;
         std::cout << "Player " << p2->getName() << " score: " << p2Score << std::endl;
 

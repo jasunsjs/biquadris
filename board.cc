@@ -107,8 +107,9 @@ bool Board::setBlock(char block) {
         picture = new SBlock(picture, player->getLevel()->getLevelNum());
     } else if (block == 'Z') {
         picture = new ZBlock(picture, player->getLevel()->getLevelNum());
-    } else if(block == '*') {
-        picture = new ForceBlock(player->getLevel()->getLevelNum());
+    } else if (block == '*') {
+        // Give level -1 to not impact score when cleared
+        picture = new ForceBlock(picture, -1);
     }
     if (picture->hasOverlap()) {
         return false;

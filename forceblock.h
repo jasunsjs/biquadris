@@ -5,8 +5,10 @@
 
 class ForceBlock: public Decorator {
   public:
-    ForceBlock(int generatedLevel, Decorator *component = nullptr, char symbol = '*');
-    char charAt(int x, int y) const override;
+    ForceBlock(Decorator *component,
+               int generatedLevel,
+               std::vector<std::pair<int, int>> coords = {{5, 3}},
+               char symbol = '*');
 };
 
 #endif
