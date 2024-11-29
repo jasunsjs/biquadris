@@ -56,7 +56,7 @@ void Board::removeLayer(int row) {
     }
 }
 
-void Board::checkBoard() {
+int Board::checkBoard() {
     int linesCleared = 0;
     for (int r = 0; r < rows + 3; r++) {
         bool isFull = true;
@@ -77,6 +77,7 @@ void Board::checkBoard() {
     // Add points if an entire block is cleared
     player->addScore((linesCleared + player->getLevel()->getLevelNum()) *
                      (linesCleared + player->getLevel()->getLevelNum()));
+    return linesCleared;
 }
 
 int Board::getRows() const {
@@ -127,6 +128,10 @@ void Board::moveBlock(int rows, int cols) {
     } else if (rows == 1) {
         picture->moveRight();
     } else if (cols == 1) {
+        picture->moveDown();
+    }
+    if (player->getEffect() == Effect::HEAVY) {
+        picture->moveDown();
         picture->moveDown();
     }
 }

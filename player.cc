@@ -15,16 +15,10 @@ Player::Player(const std::string& name, Board* b, const std::string& filename, i
 
 Player::~Player() {
     delete level;
-    if (currEffect) {
-        delete currEffect;
-    }
 }
 
-void Player::applyEffect() {
-    if (!currEffect) {
-        return;
-    }
-    currEffect->apply(*board);
+void Player::setEffect(Effect e) {
+    currEffect = e;
 }
 
 void Player::setLevel(int levelNum) {
@@ -68,6 +62,14 @@ Board* Player::getBoard() const {
     return board;
 }
 
+Effect Player::getEffect() const {
+    return currEffect;
+}
+
 void Player::addScore(int increase) {
     score += increase;
+}
+
+void Player::applyEffect() {
+    return;
 }

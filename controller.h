@@ -12,6 +12,7 @@ class Controller {
     bool takeCommand();
     bool interpretCommand(std::string& cmd, int& multiplier);
     bool processCommand(const std::string& cmd, int multiplier);
+    void takeSpecialAction();
     void render();
     void levelUp();
     void levelDown();

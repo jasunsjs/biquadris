@@ -7,20 +7,22 @@
 
 class Player {
     std::string playerName, inputFilename;
-    Effect* currEffect = nullptr;
+    Effect currEffect = Effect::NONE;
     int score = 0;
     Board* board;
     Level* level;
   public:
     Player(const std::string& name, Board* b, const std::string& filename, int startLevel);
     ~Player();
-    void applyEffect();
+    void setEffect(Effect e);
     void setLevel(int levelNum);
     std::string getName();
     Level* getLevel() const;
     int getScore() const;
     Board* getBoard() const;
+    Effect getEffect() const;
     void addScore(int increase);
+    void applyEffect();
 };
 
 #endif

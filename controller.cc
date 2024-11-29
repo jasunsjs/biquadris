@@ -1,6 +1,7 @@
 #include "controller.h"
 #include "level3.h"
 #include "level4.h"
+#include "effect.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -84,6 +85,23 @@ Controller::Controller(Player* p1, Player* p2) : p1{p1}, p2{p2}, currPlayer{p1} 
         {"Z", "Z"},
         {"T", "T"}
     };
+    // effectMap = {
+    //     {"b", "blind"},
+    //     {"bl", "blind"},
+    //     {"bli", "blind"},
+    //     {"blin", "blind"},
+    //     {"blind", "blind"},
+    //     {"h", "heavy"},
+    //     {"he", "heavy"},
+    //     {"hea", "heavy"},
+    //     {"heav", "heavy"},
+    //     {"heavy", "heavy"},
+    //     {"f", "force"},
+    //     {"fo", "force"},
+    //     {"for", "force"},
+    //     {"forc", "force"},
+    //     {"force", "force"}
+    // }
 }
 
 bool Controller::takeCommand() {
@@ -144,7 +162,11 @@ bool Controller::processCommand(const std::string& cmd, int multiplier) {
             currPlayer->getBoard()->rotateBlock(false);
         } else if (cmd == "drop") {
             currPlayer->getBoard()->dropBlock();
-            currPlayer->getBoard()->checkBoard();
+            // Check for special action
+            if (currPlayer->getBoard()->checkBoard() >= 2) {
+                render();
+                takeSpecialAction();
+            }
             if (!generateCurrBlock(currPlayer)) {
                 render();
                 return false;
@@ -217,6 +239,34 @@ bool Controller::processCommand(const std::string& cmd, int multiplier) {
     return true;
 }
 
+void Controller::takeSpecialAction() {
+    std::string action;
+    char cmd;
+    while (true) {
+        std::cout << "Select special action (b - blind, h - heavy, f - force): ";
+        getline(std::cin, action);
+        if (std::cin.eof()) {
+            return;
+        }
+        if (action == "b" || action == "h" || action == "f") {
+            cmd = action[0];
+            break;
+        }
+    }
+    Player* targetPlayer = (currPlayer == p1) ? p2 : p1;
+    switch(cmd) {
+        case 'b':
+            targetPlayer->setEffect(Effect::BLIND);
+            break;
+        case 'h':
+            targetPlayer->setEffect(Effect::HEAVY);
+            break;
+        case 'f':
+            targetPlayer->setEffect(Effect::FORCE);
+            break;
+    }
+}
+
 void Controller::render() {
     currPlayer->getBoard()->updateObservers();
 }
@@ -242,11 +292,8 @@ void Controller::levelDown() {
 }
 
 void Controller::switchPlayer() {
-    if (currPlayer == p1) {
-        currPlayer = p2;
-    } else {
-        currPlayer = p1;
-    }
+    currPlayer->setEffect(Effect::NONE);
+    currPlayer = (currPlayer == p1) ? p2 : p1;
 }
 
 void Controller::generateNextBlock(Player* p) {
