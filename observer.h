@@ -13,9 +13,9 @@ class Observer {
     const std::unordered_map<char, std::vector<std::string>> blockShapes = {
         {'I', {"IIII ", "     "}},          // I-block
         {'J', {" J   ", " JJJ "}},    // J-block
-        {'L', {"  L  ", "  LLL"}},    // L-block
+        {'L', {"  L  ", "LLL  "}},    // L-block
         {'O', {"  OO ", "  OO "}},      // O-block
-        {'S', {"  SS ", " SS "}},    // S-block
+        {'S', {"  SS ", " SS  "}},    // S-block
         {'Z', {" ZZ  ", "  ZZ "}},    // Z-block
         {'T', {" TTT ", "  T  "}}     // T-block
     };
