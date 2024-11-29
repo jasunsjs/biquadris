@@ -138,37 +138,17 @@ bool Controller::processCommand(const std::string& cmd, int multiplier) {
                 // Only when heavy
                 processCommand("drop", 1);
             }
-            // Level 3 and 4 rules
-            if (currPlayer->getLevel()->getLevelNum() == 3 || currPlayer->getLevel()->getLevelNum() == 4) {
-                currPlayer->getBoard()->moveBlock(0, 1);
-            }
         } else if (cmd == "right") {
             if (!currPlayer->getBoard()->moveBlock(1, 0)) {
                 // Only when heavy
-                currPlayer->getBoard()->moveBlock(0, 1);
-            }
-            // Level 3 and 4 rules
-            if (currPlayer->getLevel()->getLevelNum() == 3 || currPlayer->getLevel()->getLevelNum() == 4) {
-                currPlayer->getBoard()->moveBlock(0, 1);
+                processCommand("drop", 1);
             }
         } else if (cmd == "down") {
             currPlayer->getBoard()->moveBlock(0, 1);
-            // Level 3 and 4 rules
-            if (currPlayer->getLevel()->getLevelNum() == 3 || currPlayer->getLevel()->getLevelNum() == 4) {
-                currPlayer->getBoard()->moveBlock(0, 1);
-            }
         } else if (cmd == "clockwise") {
             currPlayer->getBoard()->rotateBlock(true);
-            // Level 3 and 4 rules
-            if (currPlayer->getLevel()->getLevelNum() == 3 || currPlayer->getLevel()->getLevelNum() == 4) {
-                currPlayer->getBoard()->moveBlock(0, 1);
-            }
         } else if (cmd == "counterclockwise") {
             currPlayer->getBoard()->rotateBlock(false);
-            // Level 3 and 4 rules
-            if (currPlayer->getLevel()->getLevelNum() == 3 || currPlayer->getLevel()->getLevelNum() == 4) {
-                currPlayer->getBoard()->moveBlock(0, 1);
-            }
         } else if (cmd == "drop") {
             currPlayer->getBoard()->dropBlock();
             
@@ -252,6 +232,14 @@ bool Controller::processCommand(const std::string& cmd, int multiplier) {
             currPlayer->getBoard()->replaceBlock('Z');
         } else if (cmd == "T") {
             currPlayer->getBoard()->replaceBlock('T');
+        }
+
+        // Level 3 and 4 rules
+        if (currPlayer->getLevel()->getLevelNum() == 3 || currPlayer->getLevel()->getLevelNum() == 4) {
+            if (cmd == "left" || cmd == "right" || cmd == "down" ||
+                cmd == "clockwise" || cmd == "counterclockwise") {
+                currPlayer->getBoard()->moveBlock(0, 1);
+            }
         }
     }
     // Render displays
