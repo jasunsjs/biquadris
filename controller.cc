@@ -161,7 +161,11 @@ bool Controller::processCommand(const std::string& cmd, int multiplier) {
                     level4->blockPlaced();
                 }
                 if (level4->shouldDropStar()) {
-                    currPlayer->getBoard()->setBlock('*');
+                    // Cannot generate without overlap
+                    if (!currPlayer->getBoard()->setBlock('*')) {
+                        render();
+                        return false;
+                    }
                     currPlayer->getBoard()->dropBlock();                               
                 }
             }
@@ -328,6 +332,7 @@ void Controller::generateNextBlock(Player* p) {
 }
 
 bool Controller::generateCurrBlock(Player* p) {
+    // If next block cannot be generated without overlap
     if (!p->getBoard()->setBlock(p->getBoard()->getNextBlock())) {
         return false;
     }
