@@ -23,6 +23,12 @@ Board::~Board() {
 }
 
 char Board::getState(int x, int y) const {
+    // Adding blind overlay
+    if (player->getEffect() == Effect::BLIND) {
+        if (x >= 2 && x <= 8 && y >= 5 && y <= 14) {
+            return '?';
+        }
+    }
     return picture->charAt(x, y);
 }
 
