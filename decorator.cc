@@ -105,17 +105,21 @@ bool Decorator::isValid(const vector<pair<int, int>> &coordinates) {
     return true;
 }
 
-Decorator* Decorator::getComponent() const {
-    return component;
+Decorator* Decorator::getComponent() const { return component; }
+
+bool Decorator::isEmpty() { return coords.size() == 0; }
+
+bool Decorator::canMoveDown() {
+    vector<pair<int, int>> newCoords = coords;
+    for (int i = 0; i < newCoords.size(); ++i) {
+        newCoords[i].second++;
+    }
+    return isValid(newCoords);
 }
 
-bool Decorator::isEmpty(){
-    return coords.size() == 0;
-}
+void Decorator::setComponentNull() { component = nullptr; }
 
-int Decorator::getGeneratedLevel() const {
-    return generatedLevel;
-}
+int Decorator::getGeneratedLevel() const { return generatedLevel; }
 
 bool Decorator::hasOverlap() const {
     for (auto coord : coords) {
@@ -124,10 +128,6 @@ bool Decorator::hasOverlap() const {
         }
     }
     return false;
-}
-
-void Decorator::setComponentNull() {
-    component = nullptr;
 }
 
 char Decorator::charAt(int x, int y) const {

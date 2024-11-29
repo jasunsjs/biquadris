@@ -34,6 +34,8 @@ class Decorator : public Board {
 
     void removeTile(int x, int y);
     bool isEmpty();
+    bool canMoveDown();
+    void setComponentNull();
 
     // Getters
     Decorator* blockAt(int x, int y);
@@ -42,7 +44,6 @@ class Decorator : public Board {
     bool hasOverlap() const;
 
     // Helper methods for movement and rotations
-    void setComponentNull();
     bool isValid(const std::vector<std::pair<int, int>> &coordinates);
     void transpose(std::vector<std::pair<int, int>> &coordinates, 
                    std::pair<int, int> &anchor) const; // Swap x and y values

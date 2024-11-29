@@ -21,10 +21,9 @@ class Board : public Subject {
     int checkBoard();
     int getRows() const;
     int getCols() const;
-    void setBlind(int rowStart, int rowEnd, int colStart, int colEnd);
     bool setBlock(char block);
     void replaceBlock(char block);
-    void moveBlock(int rows, int cols);
+    bool moveBlock(int rows, int cols);
     void rotateBlock(bool clockwise);
     void dropBlock();
     int getScore() const;

@@ -85,23 +85,6 @@ Controller::Controller(Player* p1, Player* p2) : p1{p1}, p2{p2}, currPlayer{p1} 
         {"Z", "Z"},
         {"T", "T"}
     };
-    // effectMap = {
-    //     {"b", "blind"},
-    //     {"bl", "blind"},
-    //     {"bli", "blind"},
-    //     {"blin", "blind"},
-    //     {"blind", "blind"},
-    //     {"h", "heavy"},
-    //     {"he", "heavy"},
-    //     {"hea", "heavy"},
-    //     {"heav", "heavy"},
-    //     {"heavy", "heavy"},
-    //     {"f", "force"},
-    //     {"fo", "force"},
-    //     {"for", "force"},
-    //     {"forc", "force"},
-    //     {"force", "force"}
-    // }
 }
 
 bool Controller::takeCommand() {
@@ -151,9 +134,15 @@ bool Controller::processCommand(const std::string& cmd, int multiplier) {
     // Carry out command multiplier times
     for (int i = 0; i < multiplier; ++i) {
         if (cmd == "left") {
-            currPlayer->getBoard()->moveBlock(-1, 0);
+            if (!currPlayer->getBoard()->moveBlock(-1, 0)) {
+                // Only when heavy
+                processCommand("drop", 1);
+            }
         } else if (cmd == "right") {
-            currPlayer->getBoard()->moveBlock(1, 0);
+            if (!currPlayer->getBoard()->moveBlock(1, 0)) {
+                // Only when heavy
+                processCommand("drop", 1);
+            }
         } else if (cmd == "down") {
             currPlayer->getBoard()->moveBlock(0, 1);
         } else if (cmd == "clockwise") {
@@ -167,6 +156,7 @@ bool Controller::processCommand(const std::string& cmd, int multiplier) {
                 render();
                 takeSpecialAction();
             }
+            // Check for generated block overlap
             if (!generateCurrBlock(currPlayer)) {
                 render();
                 return false;

@@ -18,9 +18,7 @@ Board::Board() : rows{15}, cols{11}, picture{nullptr}, player{nullptr} {
 
 Board::Board(int rows, int cols, Decorator* picture) : rows{rows}, cols{cols}, picture{picture} {}
 
-Board::~Board() {
-    delete picture;
-}
+Board::~Board() { delete picture; }
 
 char Board::getState(int x, int y) const {
     // Adding blind overlay
@@ -89,17 +87,9 @@ int Board::checkBoard() {
     return linesCleared;
 }
 
-int Board::getRows() const {
-    return rows;
-}
+int Board::getRows() const { return rows; }
 
-int Board::getCols() const {
-    return cols;
-}
-
-void Board::setBlind(int rowStart, int rowEnd, int colStart, int colEnd) {
-    // TODO
-}
+int Board::getCols() const { return cols; }
 
 bool Board::setBlock(char block) {
     if (block == 'O') {
@@ -131,7 +121,7 @@ void Board::replaceBlock(char block) {
     setBlock(block);
 }
 
-void Board::moveBlock(int rows, int cols) {
+bool Board::moveBlock(int rows, int cols) {
     if (rows == -1) {
         picture->moveLeft();
     } else if (rows == 1) {
@@ -139,10 +129,16 @@ void Board::moveBlock(int rows, int cols) {
     } else if (cols == 1) {
         picture->moveDown();
     }
-    if (player->getEffect() == Effect::HEAVY) {
+    // Heavy effect upon horizontal movement only
+    if (cols != 1 && player->getEffect() == Effect::HEAVY) {
         picture->moveDown();
         picture->moveDown();
+        // Only return false if block is heavy
+        if (!picture->canMoveDown()) {
+            return false;
+        }
     }
+    return true;
 }
 
 void Board::rotateBlock(bool clockwise) {
@@ -153,25 +149,16 @@ void Board::rotateBlock(bool clockwise) {
     }
 }
 
-void Board::dropBlock() {
-    picture->drop();
-}
+void Board::dropBlock() { picture->drop(); }
 
-void Board::setNextBlock(char block) {
-    nextBlock = block;
-}
+void Board::setNextBlock(char block) { nextBlock = block; }
 
 int Board::getScore() const { return player->getScore(); }
-// int Board::getScore() const { return 0; }
 
 int Board::getLevel() const { return player->getLevel()->getLevelNum(); }
-// int Board::getLevel() const {  return 1; }
 
 char Board::getNextBlock() const { return nextBlock; }
-// char Board::getNextBlock() const { return 'I'; }
 
 std::string Board::getPlayerName() const { return player->getName(); }
 
-void Board::setPlayer(Player* p) {
-    player = p;
-}
+void Board::setPlayer(Player* p) { player = p; }
