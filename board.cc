@@ -84,24 +84,23 @@ int Board::getRows() const { return rows; }
 
 int Board::getCols() const { return cols; }
 
-bool Board::setBlock(char block) {
+bool Board::setBlock(char block, int level) {
     if (block == 'O') {
-        picture = new OBlock(picture, player->getLevel()->getLevelNum());
+        picture = new OBlock(picture, level);
     } else if (block == 'T') {
-        picture = new TBlock(picture, player->getLevel()->getLevelNum());
+        picture = new TBlock(picture, level);
     } else if (block == 'I') {
-        picture = new IBlock(picture, player->getLevel()->getLevelNum());
+        picture = new IBlock(picture, level);
     } else if (block == 'J') {
-        picture = new JBlock(picture, player->getLevel()->getLevelNum());
+        picture = new JBlock(picture, level);
     } else if (block == 'L') {
-        picture = new LBlock(picture, player->getLevel()->getLevelNum());
+        picture = new LBlock(picture, level);
     } else if (block == 'S') {
-        picture = new SBlock(picture, player->getLevel()->getLevelNum());
+        picture = new SBlock(picture, level);
     } else if (block == 'Z') {
-        picture = new ZBlock(picture, player->getLevel()->getLevelNum());
+        picture = new ZBlock(picture, level);
     } else if (block == '*') {
-        // Give level -1 to not impact score when cleared
-        picture = new ForceBlock(picture, -1);
+        picture = new ForceBlock(picture, level);
     }
     if (picture->hasOverlap()) {
         return false;
@@ -109,12 +108,17 @@ bool Board::setBlock(char block) {
     return true;
 }
 
+void Board::setNextBlock(char block, int level) {
+    nextBlock = block;
+    nextBlockLevelNum = level;
+}
+
 void Board::replaceBlock(char block) {
     Decorator* nextPic = picture->getComponent();
     picture->setComponentNull();
     delete picture;
     picture = nextPic;
-    setBlock(block);
+    setBlock(block, picture->getGeneratedLevel());
 }
 
 bool Board::moveBlock(int rows, int cols) {
@@ -147,8 +151,6 @@ void Board::rotateBlock(bool clockwise) {
 
 void Board::dropBlock() { picture->drop(); }
 
-void Board::setNextBlock(char block) { nextBlock = block; }
-
 int Board::getScore() const { return player->getScore(); }
 
 int Board::getLevelNum() const { return player->getLevel()->getLevelNum(); }
@@ -156,6 +158,8 @@ int Board::getLevelNum() const { return player->getLevel()->getLevelNum(); }
 int Board::getBlockLevel() const { return picture->getGeneratedLevel(); }
 
 char Board::getNextBlock() const { return nextBlock; }
+
+int Board::getNextBlockLevelNum() const { return nextBlockLevelNum; }
 
 std::string Board::getPlayerName() const { return player->getName(); }
 

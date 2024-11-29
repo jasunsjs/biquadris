@@ -162,7 +162,8 @@ bool Controller::processCommand(const std::string& cmd, int multiplier) {
                 }
                 if (level4->shouldDropStar()) {
                     // Cannot generate without overlap
-                    if (!currPlayer->getBoard()->setBlock('*')) {
+                    // Give level -1 to not impact score when cleared
+                    if (!currPlayer->getBoard()->setBlock('*', -1)) {
                         render();
                         switchPlayer();
                         winner = currPlayer->getName();
@@ -333,12 +334,12 @@ void Controller::switchPlayer() {
 
 void Controller::generateNextBlock(Player* p) {
     char block = p->getLevel()->nextBlock();
-    p->getBoard()->setNextBlock(block);
+    p->getBoard()->setNextBlock(block, p->getLevel()->getLevelNum());
 }
 
 bool Controller::generateCurrBlock(Player* p) {
     // If next block cannot be generated without overlap
-    if (!p->getBoard()->setBlock(p->getBoard()->getNextBlock())) {
+    if (!p->getBoard()->setBlock(p->getBoard()->getNextBlock(), p->getBoard()->getNextBlockLevelNum())) {
         return false;
     }
     generateNextBlock(p);

@@ -12,6 +12,7 @@ class Board : public Subject {
     Decorator* picture;
     Player* player = nullptr;
     char nextBlock;
+    int nextBlockLevelNum;
   public:
     Board();
     ~Board();
@@ -21,7 +22,8 @@ class Board : public Subject {
     int checkBoard();
     int getRows() const;
     int getCols() const;
-    bool setBlock(char block);
+    bool setBlock(char block, int level);
+    void setNextBlock(char block, int level);
     void replaceBlock(char block);
     bool moveBlock(int rows, int cols);
     void rotateBlock(bool clockwise);
@@ -29,8 +31,8 @@ class Board : public Subject {
     int getScore() const;
     int getLevelNum() const;
     int getBlockLevel() const;
-    void setNextBlock(char block);
     char getNextBlock() const;
+    int getNextBlockLevelNum() const;
     std::string getPlayerName() const;
     void setPlayer(Player* p);
 };
