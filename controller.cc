@@ -154,11 +154,15 @@ bool Controller::processCommand(const std::string& cmd, int multiplier) {
             
             // Level 4 rules
             if (currPlayer->getLevel()->getLevelNum() == 4) {
+                Level4* level4 = static_cast<Level4*>(currPlayer->getLevel());
                 if (currPlayer->getBoard()->checkBoard() > 0) {
-                    // Reset counter
+                    level4->rowCleared();
+                } else {
+                    level4->blockPlaced();
                 }
-                // Increment counter
-                // Check if drop needed
+                if (level4->shouldDropStar()) {
+                    // Drop star
+                }
             }
             
             // Check for special action
