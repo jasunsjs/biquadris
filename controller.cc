@@ -89,19 +89,36 @@ Controller::Controller(Player* p1, Player* p2) : p1{p1}, p2{p2}, currPlayer{p1} 
 bool Controller::takeCommand() {
     // Get command from input, interpret, then process command
     std::string cmd;
+    int multiplier = 1;
     std::cout << "Player " << currPlayer->getName() << ", please enter command:" << std::endl;
     while (std::cin >> cmd) {
-        if (interpretCommand(cmd)) {
+        if (interpretCommand(cmd, multiplier)) {
             break;
         }
     }
     if (std::cin.eof()) {
         return false;
     }
-    return processCommand(cmd);
+    return processCommand(cmd, multiplier);
 }
 
-bool Controller::interpretCommand(std::string& cmd) {
+bool Controller::interpretCommand(std::string& cmd, int& multiplier) {
+    // Check for multiplier prefix
+    std::string numStr = "";
+    int i = 0;
+    while (i < cmd.length() && '0' <= cmd[i] && cmd[i] <= '9') {
+        numStr += cmd[i];
+        ++i;
+    }
+    std::istringstream iss{numStr};
+    int mult = 1;
+    iss >> mult;
+    if (mult <= 0) {
+        std::cout << "Invalid multiplier prefix" << std::endl;
+        return false;
+    }
+    multiplier = mult;
+    cmd = cmd.substr(i);
     // Find corresponding command in map
     auto found = commandMap.find(cmd);
     if (found != commandMap.end()) {
@@ -112,81 +129,84 @@ bool Controller::interpretCommand(std::string& cmd) {
     return false;
 }
 
-bool Controller::processCommand(const std::string& cmd) {
-    // Carry out command
-    if (cmd == "left") {
-        currPlayer->getBoard()->moveBlock(-1, 0);
-    } else if (cmd == "right") {
-        currPlayer->getBoard()->moveBlock(1, 0);
-    } else if (cmd == "down") {
-        currPlayer->getBoard()->moveBlock(0, 1);
-    } else if (cmd == "clockwise") {
-        currPlayer->getBoard()->rotateBlock(true);
-    } else if (cmd == "counterclockwise") {
-        currPlayer->getBoard()->rotateBlock(false);
-    } else if (cmd == "drop") {
-        currPlayer->getBoard()->dropBlock();
-        generateCurrBlock(currPlayer);
-        switchPlayer();
-    } else if (cmd == "levelup") {
-        levelUp();
-    } else if (cmd == "leveldown") {
-        levelDown();
-    } else if (cmd == "restart") {
-        return false;
-    } else if (cmd == "norandom") {
-        if (currPlayer->getLevel()->getLevelNum() != 3 && currPlayer->getLevel()->getLevelNum() != 4) {
-            std::cout << "This command only works on levels 3 and 4" << std::endl;
-        } else {
-            std::string sequenceFilename;
-            std::cin >> sequenceFilename;
-            // Casting to appropriate level
-            if (auto* level3 = dynamic_cast<Level3*>(currPlayer->getLevel())) {
-                level3->setRandom(false);
-                level3->setSequenceFile(sequenceFilename);
-            } else if (auto* level4 = dynamic_cast<Level4*>(currPlayer->getLevel())) {
-                level4->setRandom(false);
-                level4->setSequenceFile(sequenceFilename);
-            }
-        }
-    } else if (cmd == "random") {
-        if (currPlayer->getLevel()->getLevelNum() != 3 && currPlayer->getLevel()->getLevelNum() != 4) {
-            std::cout << "This command only works on levels 3 and 4" << std::endl;
-        } else {
-            // Casting to appropriate level
-            if (auto* level3 = dynamic_cast<Level3*>(currPlayer->getLevel())) {
-                level3->setRandom(true);
-            } else if (auto* level4 = dynamic_cast<Level4*>(currPlayer->getLevel())) {
-                level4->setRandom(true);
-            }
-        }
-    } else if (cmd == "sequence") {
-        std::string sequenceFilename;
-        std::cin >> sequenceFilename;
-        std::ifstream input{sequenceFilename};
-        std::string line, str;
-        while (getline(input, line)) {
-            std::istringstream iss{line};
-            while (iss >> str) {
-                if (interpretCommand(str)) {
-                    processCommand(str);
+bool Controller::processCommand(const std::string& cmd, int multiplier) {
+    // Carry out command multiplier times
+    for (int i = 0; i < multiplier; ++i) {
+        if (cmd == "left") {
+            currPlayer->getBoard()->moveBlock(-1, 0);
+        } else if (cmd == "right") {
+            currPlayer->getBoard()->moveBlock(1, 0);
+        } else if (cmd == "down") {
+            currPlayer->getBoard()->moveBlock(0, 1);
+        } else if (cmd == "clockwise") {
+            currPlayer->getBoard()->rotateBlock(true);
+        } else if (cmd == "counterclockwise") {
+            currPlayer->getBoard()->rotateBlock(false);
+        } else if (cmd == "drop") {
+            currPlayer->getBoard()->dropBlock();
+            generateCurrBlock(currPlayer);
+            switchPlayer();
+        } else if (cmd == "levelup") {
+            levelUp();
+        } else if (cmd == "leveldown") {
+            levelDown();
+        } else if (cmd == "restart") {
+            return false;
+        } else if (cmd == "norandom") {
+            if (currPlayer->getLevel()->getLevelNum() != 3 && currPlayer->getLevel()->getLevelNum() != 4) {
+                std::cout << "This command only works on levels 3 and 4" << std::endl;
+            } else {
+                std::string sequenceFilename;
+                std::cin >> sequenceFilename;
+                // Casting to appropriate level
+                if (auto* level3 = dynamic_cast<Level3*>(currPlayer->getLevel())) {
+                    level3->setRandom(false);
+                    level3->setSequenceFile(sequenceFilename);
+                } else if (auto* level4 = dynamic_cast<Level4*>(currPlayer->getLevel())) {
+                    level4->setRandom(false);
+                    level4->setSequenceFile(sequenceFilename);
                 }
             }
+        } else if (cmd == "random") {
+            if (currPlayer->getLevel()->getLevelNum() != 3 && currPlayer->getLevel()->getLevelNum() != 4) {
+                std::cout << "This command only works on levels 3 and 4" << std::endl;
+            } else {
+                // Casting to appropriate level
+                if (auto* level3 = dynamic_cast<Level3*>(currPlayer->getLevel())) {
+                    level3->setRandom(true);
+                } else if (auto* level4 = dynamic_cast<Level4*>(currPlayer->getLevel())) {
+                    level4->setRandom(true);
+                }
+            }
+        } else if (cmd == "sequence") {
+            std::string sequenceFilename;
+            std::cin >> sequenceFilename;
+            std::ifstream input{sequenceFilename};
+            std::string line, str;
+            int multiplier = 1;
+            while (getline(input, line)) {
+                std::istringstream iss{line};
+                while (iss >> str) {
+                    if (interpretCommand(str, multiplier)) {
+                        processCommand(str, multiplier);
+                    }
+                }
+            }
+        } else if (cmd == "I") {
+            currPlayer->getBoard()->setBlock('I');
+        } else if (cmd == "J") {
+            currPlayer->getBoard()->setBlock('J');
+        } else if (cmd == "L") {
+            currPlayer->getBoard()->setBlock('L');
+        } else if (cmd == "O") {
+            currPlayer->getBoard()->setBlock('O');
+        } else if (cmd == "S") {
+            currPlayer->getBoard()->setBlock('S');
+        } else if (cmd == "Z") {
+            currPlayer->getBoard()->setBlock('Z');
+        } else if (cmd == "T") {
+            currPlayer->getBoard()->setBlock('T');
         }
-    } else if (cmd == "I") {
-        currPlayer->getBoard()->setBlock('I');
-    } else if (cmd == "J") {
-        currPlayer->getBoard()->setBlock('J');
-    } else if (cmd == "L") {
-        currPlayer->getBoard()->setBlock('L');
-    } else if (cmd == "O") {
-        currPlayer->getBoard()->setBlock('O');
-    } else if (cmd == "S") {
-        currPlayer->getBoard()->setBlock('S');
-    } else if (cmd == "Z") {
-        currPlayer->getBoard()->setBlock('Z');
-    } else if (cmd == "T") {
-        currPlayer->getBoard()->setBlock('T');
     }
     // Render displays
     render();
@@ -194,9 +214,7 @@ bool Controller::processCommand(const std::string& cmd) {
 }
 
 void Controller::render() {
-    // std::cout << "STANLEY" << std::endl;
-    currPlayer->getBoard()->updateObservers(); // error
-    // std::cout << "RYAN" << std::endl; // not currently printing
+    currPlayer->getBoard()->updateObservers();
 }
 
 void Controller::levelUp() {

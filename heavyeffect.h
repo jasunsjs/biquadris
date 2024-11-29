@@ -3,9 +3,8 @@
 #include "effect.h"
 
 class HeavyEffect : public Effect {
-    int numRows;
+    int numRows = 2;
   public:
-    HeavyEffect();
     void apply(Board& board) override;
 };
 

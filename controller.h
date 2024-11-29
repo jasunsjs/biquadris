@@ -10,8 +10,8 @@ class Controller {
   public:
     Controller(Player* p1, Player* p2);
     bool takeCommand();
-    bool interpretCommand(std::string& cmd);
-    bool processCommand(const std::string& cmd);
+    bool interpretCommand(std::string& cmd, int& multiplier);
+    bool processCommand(const std::string& cmd, int multiplier);
     void render();
     void levelUp();
     void levelDown();
