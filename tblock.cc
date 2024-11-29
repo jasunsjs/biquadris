@@ -3,7 +3,7 @@
 using namespace std;
 
 
-TBlock::TBlock(Board *component, int generatedLevel, vector<pair<int, int>> coords, char symbol):
+TBlock::TBlock(Decorator *component, int generatedLevel, vector<pair<int, int>> coords, char symbol):
     Decorator{component, generatedLevel, coords, symbol} {}
 
 void TBlock::rotateClockwise() {

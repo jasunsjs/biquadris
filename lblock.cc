@@ -3,7 +3,7 @@
 using namespace std;
 
 
-LBlock::LBlock(Board *component, int generatedLevel, vector<pair<int, int>> coords, char symbol):
+LBlock::LBlock(Decorator *component, int generatedLevel, vector<pair<int, int>> coords, char symbol):
     Decorator{component, generatedLevel, coords, symbol} {}
 
 void LBlock::rotateClockwise() {

@@ -5,7 +5,7 @@
 
 class IBlock: public Decorator {
   public:
-    IBlock(Board *component,
+    IBlock(Decorator *component,
            int generatedLevel,
            std::vector<std::pair<int, int>> coords = {{0, 3}, {1, 3}, {2, 3}, {3, 3}}, 
            char symbol = 'I');

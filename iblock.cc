@@ -3,7 +3,7 @@
 using namespace std;
 
 
-IBlock::IBlock(Board *component, int generatedLevel, vector<pair<int, int>> coords, char symbol):
+IBlock::IBlock(Decorator *component, int generatedLevel, vector<pair<int, int>> coords, char symbol):
     Decorator{component, generatedLevel, coords, symbol} {}
 
 void IBlock::rotateClockwise() {
@@ -33,7 +33,5 @@ void IBlock::rotateClockwise() {
 }
 
 void IBlock::rotateCounterClockwise() {
-    for (int i = 0; i < 3; ++i) {
-        rotateClockwise();
-    }
+    rotateClockwise();
 }

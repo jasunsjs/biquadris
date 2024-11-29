@@ -5,10 +5,14 @@
 using namespace std;
 
 
-JBlock::JBlock(Board *component, int generatedLevel, vector<pair<int, int>> coords, char symbol):
+JBlock::JBlock(Decorator *component, int generatedLevel, vector<pair<int, int>> coords, char symbol):
     Decorator{component, generatedLevel, coords, symbol} {}
 
 void JBlock::rotateClockwise() {
+    for (pair<int, int> p : coords) {
+        cout << p.first << p.second << endl;
+    }
+
     vector<pair<int, int>> newCoords = coords;
     pair<int, int> newBottomLeft = bottomLeft;
 
@@ -21,7 +25,10 @@ void JBlock::rotateClockwise() {
 
         newCoords[2].first = newCoords[0].first;
         newCoords[3].first = newCoords[0].first;
-        swap(newCoords[0], newCoords[1]);    
+        swap(newCoords[0], newCoords[1]);
+        for (pair<int, int> p : newCoords) {
+            cout << p.first << p.second << endl;
+        }
     } else {
         newBottomLeft.first -= 2;
         newBottomLeft.second += 1;

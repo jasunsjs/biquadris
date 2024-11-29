@@ -3,7 +3,7 @@
 using namespace std;
 
 
-ZBlock::ZBlock(Board *component, int generatedLevel, vector<pair<int, int>> coords, char symbol):
+ZBlock::ZBlock(Decorator *component, int generatedLevel, vector<pair<int, int>> coords, char symbol):
     Decorator{component, generatedLevel, coords, symbol} {}
 
 void ZBlock::rotateClockwise() {
@@ -17,11 +17,17 @@ void ZBlock::rotateClockwise() {
         newBottomLeft.first -= 1;
         newBottomLeft.second += 2;
 
+        newCoords[0].first = newCoords[2].first;
+        newCoords[3].first = newCoords[1].first;
+
         // Change state
-        state = RotationState::Rotated90;   
+        state = RotationState::Rotated90;
     } else {
         newBottomLeft.first -= 2;
         newBottomLeft.second += 1;
+
+        newCoords[0].second = newCoords[1].second;
+        newCoords[3].second = newCoords[2].second;
 
         // Change state
         state = RotationState::Default; 
@@ -35,8 +41,6 @@ void ZBlock::rotateClockwise() {
 }
 
 void ZBlock::rotateCounterClockwise() {
-    for (int i = 0; i < 3; ++i) {
-        rotateClockwise();
-    }
+    rotateClockwise();
 }
 

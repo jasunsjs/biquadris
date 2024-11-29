@@ -5,7 +5,7 @@
 
 class Blank: public Decorator {
   public:
-    Blank(Board *component = nullptr, 
+    Blank(Decorator *component = nullptr, 
            std::vector<std::pair<int, int>> coords = {}, 
            char symbol = ' ', 
            int generatedLevel = 0);

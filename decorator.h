@@ -14,7 +14,7 @@ enum class RotationState {
 
 class Decorator : public Board {
   protected:
-    Board *component;
+    Decorator *component;
     std::vector<std::pair<int, int>> coords; // Vector of 4 pairs representing each block cell's position
     char symbol;
     int generatedLevel;
@@ -22,7 +22,7 @@ class Decorator : public Board {
     RotationState state = RotationState::Default;
     std::pair<int, int> bottomLeft = {0, 3}; // Anchor point for rotations, default set
   public:
-    Decorator(Board *component, int generatedLevel, std::vector<std::pair<int, int>> coords, char symbol);
+    Decorator(Decorator *component, int generatedLevel, std::vector<std::pair<int, int>> coords, char symbol);
     virtual ~Decorator();
 
     // Universal movement across all blocks

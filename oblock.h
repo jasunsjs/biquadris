@@ -5,7 +5,7 @@
 
 class OBlock: public Decorator {
   public:
-    OBlock(Board *component, 
+    OBlock(Decorator *component, 
            int generatedLevel,
            std::vector<std::pair<int, int>> coords = {{0, 2}, {1, 2}, {0, 3}, {1, 3}},
            char symbol = 'O');

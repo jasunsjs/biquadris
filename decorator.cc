@@ -4,7 +4,7 @@
 using namespace std;
 
 // ** Decorator Constructor and Destructor **
-Decorator::Decorator(Board *component, int generatedLevel, vector<pair<int, int>> coords, char symbol):
+Decorator::Decorator(Decorator *component, int generatedLevel, vector<pair<int, int>> coords, char symbol):
     component{component}, 
     generatedLevel{generatedLevel},
     coords{coords}, 
@@ -80,6 +80,10 @@ bool Decorator::drop() {
     coords = newCoords;
     bottomLeft = newBottomLeft;
     dropped = true;
+    cout << "character is: " << charAt(0, 17) << endl;
+
+
+
     return true;
 }
 
@@ -98,14 +102,13 @@ bool Decorator::isValid(const vector<pair<int, int>> &coordinates) {
 }
 
 char Decorator::charAt(int x, int y) const {
-
     // Check if within block
     for (pair<int, int> p : coords) {
         if (p.first == x && p.second == y) {
             return symbol;
         }
     }
-    return component->getState(x, y); 
+    return component->charAt(x, y); //s1->getState(c,r);
 }
 
 Decorator* Decorator::blockAt(int x, int y) {

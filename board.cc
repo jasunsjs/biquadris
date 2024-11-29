@@ -27,7 +27,6 @@ char Board::getState(int x, int y) const {
         return ' ';
     }
     return picture->charAt(x, y);
-
 }
 
 Decorator* Board::getBlock(int x, int y) {

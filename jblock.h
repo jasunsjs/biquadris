@@ -5,7 +5,7 @@
 
 class JBlock: public Decorator {
   public:
-    JBlock(Board *component,
+    JBlock(Decorator *component,
            int generatedLevel,
            std::vector<std::pair<int, int>> coords = {{0, 2}, {0, 3}, {1, 3}, {2, 3}}, 
            char symbol = 'J');
