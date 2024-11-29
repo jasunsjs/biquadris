@@ -17,7 +17,7 @@ class Controller {
     void levelDown();
     void switchPlayer();
     void generateNextBlock(Player* p);
-    void generateCurrBlock(Player* p);
+    bool generateCurrBlock(Player* p);
 };
 
 #endif

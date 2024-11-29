@@ -38,6 +38,8 @@ void GraphicsObserver::update() {
     int board2OffsetX = 20 * pixelSize;
     int uiHeight = 100;
 
+    window.fillRectangle(board1OffsetX - 10, 0, 320, 100, XWindow::White);
+
     // Draw Player 1 UI
     window.drawString(board1OffsetX + 10, 20, "Player 1: " + s1->getPlayerName());
     window.drawString(board1OffsetX + 10, 40, "Level: " + std::to_string(s1->getLevel()));

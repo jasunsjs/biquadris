@@ -10,11 +10,10 @@
 #include "jblock.h"
 #include "player.h"
 #include "blank.h"
-#include <unordered_set>
+// #include <unordered_set>
 #include <iostream>
 
 Board::Board() : rows{15}, cols{11}, picture{nullptr}, player{nullptr} {
-    // std::cout << "Default constructing board" << std::endl;
 }
 
 Board::Board(int rows, int cols, Decorator* picture) : rows{rows}, cols{cols}, picture{picture} {}
@@ -39,16 +38,20 @@ void Board::removeLayer(int row) {
         }
     }
 
-    std::unordered_set<Decorator*> movedBlocks;
+    // std::unordered_set<Decorator*> movedBlocks;
 
     // Move above rows down by 1
-    for (int r = 0; r < row; r++) {
+    for (int r = row - 1; r >= 0; r--) {
         for (int c = 0; c < cols; c++) {
-            Decorator* curBlock = picture->blockAt(c, r); 
-            if (curBlock && !movedBlocks.count(curBlock)) {
-                curBlock->unconditionalMoveDown();
-                movedBlocks.insert(curBlock);
+            Decorator* curBlock = picture->blockAt(c, r);
+            if (curBlock) {
+                curBlock->unconditionalMoveDown(r); 
             }
+            
+            // if (curBlock && !movedBlocks.count(curBlock)) {
+            //     curBlock->unconditionalMoveDown(r); 
+            //     movedBlocks.insert(curBlock);
+            // }
         }
     }
 }
@@ -88,7 +91,7 @@ void Board::setBlind(int rowStart, int rowEnd, int colStart, int colEnd) {
     // TODO
 }
 
-void Board::setBlock(char block) {
+bool Board::setBlock(char block) {
     if (block == 'O') {
         picture = new OBlock(picture, player->getLevel()->getLevelNum());
     } else if (block == 'T') {
@@ -104,6 +107,10 @@ void Board::setBlock(char block) {
     } else if (block == 'Z') {
         picture = new ZBlock(picture, player->getLevel()->getLevelNum());
     }
+    if (picture->hasOverlap()) {
+        return false;
+    }
+    return true;
 }
 
 void Board::replaceBlock(char block) {

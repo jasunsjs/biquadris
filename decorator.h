@@ -29,7 +29,7 @@ class Decorator : public Board {
     void moveLeft();
     void moveRight();
     void moveDown();
-    void unconditionalMoveDown();
+    void unconditionalMoveDown(int row);
     void drop();
 
     void removeTile(int x, int y);
@@ -39,6 +39,7 @@ class Decorator : public Board {
     Decorator* blockAt(int x, int y);
     Decorator* getComponent() const;
     int getGeneratedLevel() const;
+    bool hasOverlap() const;
 
     // Helper methods for movement and rotations
     void setComponentNull();

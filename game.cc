@@ -14,6 +14,31 @@
 const int BOARD_ROWS = 15;
 const int BOARD_COLS = 11;
 
+void startup(Board*& board1, Board*& board2, Player*& p1, Player*& p2, TextObserver*& to, GraphicsObserver*& go, Controller*& ctrl,
+             bool textOnly, std::string scriptFile1, std::string scriptFile2, int startLevel) {
+    // Set up players and controller
+    board1 = new Board{BOARD_ROWS, BOARD_COLS, new Blank()};
+    board2 = new Board{BOARD_ROWS, BOARD_COLS, new Blank()};
+    std::string name;
+    std::cout << "Enter Player 1 name: ";
+    std::getline(std::cin, name);
+    p1 = new Player{name, board1, scriptFile1, startLevel};
+    std::cout << "Enter Player 2 name: ";
+    std::getline(std::cin, name);
+    p2 = new Player{name, board2, scriptFile2, startLevel};
+    board1->setPlayer(p1);
+    board2->setPlayer(p2);
+
+    // Set up observers
+    to = new TextObserver{board1, board2, 11, 15, std::cout};
+    go = nullptr;
+    if (!textOnly) {
+        go = new GraphicsObserver{board1, board2, 11, 15};
+    }
+
+    ctrl = new Controller{p1, p2};
+}
+
 int main(int argc, char* argv[]) {
     std::string scriptFile1 = "sequence1.txt";
     std::string scriptFile2 = "sequence2.txt";
@@ -45,39 +70,30 @@ int main(int argc, char* argv[]) {
     // Set seed
     srand(seed);
 
-    // Set up players and controller
-    Board board1{BOARD_ROWS, BOARD_COLS, new Blank()};
-    Board board2{BOARD_ROWS, BOARD_COLS, new Blank()};
-    std::string name;
-    std::cout << "Enter Player 1 name: ";
-    std::getline(std::cin, name);
-    Player p1{name, &board1, scriptFile1, startLevel};
-    std::cout << "Enter Player 2 name: ";
-    std::getline(std::cin, name);
-    Player p2{name, &board2, scriptFile2, startLevel};
-    board1.setPlayer(&p1);
-    board2.setPlayer(&p2);
-
-    // Set up observers
-    TextObserver* to = new TextObserver{&board1, &board2, 11, 15, std::cout};
+    // Initialize and construct all objects
+    Board* board1 = nullptr;
+    Board* board2 = nullptr;
+    Player* p1 = nullptr;
+    Player* p2 = nullptr;
+    TextObserver* to = nullptr;
     GraphicsObserver* go = nullptr;
-    if (!textOnly) {
-        go = new GraphicsObserver{&board1, &board2, 11, 15};
-    }
+    Controller* ctrl = nullptr;
+    startup(board1, board2, p1, p2, to, go, ctrl, textOnly,
+            scriptFile1, scriptFile2, startLevel);
 
-    Controller ctrl{&p1, &p2};
-    
+    bool stopGame = false;
+
     // Main game loop
-    while (true) {
+    while (!stopGame) {
         // Startup sequence
-        ctrl.generateNextBlock(&p1);
-        ctrl.generateCurrBlock(&p1);
-        ctrl.generateNextBlock(&p2);
-        ctrl.generateCurrBlock(&p2);
-        ctrl.render();
+        ctrl->generateNextBlock(p1);
+        ctrl->generateCurrBlock(p1);
+        ctrl->generateNextBlock(p2);
+        ctrl->generateCurrBlock(p2);
+        ctrl->render();
 
         // Current game loop
-        while (ctrl.takeCommand()) {}
+        while (ctrl->takeCommand()) {}
         
         // EOF check
         if (std::cin.eof()) {
@@ -85,31 +101,60 @@ int main(int argc, char* argv[]) {
         }
 
         // Game over sequence
-        int p1Score = p1.getScore();
-        int p2Score = p2.getScore();
+        int p1Score = p1->getScore();
+        int p2Score = p2->getScore();
         std::cout << "Game Over!" << std::endl;
-        std::cout << "Player " << p1.getName() << " score: " << p1Score << std::endl;
-        std::cout << "Player " << p2.getName() << " score: " << p2Score << std::endl;
+        std::cout << "Player " << p1->getName() << " score: " << p1Score << std::endl;
+        std::cout << "Player " << p2->getName() << " score: " << p2Score << std::endl;
 
         // Set and output high scores
         if (p1Score >= highScore || p2Score >= highScore) {
             if (p1Score >= p2Score) {
                 highScore = p1Score;
-                highScoreName = p1.getName();
+                highScoreName = p1->getName();
             } else {
                 highScore = p2Score;
-                highScoreName = p2.getName();
+                highScoreName = p2->getName();
             }
         }
         std::cout << "High Score: " << highScore << " by " << highScoreName << std::endl;
 
         // Restart sequence
-        // TODO
+        while (true) {
+            std::cout << "Play again? (Y/N):" << std::endl;
+            std::string cmd;
+            std::cin >> cmd;
+            std::cin.ignore();
+            if (cmd == "Y" || cmd == "y") {
+                delete board1;
+                delete board2;
+                delete p1;
+                delete p2;
+                delete to;
+                delete go;
+                delete ctrl;
+                startup(board1, board2, p1, p2, to, go, ctrl, textOnly,
+                        scriptFile1, scriptFile2, startLevel);
+                break;
+            } else if (cmd == "N" || cmd == "n" || std::cin.eof()) {
+                stopGame = true;
+                break;
+            }
+        }
     }
 
     // Delete observers
     delete to;
-    if (go) {
-        delete go;
-    }
+    delete go;
+
+    // Delete players
+    delete p1;
+    delete p2;
+
+    // Delete boards
+    delete board1;
+    delete board2;
+
+    // Delete controller
+    delete ctrl;
 }

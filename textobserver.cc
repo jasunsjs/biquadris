@@ -70,5 +70,4 @@ void TextObserver::update(){
         out << std::endl;
     }
 
-    // out << "test tes tetst " << s1->charAt(0, 17) << std::endl;
 }

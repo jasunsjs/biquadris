@@ -22,7 +22,7 @@ class Board : public Subject {
     int getRows() const;
     int getCols() const;
     void setBlind(int rowStart, int rowEnd, int colStart, int colEnd);
-    void setBlock(char block);
+    bool setBlock(char block);
     void replaceBlock(char block);
     void moveBlock(int rows, int cols);
     void rotateBlock(bool clockwise);

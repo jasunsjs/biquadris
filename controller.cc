@@ -145,7 +145,10 @@ bool Controller::processCommand(const std::string& cmd, int multiplier) {
         } else if (cmd == "drop") {
             currPlayer->getBoard()->dropBlock();
             currPlayer->getBoard()->checkBoard();
-            generateCurrBlock(currPlayer);
+            if (!generateCurrBlock(currPlayer)) {
+                render();
+                return false;
+            }
             switchPlayer();
         } else if (cmd == "levelup") {
             levelUp();
@@ -251,7 +254,10 @@ void Controller::generateNextBlock(Player* p) {
     p->getBoard()->setNextBlock(block);
 }
 
-void Controller::generateCurrBlock(Player* p) {
-    p->getBoard()->setBlock(p->getBoard()->getNextBlock());
+bool Controller::generateCurrBlock(Player* p) {
+    if (!p->getBoard()->setBlock(p->getBoard()->getNextBlock())) {
+        return false;
+    }
     generateNextBlock(p);
+    return true;
 }

@@ -16,7 +16,6 @@ Decorator::~Decorator() {
     }
 }
 
-
 // ** Universal Block Movement **
 void Decorator::moveLeft() {
     vector<pair<int, int>> newCoords = coords;
@@ -33,7 +32,6 @@ void Decorator::moveLeft() {
 void Decorator::moveRight() {
     vector<pair<int, int>> newCoords = coords;
     for (int i = 0; i < newCoords.size(); ++i) {
-        // std::cout << "qwerty" << std::endl;
         newCoords[i].first++;
     }
 
@@ -55,18 +53,17 @@ void Decorator::moveDown() {
     }
 }
 
-void Decorator::unconditionalMoveDown() {
+void Decorator::unconditionalMoveDown(int row) {
     for (int i = 0; i < coords.size(); ++i) {
-        coords[i].second++;
+        if (coords[i].second == row) {
+            coords[i].second++;
+        }
     }
-    bottomLeft.second++;
 }
-
 
 void Decorator::drop() {
     vector<pair<int, int>> newCoords = coords;
     pair<int, int> newBottomLeft = bottomLeft;
-
 
     // Continuously move down until invalid position
     while (isValid(newCoords)) {
@@ -96,11 +93,9 @@ void Decorator::removeTile(int x, int y) {
     }
 }
 
-
 // ** Helper methods for movement and rotations **
 bool Decorator::isValid(const vector<pair<int, int>> &coordinates) {
     for (pair<int, int> p : coordinates) {
-
         // Check if out of bounds and if position is already occupied
         if (p.first < 0 || p.first >= component->getCols() || p.second < 0 || p.second >= component->getRows() + 3 ||
             (blockAt(p.first, p.second) && blockAt(p.first, p.second)->dropped)) {
@@ -120,6 +115,15 @@ bool Decorator::isEmpty(){
 
 int Decorator::getGeneratedLevel() const {
     return generatedLevel;
+}
+
+bool Decorator::hasOverlap() const {
+    for (auto coord : coords) {
+        if (component->charAt(coord.first, coord.second) != ' ') {
+            return true;
+        }
+    }
+    return false;
 }
 
 void Decorator::setComponentNull() {
