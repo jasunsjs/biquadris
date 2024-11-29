@@ -23,17 +23,7 @@ Board::~Board() {
 }
 
 char Board::getState(int x, int y) const {
-    if (!picture) {
-        return ' ';
-    }
     return picture->charAt(x, y);
-}
-
-Decorator* Board::getBlock(int x, int y) {
-    if (!picture) {
-        return nullptr;
-    }
-    return picture->blockAt(x, y);
 }
 
 void Board::removeLayer() {

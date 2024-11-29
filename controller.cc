@@ -40,7 +40,6 @@ Controller::Controller(Player* p1, Player* p2) : p1{p1}, p2{p2}, currPlayer{p1} 
         {"counterclockwi", "counterclockwise"},
         {"counterclockwis", "counterclockwise"},
         {"counterclockwise", "counterclockwise"},
-        {"d", "drop"},
         {"dr", "drop"},
         {"dro", "drop"},
         {"drop", "drop"},

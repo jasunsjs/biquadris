@@ -54,7 +54,6 @@ void Decorator::moveDown() {
         coords = newCoords;
         bottomLeft.second++;
     }
-    cout << bottomLeft.first << ", " << bottomLeft.second << endl;
 }
 
 void Decorator::drop() {
@@ -86,7 +85,6 @@ void Decorator::drop() {
 // ** Helper methods for movement and rotations **
 bool Decorator::isValid(const vector<pair<int, int>> &coordinates) {
     for (pair<int, int> p : coordinates) {
-        
         // Check if out of bounds and if position is already occupied
         if (p.first < 0 || p.first >= component->getCols() || p.second < 0 || p.second >= component->getRows() + 3 ||
             (blockAt(p.first, p.second) && blockAt(p.first, p.second)->dropped)) {
@@ -103,7 +101,7 @@ char Decorator::charAt(int x, int y) const {
             return symbol;
         }
     }
-    return component->charAt(x, y); //s1->getState(c,r);
+    return component->charAt(x, y);
 }
 
 Decorator* Decorator::blockAt(int x, int y) {
@@ -112,7 +110,10 @@ Decorator* Decorator::blockAt(int x, int y) {
             return this;
         }
     }
-    return component->getBlock(x, y);
+    if (!component) {
+        return nullptr;
+    }
+    return component->blockAt(x, y);
 }
 
 void Decorator::transpose(vector<pair<int, int>> &coordinates, pair<int, int> &anchor) const {
