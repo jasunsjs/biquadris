@@ -65,5 +65,3 @@ drop
 drop
 clockwise
 10right
-drop
-b

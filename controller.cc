@@ -248,7 +248,7 @@ bool Controller::processCommand(const std::string& cmd, int multiplier) {
         }
 
         // Level 3 and 4 rules
-        if (currPlayer->getLevel()->getLevelNum() == 3 || currPlayer->getLevel()->getLevelNum() == 4) {
+        if (currPlayer->getBoard()->getBlockLevel() == 3 || currPlayer->getBoard()->getBlockLevel() == 4) {
             if (cmd == "left" || cmd == "right" || cmd == "down" ||
                 cmd == "clockwise" || cmd == "counterclockwise") {
                 currPlayer->getBoard()->moveBlock(0, 1);
