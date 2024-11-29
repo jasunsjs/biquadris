@@ -1,7 +1,7 @@
 #include "graphicsobserver.h"
 
 GraphicsObserver::GraphicsObserver(Board* b1, Board* b2, int w, int h)
-: Observer(b1, b2, w, h), window(1000, 650), board1Cache(h+3, std::vector<char>(w, '-')), 
+: Observer(b1, b2, w, h), window(875, 625), board1Cache(h+3, std::vector<char>(w, '-')), 
  board2Cache(h+3, std::vector<char>(w, '-')) {
     s1->attach(this);
     s2->attach(this);
@@ -36,8 +36,8 @@ int GraphicsObserver::mapBlockToColor(char state){
 }
 
 void GraphicsObserver::update() {
-    const int board1OffsetX = 4 * pixelSize;
-    const int board2OffsetX = 20 * pixelSize;
+    const int board1OffsetX = 8 * pixelSize;
+    const int board2OffsetX = 24 * pixelSize;
     const int uiHeight = 100;
 
     window.fillRectangle(board1OffsetX - 10, 0, 600, 100, XWindow::White);
