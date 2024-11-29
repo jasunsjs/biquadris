@@ -151,7 +151,9 @@ void Board::setNextBlock(char block) { nextBlock = block; }
 
 int Board::getScore() const { return player->getScore(); }
 
-int Board::getLevel() const { return player->getLevel()->getLevelNum(); }
+int Board::getLevelNum() const { return player->getLevel()->getLevelNum(); }
+
+int Board::getBlockLevel() const { return picture->getGeneratedLevel(); }
 
 char Board::getNextBlock() const { return nextBlock; }
 

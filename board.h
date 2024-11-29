@@ -27,7 +27,8 @@ class Board : public Subject {
     void rotateBlock(bool clockwise);
     void dropBlock();
     int getScore() const;
-    int getLevel() const;
+    int getLevelNum() const;
+    int getBlockLevel() const;
     void setNextBlock(char block);
     char getNextBlock() const;
     std::string getPlayerName() const;

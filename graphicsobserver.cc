@@ -44,12 +44,12 @@ void GraphicsObserver::update() {
 
     // Draw Player 1 UI
     window.drawString(board1OffsetX + 10, 20, "Player 1: " + s1->getPlayerName());
-    window.drawString(board1OffsetX + 10, 40, "Level: " + std::to_string(s1->getLevel()));
+    window.drawString(board1OffsetX + 10, 40, "Level: " + std::to_string(s1->getLevelNum()));
     window.drawString(board1OffsetX + 10, 60, "Score: " + std::to_string(s1->getScore()));
 
     // Draw Player 2 UI
     window.drawString(board2OffsetX + 10, 20, "Player 2: " + s2->getPlayerName());
-    window.drawString(board2OffsetX + 10, 40, "Level: " + std::to_string(s2->getLevel()));
+    window.drawString(board2OffsetX + 10, 40, "Level: " + std::to_string(s2->getLevelNum()));
     window.drawString(board2OffsetX + 10, 60, "Score: " + std::to_string(s2->getScore()));
 
     // Draw Boards
