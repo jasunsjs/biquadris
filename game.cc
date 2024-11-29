@@ -136,7 +136,7 @@ int main(int argc, char* argv[]) {
                 startup(board1, board2, p1, p2, to, go, ctrl, textOnly,
                         scriptFile1, scriptFile2, startLevel);
                 break;
-            } else if (cmd == "N" || cmd == "n") {
+            } else if (cmd == "N" || cmd == "n" || std::cin.eof()) {
                 stopGame = true;
                 break;
             }
