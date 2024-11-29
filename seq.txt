@@ -1,0 +1,17 @@
+drop
+drop
+4right
+drop
+drop
+8right
+clockwise
+8right
+drop
+drop
+clockwise
+9right
+drop
+drop
+clockwise
+8right
+drop

@@ -67,3 +67,7 @@ int Player::getScore() const {
 Board* Player::getBoard() const {
     return board;
 }
+
+void Player::addScore(int increase) {
+    score += increase;
+}

@@ -10,6 +10,7 @@
 #include "jblock.h"
 #include "player.h"
 #include "blank.h"
+#include <unordered_set>
 #include <iostream>
 
 Board::Board() : rows{15}, cols{11}, picture{nullptr}, player{nullptr} {
@@ -26,12 +27,54 @@ char Board::getState(int x, int y) const {
     return picture->charAt(x, y);
 }
 
-void Board::removeLayer() {
-    // TODO
+void Board::removeLayer(int row) { 
+    // Remove tiles from row and block
+    for (int c = 0; c < cols; ++c) {
+        Decorator* curBlock = picture->blockAt(c, row);
+        curBlock->removeTile(c, row);
+
+        // If block is completely removed (all tiles gone), add to score
+        if (curBlock->isEmpty()) {
+            player->addScore((curBlock->getGeneratedLevel() + 1) * (curBlock->getGeneratedLevel() + 1));
+        }
+    }
+
+    std::unordered_set<Decorator*> movedBlocks;
+
+    // Move above rows down by 1
+    for (int r = 0; r < row; r++) {
+        std::cout << r << std::endl;
+        for (int c = 0; c < cols; c++) {
+            Decorator* curBlock = picture->blockAt(c, r); 
+            if (curBlock && !movedBlocks.count(curBlock)) {
+                curBlock->unconditionalMoveDown();
+                movedBlocks.insert(curBlock);
+            }
+        }
+    }
 }
 
 void Board::checkBoard() {
-    // TODO
+    int linesCleared = 0;
+    for (int r = 0; r < rows + 3; r++) {
+        bool isFull = true;
+        // Check each tile in row
+        for (int c = 0; c < cols; c++) {
+            if (!picture->blockAt(c,r)) {
+                isFull = false;
+            }
+        }
+        
+        if (isFull) { 
+            removeLayer(r);
+            --r;
+            linesCleared++;
+        }
+    }
+
+    // Add points if an entire block is cleared
+    player->addScore((linesCleared + player->getLevel()->getLevelNum()) *
+                     (linesCleared + player->getLevel()->getLevelNum()));
 }
 
 int Board::getRows() const {
@@ -62,6 +105,14 @@ void Board::setBlock(char block) {
     } else if (block == 'Z') {
         picture = new ZBlock(picture, player->getLevel()->getLevelNum());
     }
+}
+
+void Board::replaceBlock(char block) {
+    Decorator* nextPic = picture->getComponent();
+    picture->setComponentNull();
+    delete picture;
+    picture = nextPic;
+    setBlock(block);
 }
 
 void Board::moveBlock(int rows, int cols) {

@@ -17,13 +17,13 @@ class Board : public Subject {
     ~Board();
     Board(int row, int col, Decorator *picture);
     char getState(int x, int y) const override;
-    Decorator* getBlock(int x, int y);
-    void removeLayer();
+    void removeLayer(int row);
     void checkBoard();
     int getRows() const;
     int getCols() const;
     void setBlind(int rowStart, int rowEnd, int colStart, int colEnd);
     void setBlock(char block);
+    void replaceBlock(char block);
     void moveBlock(int rows, int cols);
     void rotateBlock(bool clockwise);
     void dropBlock();

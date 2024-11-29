@@ -29,9 +29,19 @@ class Decorator : public Board {
     void moveLeft();
     void moveRight();
     void moveDown();
+    void unconditionalMoveDown();
     void drop();
 
+    void removeTile(int x, int y);
+    bool isEmpty();
+
+    // Getters
+    Decorator* blockAt(int x, int y);
+    Decorator* getComponent() const;
+    int getGeneratedLevel() const;
+
     // Helper methods for movement and rotations
+    void setComponentNull();
     bool isValid(const std::vector<std::pair<int, int>> &coordinates);
     void transpose(std::vector<std::pair<int, int>> &coordinates, 
                    std::pair<int, int> &anchor) const; // Swap x and y values
@@ -43,7 +53,8 @@ class Decorator : public Board {
     virtual void rotateCounterClockwise() {}
     // Pure virtual, must implement in children
     virtual char charAt(int x, int y) const;
-    Decorator* blockAt(int x, int y);
+
+
 };
 
 #endif

@@ -144,6 +144,7 @@ bool Controller::processCommand(const std::string& cmd, int multiplier) {
             currPlayer->getBoard()->rotateBlock(false);
         } else if (cmd == "drop") {
             currPlayer->getBoard()->dropBlock();
+            currPlayer->getBoard()->checkBoard();
             generateCurrBlock(currPlayer);
             switchPlayer();
         } else if (cmd == "levelup") {
@@ -193,19 +194,19 @@ bool Controller::processCommand(const std::string& cmd, int multiplier) {
                 }
             }
         } else if (cmd == "I") {
-            currPlayer->getBoard()->setBlock('I');
+            currPlayer->getBoard()->replaceBlock('I');
         } else if (cmd == "J") {
-            currPlayer->getBoard()->setBlock('J');
+            currPlayer->getBoard()->replaceBlock('J');
         } else if (cmd == "L") {
-            currPlayer->getBoard()->setBlock('L');
+            currPlayer->getBoard()->replaceBlock('L');
         } else if (cmd == "O") {
-            currPlayer->getBoard()->setBlock('O');
+            currPlayer->getBoard()->replaceBlock('O');
         } else if (cmd == "S") {
-            currPlayer->getBoard()->setBlock('S');
+            currPlayer->getBoard()->replaceBlock('S');
         } else if (cmd == "Z") {
-            currPlayer->getBoard()->setBlock('Z');
+            currPlayer->getBoard()->replaceBlock('Z');
         } else if (cmd == "T") {
-            currPlayer->getBoard()->setBlock('T');
+            currPlayer->getBoard()->replaceBlock('T');
         }
     }
     // Render displays

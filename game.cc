@@ -79,10 +79,30 @@ int main(int argc, char* argv[]) {
         // Current game loop
         while (ctrl.takeCommand()) {}
         
+        // EOF check
         if (std::cin.eof()) {
             break;
         }
-        // Set high scores
+
+        // Game over sequence
+        int p1Score = p1.getScore();
+        int p2Score = p2.getScore();
+        std::cout << "Game Over!" << std::endl;
+        std::cout << "Player " << p1.getName() << " score: " << p1Score << std::endl;
+        std::cout << "Player " << p2.getName() << " score: " << p2Score << std::endl;
+
+        // Set and output high scores
+        if (p1Score >= highScore || p2Score >= highScore) {
+            if (p1Score >= p2Score) {
+                highScore = p1Score;
+                highScoreName = p1.getName();
+            } else {
+                highScore = p2Score;
+                highScoreName = p2.getName();
+            }
+        }
+        std::cout << "High Score: " << highScore << " by " << highScoreName << std::endl;
+
         // Restart sequence
         // TODO
     }

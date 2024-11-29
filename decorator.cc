@@ -49,12 +49,21 @@ void Decorator::moveDown() {
     for (int i = 0; i < newCoords.size(); ++i) {
         newCoords[i].second++;
     }
-
+    std::cout << "AAAAAA" << std::endl;
     if (isValid(newCoords)) {
+        std::cout << "BBBBBB" << std::endl;
         coords = newCoords;
         bottomLeft.second++;
     }
 }
+
+void Decorator::unconditionalMoveDown() {
+    for (int i = 0; i < coords.size(); ++i) {
+        coords[i].second++;
+    }
+    bottomLeft.second++;
+}
+
 
 void Decorator::drop() {
     vector<pair<int, int>> newCoords = coords;
@@ -81,10 +90,22 @@ void Decorator::drop() {
     dropped = true;
 }
 
+void Decorator::removeTile(int x, int y) {
+    for (int i = 0; i < coords.size(); ++i) {
+        if (coords[i].first == x && coords[i].second == y) {
+            coords.erase(coords.begin() + i);
+        }
+    }
+}
+
 
 // ** Helper methods for movement and rotations **
 bool Decorator::isValid(const vector<pair<int, int>> &coordinates) {
     for (pair<int, int> p : coordinates) {
+        if (p.second >= component->getRows() + 3) {
+            std::cout << "HHHHHH" << std::endl;
+        }
+
         // Check if out of bounds and if position is already occupied
         if (p.first < 0 || p.first >= component->getCols() || p.second < 0 || p.second >= component->getRows() + 3 ||
             (blockAt(p.first, p.second) && blockAt(p.first, p.second)->dropped)) {
@@ -92,6 +113,22 @@ bool Decorator::isValid(const vector<pair<int, int>> &coordinates) {
         }
     }
     return true;
+}
+
+Decorator* Decorator::getComponent() const {
+    return component;
+}
+
+bool Decorator::isEmpty(){
+    return coords.size() == 0;
+}
+
+int Decorator::getGeneratedLevel() const {
+    return generatedLevel;
+}
+
+void Decorator::setComponentNull() {
+    component = nullptr;
 }
 
 char Decorator::charAt(int x, int y) const {

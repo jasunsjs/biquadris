@@ -20,6 +20,7 @@ class Player {
     Level* getLevel() const;
     int getScore() const;
     Board* getBoard() const;
+    void addScore(int increase);
 };
 
 #endif
