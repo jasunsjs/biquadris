@@ -263,6 +263,19 @@ void Controller::takeSpecialAction() {
             break;
         case 'f':
             targetPlayer->setEffect(Effect::FORCE);
+            std::string block;
+            while (true) {
+                std::cout << "Select block (I, J, L, O, S, Z, T): ";
+                getline(std::cin, block);
+                if (std::cin.eof()) {
+                    return;
+                }
+                if (block == "I" || block == "J" || block == "L" || block == "O" ||
+                    block == "S" || block == "Z" || block == "T") {
+                    targetPlayer->getBoard()->replaceBlock(block[0]);
+                    break;
+                }
+            }
             break;
     }
 }
