@@ -39,8 +39,6 @@ class Board : public Subject {
     void setPlayer(Player* p);
     bool setBlock(char block, int level);
     void setNextBlock(char block, int level);
-    bool setBlock(char block, int level);
-    void setNextBlock(char block, int level);
 };
 
 #endif
