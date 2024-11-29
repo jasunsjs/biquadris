@@ -161,7 +161,8 @@ bool Controller::processCommand(const std::string& cmd, int multiplier) {
                     level4->blockPlaced();
                 }
                 if (level4->shouldDropStar()) {
-                    // Drop star
+                    currPlayer->getBoard()->setBlock('*');
+                    currPlayer->getBoard()->dropBlock();                               
                 }
             }
             

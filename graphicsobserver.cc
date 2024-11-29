@@ -60,6 +60,7 @@ void GraphicsObserver::update() {
                 int x1 = board1OffsetX + x * pixelSize;
                 int y1 = uiHeight + y * pixelSize;
                 window.fillRectangle(x1, y1, pixelSize, pixelSize, color1);
+                if(state1 == '?') window.drawString(x1 + 7, y1  + 12 , "?");
                 board1Cache[y][x] = state1;
             }
 
@@ -70,6 +71,7 @@ void GraphicsObserver::update() {
                 int x2 = board2OffsetX + x * pixelSize;
                 int y2 = uiHeight + y * pixelSize;
                 window.fillRectangle(x2, y2, pixelSize, pixelSize, color2);
+                if(state2 == '?') window.drawString(x2 + 7, y2 + 12, "?");
                 board2Cache[y][x] = state2;
             }
         }

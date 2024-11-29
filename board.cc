@@ -8,6 +8,7 @@
 #include "iblock.h"
 #include "lblock.h"
 #include "jblock.h"
+#include "forceblock.h"
 #include "player.h"
 #include "blank.h"
 // #include <unordered_set>
@@ -106,6 +107,8 @@ bool Board::setBlock(char block) {
         picture = new SBlock(picture, player->getLevel()->getLevelNum());
     } else if (block == 'Z') {
         picture = new ZBlock(picture, player->getLevel()->getLevelNum());
+    } else if(block == '*') {
+        picture = new ForceBlock(player->getLevel()->getLevelNum());
     }
     if (picture->hasOverlap()) {
         return false;
