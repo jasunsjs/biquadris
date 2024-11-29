@@ -44,4 +44,3 @@ void ZBlock::rotateClockwise() {
 void ZBlock::rotateCounterClockwise() {
     rotateClockwise();
 }
-

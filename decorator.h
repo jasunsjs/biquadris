@@ -59,4 +59,3 @@ class Decorator : public Board {
 };
 
 #endif
-

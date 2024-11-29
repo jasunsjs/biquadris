@@ -73,4 +73,3 @@ void XWindow::fillRectangle(int x, int y, int width, int height, int colour) {
 void XWindow::drawString(int x, int y, string msg) {
   XDrawString(d, w, DefaultGC(d, s), x, y, msg.c_str(), msg.length());
 }
-

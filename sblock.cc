@@ -43,4 +43,3 @@ void SBlock::rotateClockwise() {
 void SBlock::rotateCounterClockwise() {
     rotateClockwise();
 }
-

@@ -12,4 +12,3 @@ void OBlock::rotateClockwise() {
 void OBlock::rotateCounterClockwise() {
     return;
 }
-
