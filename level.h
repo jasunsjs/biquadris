@@ -7,7 +7,7 @@ class Level {
     Level(int num) : levelNum{num} {}
     virtual ~Level() = default;
     virtual char nextBlock() = 0;
-    int getLevelNum() { return levelNum; }
+    int getLevelNum() const { return levelNum; }
 };
 
 #endif

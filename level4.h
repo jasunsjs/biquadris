@@ -18,6 +18,8 @@ class Level4 : public Level {
     void rowCleared();
     void blockPlaced();
     bool shouldDropStar();
+
+    // Setters
     void setRandom(bool randBool);
     void setSequenceFile(std::string filename);
 };

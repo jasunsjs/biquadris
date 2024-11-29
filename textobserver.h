@@ -11,8 +11,9 @@ class TextObserver : public Observer {
 
     public:
         TextObserver(Board* b1, Board* b2, int w, int h, std::ostream& o);
-        void update() override;
         ~TextObserver() override = default;
+
+        void update() override;
 
 };
 

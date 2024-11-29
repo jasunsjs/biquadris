@@ -15,26 +15,32 @@ class Board : public Subject {
     int nextBlockLevelNum;
   public:
     Board();
-    ~Board();
     Board(int row, int col, Decorator *picture);
-    char getState(int x, int y) const override;
+    ~Board();
+
     void removeLayer(int row);
     int checkBoard();
-    int getRows() const;
-    int getCols() const;
-    bool setBlock(char block, int level);
-    void setNextBlock(char block, int level);
     void replaceBlock(char block);
     bool moveBlock(int rows, int cols);
     void rotateBlock(bool clockwise);
     void dropBlock();
+
+    // Getters and setters
+    char getState(int x, int y) const override;
+    int getRows() const;
+    int getCols() const;
     int getScore() const;
     int getLevelNum() const;
     int getBlockLevel() const;
     char getNextBlock() const;
     int getNextBlockLevelNum() const;
     std::string getPlayerName() const;
+
     void setPlayer(Player* p);
+    bool setBlock(char block, int level);
+    void setNextBlock(char block, int level);
+    bool setBlock(char block, int level);
+    void setNextBlock(char block, int level);
 };
 
 #endif

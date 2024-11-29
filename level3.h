@@ -14,6 +14,8 @@ class Level3 : public Level {
   public:
     Level3();
     char nextBlock() override;
+
+    // Setters
     void setRandom(bool randBool);
     void setSequenceFile(std::string filename);
 };

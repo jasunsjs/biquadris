@@ -17,14 +17,15 @@ class XWindow {
 
     enum { White = 0, Black, Red, Green, Blue, Yellow, Cyan, Magenta, Orange, Brown};
 
-    int getWidth() const;
-    int getHeight() const;
-
     // Draws a rectangle
     void fillRectangle(int x, int y, int width, int height, int colour=Black);
 
     // Draws a string
     void drawString(int x, int y, std::string msg);
+
+    // Getters
+    int getWidth() const;
+    int getHeight() const;
 
 };
 

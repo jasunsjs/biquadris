@@ -1,14 +1,11 @@
 #include "tblock.h"
 
-using namespace std;
-
-
-TBlock::TBlock(Decorator *component, int generatedLevel, vector<pair<int, int>> coords, char symbol):
+TBlock::TBlock(Decorator *component, int generatedLevel, std::vector<std::pair<int, int>> coords, char symbol):
     Decorator{component, generatedLevel, coords, symbol} {}
 
 void TBlock::rotateClockwise() {
-    vector<pair<int, int>> newCoords = coords;
-    pair<int, int> newBottomLeft = bottomLeft;
+    std::vector<std::pair<int, int>> newCoords = coords;
+    std::pair<int, int> newBottomLeft = bottomLeft;
 
     transpose(newCoords, newBottomLeft);
     

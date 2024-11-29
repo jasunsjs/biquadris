@@ -31,18 +31,18 @@ class Decorator : public Board {
     void moveDown();
     void unconditionalMoveDown(int row);
     void drop();
-
     void removeTile(int x, int y);
     bool isEmpty();
     bool canMoveDown();
     void setComponentNull();
-
-    // Getters
     Decorator* blockAt(int x, int y);
-    Decorator* getComponent() const;
-    int getGeneratedLevel() const;
     bool hasOverlap() const;
 
+    // Block specific, virtual
+    virtual void rotateClockwise() {}
+    virtual void rotateCounterClockwise() {}
+    virtual char charAt(int x, int y) const;
+    
     // Helper methods for movement and rotations
     bool isValid(const std::vector<std::pair<int, int>> &coordinates);
     void transpose(std::vector<std::pair<int, int>> &coordinates, 
@@ -50,10 +50,9 @@ class Decorator : public Board {
     void reposition(std::vector<std::pair<int, int>> &coordinates,
                     std::pair<int, int> &anchor) const; // Translate block back to designated anchor point
 
-    // Block specific, virtual
-    virtual void rotateClockwise() {}
-    virtual void rotateCounterClockwise() {}
-    virtual char charAt(int x, int y) const;
+    // Getters
+    Decorator* getComponent() const;
+    int getGeneratedLevel() const;
 };
 
 #endif

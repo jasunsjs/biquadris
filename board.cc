@@ -13,6 +13,8 @@
 #include "blank.h"
 #include <iostream>
 
+const int BLIND_DIMENSIONS[] = {2, 5, 8, 14};
+
 // Default constructor
 Board::Board() : picture{nullptr}, player{nullptr} {}
 
@@ -23,7 +25,8 @@ Board::~Board() { delete picture; }
 char Board::getState(int x, int y) const {
     // Adding blind overlay
     if (player->getEffect() == Effect::BLIND) {
-        if (x >= 2 && x <= 8 && y >= 5 && y <= 14) {
+        if (x >= BLIND_DIMENSIONS[0]  && x <= BLIND_DIMENSIONS[2] && 
+            y >= BLIND_DIMENSIONS[1] && y <= BLIND_DIMENSIONS[3]) {
             return '?';
         }
     }

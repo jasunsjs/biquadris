@@ -1,14 +1,11 @@
 #include "lblock.h"
 
-using namespace std;
-
-
-LBlock::LBlock(Decorator *component, int generatedLevel, vector<pair<int, int>> coords, char symbol):
+LBlock::LBlock(Decorator *component, int generatedLevel, std::vector<std::pair<int, int>> coords, char symbol):
     Decorator{component, generatedLevel, coords, symbol} {}
 
 void LBlock::rotateClockwise() {
-    vector<pair<int, int>> newCoords = coords;
-    pair<int, int> newBottomLeft = bottomLeft;
+    std::vector<std::pair<int, int>> newCoords = coords;
+    std::pair<int, int> newBottomLeft = bottomLeft;
 
     transpose(newCoords, newBottomLeft);
     

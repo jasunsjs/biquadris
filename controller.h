@@ -20,7 +20,8 @@ class Controller {
     void switchPlayer();
     void generateNextBlock(Player* p);
     bool generateCurrBlock(Player* p);
-    std::string getWinner();
+
+    std::string getWinner() const;
 };
 
 #endif

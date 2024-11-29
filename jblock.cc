@@ -2,16 +2,13 @@
 #include "blank.h"
 #include <iostream>
 
-using namespace std;
-
-
-JBlock::JBlock(Decorator *component, int generatedLevel, vector<pair<int, int>> coords, char symbol):
+JBlock::JBlock(Decorator *component, int generatedLevel, std::vector<std::pair<int, int>> coords, char symbol):
     Decorator{component, generatedLevel, coords, symbol} {}
 
 void JBlock::rotateClockwise() {
 
-    vector<pair<int, int>> newCoords = coords;
-    pair<int, int> newBottomLeft = bottomLeft;
+    std::vector<std::pair<int, int>> newCoords = coords;
+    std::pair<int, int> newBottomLeft = bottomLeft;
 
     transpose(newCoords, newBottomLeft);
     

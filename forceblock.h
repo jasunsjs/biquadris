@@ -3,6 +3,7 @@
 
 #include "decorator.h"
 
+
 class ForceBlock: public Decorator {
   public:
     ForceBlock(Decorator *component,

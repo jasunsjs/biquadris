@@ -46,7 +46,7 @@ void Player::setLevel(int levelNum) {
     }
 }
 
-std::string Player::getName() {
+std::string Player::getName() const {
     return playerName;
 }
 

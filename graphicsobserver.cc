@@ -36,9 +36,9 @@ int GraphicsObserver::mapBlockToColor(char state){
 }
 
 void GraphicsObserver::update() {
-    int board1OffsetX = 4 * pixelSize;
-    int board2OffsetX = 20 * pixelSize;
-    int uiHeight = 100;
+    const int board1OffsetX = 4 * pixelSize;
+    const int board2OffsetX = 20 * pixelSize;
+    const int uiHeight = 100;
 
     window.fillRectangle(board1OffsetX - 10, 0, 600, 100, XWindow::White);
 

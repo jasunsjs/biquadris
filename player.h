@@ -14,15 +14,19 @@ class Player {
   public:
     Player(const std::string& name, Board* b, const std::string& filename, int startLevel);
     ~Player();
-    void setEffect(Effect e);
-    void setLevel(int levelNum);
-    std::string getName();
+    
+    void addScore(int increase);
+    void applyEffect();
+
+    // Getters and setters
+    std::string getName() const;
     Level* getLevel() const;
     int getScore() const;
     Board* getBoard() const;
     Effect getEffect() const;
-    void addScore(int increase);
-    void applyEffect();
+
+    void setEffect(Effect e);
+    void setLevel(int levelNum);
 };
 
 #endif

@@ -12,9 +12,9 @@ class GraphicsObserver : public Observer {
 
     public:
         GraphicsObserver(Board* b1, Board* b2, int w, int h);
+        ~GraphicsObserver() override = default;
         int mapBlockToColor(char state);
         void update() override;
-        ~GraphicsObserver() override = default;
 };
 
 #endif

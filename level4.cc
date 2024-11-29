@@ -1,6 +1,8 @@
 #include "level4.h"
 #include <cstdlib>
 
+const int STAR_DROP_FREQ = 5;
+
 Level4::Level4() : Level{4} {
     blockWeights = {
         {'I', 1},
@@ -52,7 +54,7 @@ void Level4::blockPlaced() {
 }
 
 bool Level4::shouldDropStar() {
-    return (numBlocks > 0) && (numBlocks % 5 == 0);
+    return (numBlocks > 0) && (numBlocks % STAR_DROP_FREQ == 0);
 }
 
 void Level4::setRandom(bool randBool) {

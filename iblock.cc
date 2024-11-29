@@ -1,13 +1,11 @@
 #include "iblock.h"
 
-using namespace std;
-
-IBlock::IBlock(Decorator *component, int generatedLevel, vector<pair<int, int>> coords, char symbol):
+IBlock::IBlock(Decorator *component, int generatedLevel, std::vector<std::pair<int, int>> coords, char symbol):
     Decorator{component, generatedLevel, coords, symbol} {}
 
 void IBlock::rotateClockwise() {
-    vector<pair<int, int>> newCoords = coords;
-    pair<int, int> newBottomLeft = bottomLeft;
+    std::vector<std::pair<int, int>> newCoords = coords;
+    std::pair<int, int> newBottomLeft = bottomLeft;
 
     transpose(newCoords, newBottomLeft);
     

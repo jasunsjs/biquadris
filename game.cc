@@ -30,10 +30,10 @@ void startup(Board*& board1, Board*& board2, Player*& p1, Player*& p2, TextObser
     board2->setPlayer(p2);
 
     // Set up observers
-    to = new TextObserver{board1, board2, 11, 15, std::cout};
+    to = new TextObserver{board1, board2, BOARD_COLS, BOARD_ROWS, std::cout};
     go = nullptr;
     if (!textOnly) {
-        go = new GraphicsObserver{board1, board2, 11, 15};
+        go = new GraphicsObserver{board1, board2, BOARD_COLS, BOARD_ROWS};
     }
 
     ctrl = new Controller{p1, p2};

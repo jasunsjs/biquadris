@@ -350,6 +350,6 @@ bool Controller::generateCurrBlock(Player* p) {
     return true;
 }
 
-std::string Controller::getWinner() {
+std::string Controller::getWinner() const {
     return winner;
 }
