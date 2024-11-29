@@ -26,6 +26,8 @@ int GraphicsObserver::mapBlockToColor(char state){
             color = XWindow::Cyan;
         } else if (state == ' ') {
             color = XWindow::Black;
+        } else if (state == '*') {
+            color = XWindow::Brown;
         } else {
             color = XWindow::White;
         }
