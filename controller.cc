@@ -138,19 +138,49 @@ bool Controller::processCommand(const std::string& cmd, int multiplier) {
                 // Only when heavy
                 processCommand("drop", 1);
             }
+            // Level 3 and 4 rules
+            if (currPlayer->getLevel()->getLevelNum() == 3 || currPlayer->getLevel()->getLevelNum() == 4) {
+                currPlayer->getBoard()->moveBlock(0, 1);
+            }
         } else if (cmd == "right") {
             if (!currPlayer->getBoard()->moveBlock(1, 0)) {
                 // Only when heavy
-                processCommand("drop", 1);
+                currPlayer->getBoard()->moveBlock(0, 1);
+            }
+            // Level 3 and 4 rules
+            if (currPlayer->getLevel()->getLevelNum() == 3 || currPlayer->getLevel()->getLevelNum() == 4) {
+                currPlayer->getBoard()->moveBlock(0, 1);
             }
         } else if (cmd == "down") {
             currPlayer->getBoard()->moveBlock(0, 1);
+            // Level 3 and 4 rules
+            if (currPlayer->getLevel()->getLevelNum() == 3 || currPlayer->getLevel()->getLevelNum() == 4) {
+                currPlayer->getBoard()->moveBlock(0, 1);
+            }
         } else if (cmd == "clockwise") {
             currPlayer->getBoard()->rotateBlock(true);
+            // Level 3 and 4 rules
+            if (currPlayer->getLevel()->getLevelNum() == 3 || currPlayer->getLevel()->getLevelNum() == 4) {
+                currPlayer->getBoard()->moveBlock(0, 1);
+            }
         } else if (cmd == "counterclockwise") {
             currPlayer->getBoard()->rotateBlock(false);
+            // Level 3 and 4 rules
+            if (currPlayer->getLevel()->getLevelNum() == 3 || currPlayer->getLevel()->getLevelNum() == 4) {
+                currPlayer->getBoard()->moveBlock(0, 1);
+            }
         } else if (cmd == "drop") {
             currPlayer->getBoard()->dropBlock();
+            
+            // Level 4 rules
+            if (currPlayer->getLevel()->getLevelNum() == 4) {
+                if (currPlayer->getBoard()->checkBoard() > 0) {
+                    // Reset counter
+                }
+                // Increment counter
+                // Check if drop needed
+            }
+            
             // Check for special action
             if (currPlayer->getBoard()->checkBoard() >= 2) {
                 render();
