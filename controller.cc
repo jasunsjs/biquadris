@@ -207,6 +207,8 @@ bool Controller::processCommand(const std::string& cmd, int multiplier) {
                     level4->setSequenceFile(sequenceFilename);
                 }
             }
+            render();
+            return true;
         } else if (cmd == "random") {
             if (currPlayer->getLevel()->getLevelNum() != 3 && currPlayer->getLevel()->getLevelNum() != 4) {
                 std::cout << "This command only works on levels 3 and 4" << std::endl;
@@ -218,6 +220,8 @@ bool Controller::processCommand(const std::string& cmd, int multiplier) {
                     level4->setRandom(true);
                 }
             }
+            render();
+            return true;
         } else if (cmd == "sequence") {
             std::string sequenceFilename;
             std::cin >> sequenceFilename;
