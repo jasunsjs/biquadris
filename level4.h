@@ -9,7 +9,7 @@
 class Level4 : public Level {
     std::vector<std::pair<char, int>> blockWeights;
     int totalWeight, numBlocks;
-    bool random;
+    bool random = true;
     std::ifstream input;
   public:
     Level4();

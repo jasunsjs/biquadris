@@ -30,12 +30,12 @@ char Level3::nextBlock() {
         return 'I';
     }
     // Generate a random number from 0 to totalWeight - 1
-    int random = rand() % totalWeight;
+    int randomNum = rand() % totalWeight;
     // Increment sum by weights to select block according to random number
     int currSum = 0;
     for (const auto& entry : blockWeights) {
         currSum += entry.second;
-        if (random < currSum) {
+        if (randomNum < currSum) {
             return entry.first;
         }
     }
