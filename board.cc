@@ -43,7 +43,6 @@ void Board::removeLayer(int row) {
 
     // Move above rows down by 1
     for (int r = 0; r < row; r++) {
-        std::cout << r << std::endl;
         for (int c = 0; c < cols; c++) {
             Decorator* curBlock = picture->blockAt(c, r); 
             if (curBlock && !movedBlocks.count(curBlock)) {
