@@ -49,9 +49,7 @@ void Decorator::moveDown() {
     for (int i = 0; i < newCoords.size(); ++i) {
         newCoords[i].second++;
     }
-    std::cout << "AAAAAA" << std::endl;
     if (isValid(newCoords)) {
-        std::cout << "BBBBBB" << std::endl;
         coords = newCoords;
         bottomLeft.second++;
     }
@@ -102,9 +100,6 @@ void Decorator::removeTile(int x, int y) {
 // ** Helper methods for movement and rotations **
 bool Decorator::isValid(const vector<pair<int, int>> &coordinates) {
     for (pair<int, int> p : coordinates) {
-        if (p.second >= component->getRows() + 3) {
-            std::cout << "HHHHHH" << std::endl;
-        }
 
         // Check if out of bounds and if position is already occupied
         if (p.first < 0 || p.first >= component->getCols() || p.second < 0 || p.second >= component->getRows() + 3 ||
