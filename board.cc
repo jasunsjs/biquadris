@@ -75,8 +75,11 @@ int Board::checkBoard() {
     }
 
     // Add points if an entire block is cleared
-    player->addScore((linesCleared + player->getLevel()->getLevelNum()) *
+    if(linesCleared > 0){
+        player->addScore((linesCleared + player->getLevel()->getLevelNum()) *
                      (linesCleared + player->getLevel()->getLevelNum()));
+    }
+    
     return linesCleared;
 }
 
