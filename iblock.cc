@@ -15,20 +15,21 @@ void IBlock::rotateClockwise() {
     // Set new bottom left anchor and reverse cols
     if (state == RotationState::Default) {
         newBottomLeft.second += 3;
-
-        // Change state
-        state = RotationState::Rotated90;   
     } else {
         newBottomLeft.first -= 3;
-
-        // Change state
-        state = RotationState::Default; 
     }
 
     reposition(newCoords, newBottomLeft);
 
     if (isValid(newCoords)) {
         coords = newCoords;
+
+        // Change state
+        if (state == RotationState::Default) {
+            state = RotationState::Rotated90;
+        } else {
+            state = RotationState::Default;
+        }
     }
 }
 

@@ -92,8 +92,8 @@ void Board::rotateBlock(bool clockwise) {
     }
 }
 
-bool Board::dropBlock() {
-    return picture->drop();
+void Board::dropBlock() {
+    picture->drop();
 }
 
 void Board::setNextBlock(char block) {

@@ -29,7 +29,7 @@ class Decorator : public Board {
     void moveLeft();
     void moveRight();
     void moveDown();
-    bool drop();
+    void drop();
 
     // Helper methods for movement and rotations
     bool isValid(const std::vector<std::pair<int, int>> &coordinates);

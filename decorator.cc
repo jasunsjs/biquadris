@@ -57,7 +57,7 @@ void Decorator::moveDown() {
     cout << bottomLeft.first << ", " << bottomLeft.second << endl;
 }
 
-bool Decorator::drop() {
+void Decorator::drop() {
     vector<pair<int, int>> newCoords = coords;
     pair<int, int> newBottomLeft = bottomLeft;
 
@@ -80,11 +80,6 @@ bool Decorator::drop() {
     coords = newCoords;
     bottomLeft = newBottomLeft;
     dropped = true;
-    cout << "character is: " << charAt(0, 17) << endl;
-
-
-
-    return true;
 }
 
 

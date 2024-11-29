@@ -26,7 +26,7 @@ class Board : public Subject {
     void setBlock(char block);
     void moveBlock(int rows, int cols);
     void rotateBlock(bool clockwise);
-    bool dropBlock();
+    void dropBlock();
     int getScore() const;
     int getLevel() const;
     void setNextBlock(char block);

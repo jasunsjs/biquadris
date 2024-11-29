@@ -13,7 +13,7 @@ void TBlock::rotateClockwise() {
     transpose(newCoords, newBottomLeft);
     
     // Set new bottom left anchor and reverse cols
-    if (state == RotationState::Default || state == RotationState::Rotated270) {
+    if (state == RotationState::Default || state == RotationState::Rotated180) {
         newBottomLeft.first -= 1;
         newBottomLeft.second += 2;
 
@@ -28,11 +28,9 @@ void TBlock::rotateClockwise() {
     reposition(newCoords, newBottomLeft);
 
     if (isValid(newCoords)) {
-        coords = newCoords;
+        coords = newCoords;  
+        state = static_cast<RotationState>((static_cast<int>(state) + 1) % 4); // Change state
     }
-
-    // Change state
-    state = static_cast<RotationState>((static_cast<int>(state) + 1) % 4);
 }
 
 void TBlock::rotateCounterClockwise() {

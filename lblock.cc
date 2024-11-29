@@ -13,7 +13,7 @@ void LBlock::rotateClockwise() {
     transpose(newCoords, newBottomLeft);
     
     // Set new bottom left anchor and reverse cols
-    if (state == RotationState::Default || state == RotationState::Rotated270) {
+    if (state == RotationState::Default || state == RotationState::Rotated180) {
         newBottomLeft.first -= 1;
         newBottomLeft.second += 2;
 
@@ -32,10 +32,8 @@ void LBlock::rotateClockwise() {
 
     if (isValid(newCoords)) {
         coords = newCoords;
-    }
-
-    // Change state
-    state = static_cast<RotationState>((static_cast<int>(state) + 1) % 4);
+        state = static_cast<RotationState>((static_cast<int>(state) + 1) % 4); // Change state
+    } 
 }
 
 void LBlock::rotateCounterClockwise() {

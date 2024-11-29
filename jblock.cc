@@ -9,9 +9,6 @@ JBlock::JBlock(Decorator *component, int generatedLevel, vector<pair<int, int>> 
     Decorator{component, generatedLevel, coords, symbol} {}
 
 void JBlock::rotateClockwise() {
-    for (pair<int, int> p : coords) {
-        cout << p.first << p.second << endl;
-    }
 
     vector<pair<int, int>> newCoords = coords;
     pair<int, int> newBottomLeft = bottomLeft;
@@ -19,16 +16,13 @@ void JBlock::rotateClockwise() {
     transpose(newCoords, newBottomLeft);
     
     // Set new bottom left anchor and reverse cols
-    if (state == RotationState::Default || state == RotationState::Rotated270) {
+    if (state == RotationState::Default || state == RotationState::Rotated180) {
         newBottomLeft.first -= 1;
         newBottomLeft.second += 2;
 
         newCoords[2].first = newCoords[0].first;
         newCoords[3].first = newCoords[0].first;
         swap(newCoords[0], newCoords[1]);
-        for (pair<int, int> p : newCoords) {
-            cout << p.first << p.second << endl;
-        }
     } else {
         newBottomLeft.first -= 2;
         newBottomLeft.second += 1;
@@ -41,10 +35,8 @@ void JBlock::rotateClockwise() {
 
     if (isValid(newCoords)) {
         coords = newCoords;
+        state = static_cast<RotationState>((static_cast<int>(state) + 1) % 4); // Change state
     }
-
-    // Change state
-    state = static_cast<RotationState>((static_cast<int>(state) + 1) % 4);
 }
 
 void JBlock::rotateCounterClockwise() {
