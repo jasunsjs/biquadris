@@ -263,6 +263,7 @@ bool Controller::processCommand(const std::string& cmd, int multiplier) {
 void Controller::takeSpecialAction() {
     std::string action;
     char cmd;
+    std::cin.ignore();
     while (true) {
         std::cout << "Select special action (b - blind, h - heavy, f - force): ";
         getline(std::cin, action);
