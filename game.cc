@@ -120,7 +120,27 @@ int main(int argc, char* argv[]) {
         std::cout << "High Score: " << highScore << " by " << highScoreName << std::endl;
 
         // Restart sequence
-        // TODO
+        while (true) {
+            std::cout << "Play again? (Y/N):" << std::endl;
+            std::string cmd;
+            std::cin >> cmd;
+            std::cin.ignore();
+            if (cmd == "Y" || cmd == "y") {
+                delete board1;
+                delete board2;
+                delete p1;
+                delete p2;
+                delete to;
+                delete go;
+                delete ctrl;
+                startup(board1, board2, p1, p2, to, go, ctrl, textOnly,
+                        scriptFile1, scriptFile2, startLevel);
+                break;
+            } else if (cmd == "N" || cmd == "n" || std::cin.eof()) {
+                stopGame = true;
+                break;
+            }
+        }
     }
 
     // Delete observers
