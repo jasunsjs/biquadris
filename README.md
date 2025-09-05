@@ -5,7 +5,9 @@ This is the UWaterloo CS246 (Object-Oriented Programming) final project, Biquadr
 - multiple levels of varying difficulty (different block selection probabilities)
 - special actions that can be triggered to negatively affect opponent
 
-Refer to the [UML](uml-final.pdf) diagram to see an overview of the OOP structure.
+The project received a perfect overall mark (100/100).
+
+Refer to the [UML](uml-final.pdf) diagram to see the OOP structure and design patterns.
 
 The game can be played and viewed in a graphical interface using the XWindows library, or using the console:
 <img width="999" height="880" alt="image" src="https://github.com/user-attachments/assets/5e28e73c-1ded-4a38-b2cb-203a699abd78" />
