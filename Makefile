@@ -1,16 +1,18 @@
 CXX = g++
-CXXFLAGS = -std=c++14 -Wall -MMD
+CXXFLAGS = -std=c++14 -Wall -MMD -Isrc/includes
+
 EXEC = biquadris
-SOURCES = $(wildcard *.cc)   # Pick up all implementation files
-OBJECTS = ${SOURCES:.cc=.o}
-DEPENDS = ${OBJECTS:.o=.d}
+SRC_DIR = src
+SOURCES = $(wildcard $(SRC_DIR)/*.cc)
+OBJECTS = $(SOURCES:.cc=.o)
+DEPENDS = $(OBJECTS:.o=.d)
 
-${EXEC}: ${OBJECTS}
-	${CXX} ${CXXFLAGS} ${OBJECTS} -o ${EXEC} -lX11
+$(EXEC): $(OBJECTS)
+	$(CXX) $(CXXFLAGS) $(OBJECTS) -o $(EXEC) -lX11
 
--include ${DEPENDS}
+-include $(DEPENDS)
 
 .PHONY: clean
 
 clean:
-	rm ${OBJECTS} ${EXEC} ${DEPENDS}
+	rm -f $(OBJECTS) $(EXEC) $(DEPENDS)
