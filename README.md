@@ -16,6 +16,14 @@ The game can be played and viewed in a graphical interface using the XWindows li
 <img width="300" alt="image" src="https://github.com/user-attachments/assets/08493407-603b-4b1d-81a6-6a4b1e0fe9b4" />
 
 ## Running the Program
-First compile in the root directory with `make` to output an executable called "biquadris". Then run `./biquadris -text` to run the game in the command line (text-only), since running on graphics requires setting up XWindows.
+```bash
+# Compile the program in root directory
+make
+
+# Run the executable
+./biquadris -text # Run the game in the command line (text-only)
+```
+
+Providing no arguments to the executable runs the game with actual graphics, but requires setting up XWindows.
 
 Refer to the official [biquadris project description](biquadris.pdf) for instructions on playing the game.
